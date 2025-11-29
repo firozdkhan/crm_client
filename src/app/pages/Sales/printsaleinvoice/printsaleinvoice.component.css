@@ -1,0 +1,105 @@
+.invoice-box {
+  width: 100%;
+  margin: auto;
+  padding: 30px;
+  font-size: 14px;
+  font-family: "Segoe UI", sans-serif;
+  color: #333;
+  background-color: #fff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.full-bordered {
+  border: 2px solid #333;
+  border-radius: 6px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header h2 {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.header p {
+  font-size: 14px;
+  margin: 2px;
+}
+
+.center {
+  text-align: center;
+  font-size: 18px;
+  margin: 20px 0;
+  font-weight: bold;
+}
+
+.info-table {
+  width: 100%;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+
+.info-table td {
+  padding: 6px;
+  font-size: 14px;
+}
+
+.bordered {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.bordered th,
+.bordered td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.bordered .heading {
+  background-color: #f0f0f0;
+  font-weight: 600;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.totals-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.totals-table {
+  width: 350px;
+  font-size: 14px;
+}
+
+.totals-table td {
+  padding: 6px 10px;
+}
+
+.totals-table .grand-total td {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.no-print {
+  margin-bottom: 20px;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .invoice-box {
+    border: none;
+    box-shadow: none;
+  }
+}

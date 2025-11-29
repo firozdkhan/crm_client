@@ -1,0 +1,166 @@
+<div class="container-fluid" *ngIf="student" style="border: 5px solid rgb(131, 129, 129); border-radius: 10px"
+  id="print-section">
+  <div class="row" style="gap: 250px">
+    <div class="col-md-12" style="display: flex; justify-content: space-between;">
+      <div class="col-md-4">
+        <img src="{{logo}}" alt="this image does not showing" height="150px" width="150px"
+          style="max-width: 100%; border-radius: 10%" />
+      </div>
+      <div class="col-md-4" style="text-align: center" *ngIf="profile">
+        <h1 style="font-family: serif; font-weight: bold; color: black">
+          {{profile.name | translate}}
+        </h1>
+        <h2 style="font-family: serif; font-weight: bold; color: black">
+          {{profile.address| translate}}
+        </h2>
+        <h2 style="font-family: serif; font-weight: bold; color: black">
+          <span>+{{profile.adminContact| translate}}</span>
+        </h2>
+      </div>
+      <div class="col-md-4">
+        <img src="{{studentImage}}" alt="this image does not showing" height="150px" width="150px"
+          style="max-width: 100%;" />
+      </div>
+    </div>
+  </div>
+
+  <div>
+
+    <h2 style="
+        background-color: rgb(219, 213, 213);
+        text-align: center;
+        border-radius: 10px;
+        font-family: serif;
+      ">
+      {{"Fee Receipt" | translate}}
+    </h2>
+    <h3 style="text-align: center; font-family: serif">{{"Session" | translate }}: {{ (printReceiptDetails.sessionName)
+      | translate}}</h3>
+    <!-- <p style="text-align: end">Student Copy</p> -->
+  </div>
+  <br />
+  <div class="row" style="gap: 200px; padding: 0 15px">
+    <div class="col-md-12" style="display: flex; gap: 13%;" *ngIf="student">
+      <div class="col-md-4">
+        <table>
+          <tbody>
+            <tr>
+              <td style="color: black"><strong>{{"Receipt No" | translate }}:</strong></td>
+              <td>: <span>{{printReceiptDetails.receiptNo}}</span></td>
+            </tr>
+            <tr>
+              <td><strong>{{"Student Name" | translate }}:</strong></td>
+              <td>: <span>{{student.studentName | translate}}</span></td>
+            </tr>
+            <tr>
+              <td><strong>{{"Father Name" | translate}}:</strong></td>
+              <td>: <span>{{student.fatherName | translate}}</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-4">
+        <table>
+          <tbody>
+            <tr>
+              <td><strong>{{"Sr No." | translate}}:</strong></td>
+              <td>: <span>{{student.srNumber | translate}}</span></td>
+            </tr>
+            <tr>
+              <td><strong>{{"Class" | translate}}:</strong></td>
+              <td>: <span>{{student.className| translate}}</span></td>
+            </tr>
+            <tr>
+              <td><strong>{{"User Name"| translate}}:</strong></td>
+              <td>: <span>{{printReceiptDetails.userName | translate}}</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-4">
+        <table>
+          <tbody>
+            <tr>
+              <td><strong>{{"Date" | translate}}:</strong></td>
+              <td>: <span>{{printReceiptDetails.depositDate | translate | date: 'dd/MMM/yyyy'}}</span></td>
+            </tr>
+            <tr>
+              <td><strong>{{"Section" | translate}}:</strong></td>
+              <td>: <span>{{student.sectionName | translate}}</span></td>
+            </tr>
+            <tr>
+              <td><strong>{{"Payment Mode"| translate}}:</strong></td>
+              <td>: <span>{{printReceiptDetails.payMode | translate}}</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <br />
+
+  <div class="col-xs-12">
+    <div>
+      <table style="width: 100%">
+        <thead>
+
+          <tr
+            style="print-color-adjust:rgb(219, 213, 213)  ;background-color: rgb(219, 213, 213); border-radius: 10px; font-family: serif;">
+            <th>{{"S No." | translate }}:</th>
+            <th style="text-align: start;">{{"Fees" | translate }}</th>
+            <th style="text-align: end;">{{"Amount" | translate }}</th>
+            <th style="text-align: end;">{{"Discount" | translate }}</th>
+            <th style="text-align: end;">{{"Fine" | translate }}</th>
+          </tr>
+
+        </thead>
+        <tbody>
+          <tr *ngFor="let feesDetail of printReceiptDetails.feesDetail; let i = index;">
+            <th scope="row" style="font-weight: lighter;">{{i + 1}} </th>
+            <td>{{feesDetail.name}} </td>
+            <td style="text-align: end;">{{feesDetail.amount | translate }} </td>
+            <td style="text-align: end;"> {{feesDetail.discount | translate}}</td>
+            <td style="text-align: end;"> {{feesDetail.fine | translate }}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr
+            style="print-color-adjust:rgb(219, 213, 213)  ;background-color: rgb(219, 213, 213); border-radius: 10px; font-family: serif;">
+            <td colspan="2"></td>
+            <td style="text-align: end; font-weight: 600;">{{"Total Amount" | translate }} :
+              <span>{{printReceiptDetails.totalAmount | translate }} </span>
+            </td>
+            <td style="text-align: end; font-weight: 600;">{{"Total Discount" | translate }} : <span>{{0}}</span></td>
+            <td style="text-align: end; font-weight: 600;">{{"Total Fine" | translate }} : <span>{{0}}</span></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+  <br />
+  <!-- <div style="display: flex; justify-content: space-between">
+    <div class="col-xs-6" style="margin-left: 30px;"> 
+      
+    </div>
+    <div class="col-xs-6" style="display: flex; gap: 80px; margin-left: 130px;">
+       
+ 
+    </div>
+    <br /><br />
+  </div> -->
+  <div style="display: flex; justify-content: space-between">
+    <div class="col-xs-4" style="margin-left: 30px;">
+      <h4>{{"In Words" | translate }}: <span>{{printReceiptDetails.totalAmount | amountInWords}}
+        </span>&#x62f;&#x2e;&#x625;</h4>
+    </div>
+    <div class="col-xs-4" style="display: flex; gap: 80px; margin-left: 50px;">
+
+      <h4>{{"Paid Amount" | translate }}: <span>{{printReceiptDetails.totalAmount| translate }}
+        </span>&#x62f;&#x2e;&#x625;</h4>
+
+    </div>
+    <p><strong>{{"Authorized Signatory" | translate}} ______________________</strong></p>
+  </div>
+
+</div>

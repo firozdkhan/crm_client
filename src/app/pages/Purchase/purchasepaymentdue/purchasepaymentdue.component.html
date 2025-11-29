@@ -1,0 +1,27 @@
+
+<div class="col-xl-12 mx-0 px-0">
+  <div id="panel-1" class="panel">
+    <div class="panel-hdr bg-primary-600 bg-info-gradient">
+      <h2>
+        {{"Purchase Balance Due Report"}}<span class="fw-300"><i></i></span>
+      </h2>
+    </div>
+    <div class="panel-container show">
+      <div class="panel-content" style="overflow-x: auto;">
+
+        <commongrid *ngIf="purchasepayment.length > 0" [totalitems]="totalRecords" [records]=" purchasepayment"
+          [gridfilter]="gridFilter" [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)"
+          [ShowSorting]="true" [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false"
+          [ShowSNo]="true" (ActionRow)="actionRow($event)" [currencySymbol]="currencyname"   [ShowSum] = "true"  >
+
+        </commongrid>
+
+        <app-no-data-found *ngIf="purchasepayment?.length == 0">
+
+        </app-no-data-found>
+
+      </div>
+    </div>
+  </div>
+
+</div>

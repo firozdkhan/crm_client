@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="col-xl-12" style="margin: 0px; padding: 0px;">
+    <div id="panel-1" class="panel" >
+      <div class="panel-hdr bg-info-600 bg-primary-gradient">
+        <h2>
+          {{ "Customer" | translate }} <span class="fw-300"><i></i></span>
+        </h2>
+      </div>
+
+      <div class="panel-container show"  >
+        <div class="panel-content">
+          <form [formGroup]="CustomerForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-text-input formControlName="customerName" [label]="'Customer'"></app-text-input>
+              </div>
+
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-text-input formControlName="name" [label]="'Contact Person'"></app-text-input>
+              </div>
+
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-text-area formControlName="address" [label]="'Address'" />
+              </div>
+
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-text-input formControlName="gstNumber" [label]="'GST Number'"></app-text-input>
+              </div>
+
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-text-input formControlName="phoneNumber" [label]="'Phone Number'"></app-text-input>
+              </div>
+
+              <!-- <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-country-dropdown formControlName="countryId" [label]="'Country'"></app-country-dropdown>
+              </div> -->
+
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-state-dropdown formControlName="stateId" [label]="'State'" [selectedValue]="59"></app-state-dropdown>
+              </div>
+
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-city-dropdown formControlName="cityId" [label]="'City'"  [selectedValue]="1089"></app-city-dropdown>
+              </div>
+
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-text-input formControlName="email" [label]="'Email'"></app-text-input>
+              </div>
+
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-text-input formControlName="creditPeriod" [label]="'Credit Period'"></app-text-input>
+              </div>
+
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-text-input formControlName="creditLimit" [label]="'Credit Limit'"></app-text-input>
+              </div>
+
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-text-input formControlName="openingBalance" [label]="'Opening Balance'"></app-text-input>
+              </div>
+            </div>
+
+            <app-footer-buttons
+              [buttonText]="buttonText"
+              [isValid]="!CustomerForm.valid"
+              (resetForm)="cancel()">
+            </app-footer-buttons>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="row">
+
+    <div class="col-xl-12 mx-0 px-0">
+    <div id="panel-1" class="panel">
+      <div class="panel-hdr bg-primary-600 bg-info-gradient">
+        <h2>
+          {{"Customer List"| translate}}<span class="fw-300"><i></i></span>
+        </h2>
+      </div>
+      <div class="panel-container show">
+        <div class="panel-content" style="overflow-x: auto;">
+
+          <commongrid *ngIf="customers.length > 0" [totalitems]="totalRecords" [records]="customers"
+            [gridfilter]="gridFilter" [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)"
+            [ShowSorting]="true" [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false"
+            [ShowSNo]="true" (ActionRow)="actionRow($event)">
+
+          </commongrid>
+
+          <app-no-data-found *ngIf="customers?.length == 0">
+
+          </app-no-data-found>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

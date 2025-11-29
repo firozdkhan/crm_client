@@ -1,0 +1,46 @@
+<div class="row ">
+  <div class="col-md-9 col-lg-12 col-sm-12 col-xs-12">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'GST Sale Report'"> </app-entry-panel-header>
+      <div class="panel-container show">
+        <div class="panel-content">
+          <!-- Date Filter Section -->
+          <div class="row g-3 px-2">
+            <div class="col-md-3">
+              <app-date-picker [(ngModel)]="fromDate" [label]="'From Date'"></app-date-picker>
+            </div>
+            <div class="col-md-3">
+              <app-date-picker [(ngModel)]="toDate" [label]="'To Date'"></app-date-picker>
+            </div>
+            <div class="col-md-3 d-flex align-items-end mt-3">
+              <button class="btn btn-primary me-2" (click)="filterByDate()">Search</button>
+              <button class="btn btn-secondary" (click)="clearFilter()">Clear</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Data Grid -->
+<div class="col-xl-12 mx-0 px-0">
+  <div id="panel-1" class="panel">
+    <div class="panel-hdr bg-primary-600 bg-info-gradient">
+      <h2>
+        GST Purchase Report <span class="fw-300"><i></i></span>
+      </h2>
+    </div>
+    <div class="panel-container show">
+      <div class="panel-content" style="overflow-x: auto;">
+        <commongrid *ngIf="purchasemasters.length > 0" [records]="purchasemasters" [gridfilter]="gridFilter"
+          [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)" [ShowSorting]="true"
+          [PagingType]="'nextprevnumberadvanced'" [ShowSum]="true" [ShowPagesize]="true" [ShowFilter]="false"
+          [ShowSNo]="true" (ActionRow)="actionRow($event)">
+        </commongrid>
+
+        <app-no-data-found *ngIf="purchasemasters?.length == 0"></app-no-data-found>
+      </div>
+    </div>
+  </div>
+</div>

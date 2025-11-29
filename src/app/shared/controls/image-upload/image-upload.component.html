@@ -1,0 +1,25 @@
+<div class="d-flex flex-column align-items-center mt-3 justify-content-center">
+
+  <img [src]="imageUrl" style="height: 150px;" class="img-thumbnail" alt="Cinque Terre">
+
+  <div *ngIf="uploader.progress && uploader.progress > 0 && uploader.progress < 100" class="progress mt-2"
+    style="width: 60%;">
+    <div class="progress-bar bg-primary-300 bg-primary-gradient" role="progressbar"
+      [ngStyle]="{ 'width': uploader.progress + '%' } " aria-valuemin="0" aria-valuemax="100">
+      {{uploader.progress + '%'}}
+    </div>
+  </div>
+
+  <div class="modal-footer justify-content-between">
+
+    <input type='file' id="imageUpload{{id}}" accept=".png, .jpg, .jpeg" name="imageUpload{{id}}" ng2FileSelect
+      [uploader]="uploader" (change)="onFileSelected()" />
+
+
+    <label class="btn-2" for="imageUpload{{id}}"> {{fileName | translate}} </label>
+    <button type="button" class="btn btn-default waves-themed right" (click)="resetValue()">
+      <i class="ni ni-refresh"></i> {{"Reset"|translate}} </button>
+
+  </div>
+
+</div>

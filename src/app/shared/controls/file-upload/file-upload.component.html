@@ -1,0 +1,20 @@
+<div class="form-group mt-3">
+  <label class="form-label" for="{{label | translate}}">{{label | translate}}</label>
+  <div class="input-group mb-3">
+    <div class="custom-file">
+      <input type='file' id="imageUpload{{id}}" accept=".png, .jpg, .jpeg, .pdf,.xlsx,.xls" class="custom-file-input"
+        name="photo" ng2FileSelect [uploader]="uploader" (change)="onFileSelected($event)" />
+      <label class="custom-file-label" #labelImport for="imageUpload{{id}}"><i class="fal fa-search"></i> {{fileName |
+        translate}}
+      </label>
+    </div>
+  </div>
+
+
+  <div *ngIf="uploader.progress || uploader.progress > 0" class="progress mt-2">
+    <div class="progress-bar bg-primary-300 bg-primary-gradient" role="progressbar"
+      [ngStyle]="{ 'width': uploader.progress + '%' } " aria-valuemin="0" aria-valuemax="100">
+      {{uploader.progress + '%'}}
+    </div>
+  </div>
+</div>

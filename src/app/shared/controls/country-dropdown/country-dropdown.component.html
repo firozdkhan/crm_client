@@ -1,0 +1,27 @@
+<div class="form-group mt-3">
+    <label class="form-label" for="{{label}}">{{label | translate}}</label>
+  
+  
+    <ng-select [ngClass]="(controlDir?.control?.touched)
+    ? !controlDir.control.valid ? 'is-invalid' : 'is-valid' : null"
+    [items]="countrydata"
+    bindLabel="name"
+    (input)="onChange($event.target)"
+    (blur)="onTouched()" #input
+    [(ngModel)]="value"
+    (ngModelChange)="onValueChange($event)"
+    bindValue="id"
+    [(ngModel)]="selectedValue"
+    placeholder="{{'Select ' | translate}} {{label | translate}}"
+    #select
+    >
+    </ng-select>
+  
+  
+    <span *ngIf="(!controlDir?.control?.valid && controlDir?.control?.touched)"
+      class='help-block validation-message'>{{label | translate }} {{'is required' |translate}}</span>
+  
+  
+   
+  
+  </div>

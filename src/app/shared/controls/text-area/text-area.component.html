@@ -1,0 +1,22 @@
+<div class="form-group mt-3">
+  <label class="form-label" for="{{label}}">{{label | translate}} <span class="required-asterisk" *appMarkAsterisk='validator'> * </span></label>
+  <textarea
+  [ngClass]="(controlDir?.control?.touched)
+  ? !controlDir.control.valid ? 'is-invalid' : 'is-valid' : null"
+
+(input)="onChange($any($event.target).value)"
+(blur)="onTouched()"
+#input
+class="form-control"
+placeholder="{{placeHolder | translate}}"
+rows= {{rows}}></textarea>
+
+
+  <div class="help-block validation-message" *ngIf="(!controlDir?.control?.valid && controlDir?.control?.touched)">
+      <span *ngIf="controlDir.control.errors?.required">{{label | translate }} {{'is required' |translate}}</span>
+
+
+  </div>
+
+
+</div>

@@ -1,0 +1,55 @@
+<div class="row ">
+  <div class="col-xl-3">
+    <div id="panel-1" class="panel">
+      <div class="panel-hdr bg-info-600 bg-primary-gradient">
+        <h2>
+          {{"Create New Master" | translate}}<span class="fw-300"><i></i></span>
+        </h2>
+      </div>
+      <div class="panel-container  show">
+        <div class="panel-content">
+
+          <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+
+            <app-select-dropdown [data]="parentMenu" [selectedValue]="parentId" formControlName="parentId"
+              [label]="'Parent Category'" (SelectChange)="changed($event)">
+            </app-select-dropdown>
+
+            <app-text-input formControlName="name" [label]="'Name'"></app-text-input>
+
+            <app-footer-buttons [buttonText]="buttonText" [isValid]="!categoryForm.valid"
+              (resetForm)="cancel()"></app-footer-buttons>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-xl-9">
+    <div id="panel-1" class="panel">
+      <div class="panel-hdr bg-primary-600 bg-info-gradient">
+        <h2>
+          {{"New Master List"| translate}}<span class="fw-300"><i></i></span>
+        </h2>
+      </div>
+      <div class="panel-container show">
+        <div class="panel-content">
+
+          <commongrid *ngIf="categories.length > 0" [totalitems]="totalRecords" [records]="categories"
+            [gridfilter]="gridFilter" [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)"
+            [ShowSorting]="true" [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false"
+            [ShowSNo]="true" (ActionRow)="actionRow($event)">
+
+          </commongrid>
+
+          <app-no-data-found *ngIf="categories?.length == 0">
+
+          </app-no-data-found>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

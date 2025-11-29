@@ -1,0 +1,91 @@
+<div class="row">
+  <div class="col-xl-3">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Add SKU Data'"> </app-entry-panel-header>
+
+      <div class="panel-container  show">
+        <div class="panel-content">
+
+          <form [formGroup]="skdDataForm" (ngSubmit)="onSubmit()">
+
+
+
+            <app-text-input formControlName="sku" name="sku" [label]="'SKU'"></app-text-input>
+            <app-text-input formControlName="productDiscription" name="productDiscription"
+              [label]="'Product Description'"></app-text-input>
+            <app-text-input formControlName="price" name="price" [label]="'Price'"></app-text-input>
+            <app-text-input formControlName="dealerPrice" name="dealerPrice" [label]="'Dealer Price'"></app-text-input>
+
+            <div class="form-group mt-4">
+              <a href="javascript:void(0);" class="btn btn-primary waves-effect waves-themed"
+                (click)="open(mymodal)">{{"Add Permission" | translate}}</a>
+            </div>
+
+            <app-footer-buttons [buttonText]="buttonText" [isValid]="!skdDataForm.valid"
+              (resetForm)="cancel()"></app-footer-buttons>
+
+
+          </form>
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-xl-9">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'SKU Data List'"> </app-entry-panel-header>
+
+      <div class="panel-container show">
+        <div class="panel-content">
+
+          <commongrid *ngIf="skuDatas.length > 0" [totalitems]="totalRecords" [records]="skuDatas"
+            [gridfilter]="gridFilter" [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)"
+            [ShowSorting]="true" [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false"
+            [ShowSNo]="true" (ActionRow)="actionRow($event)">
+
+          </commongrid>
+
+          <app-no-data-found *ngIf="skuDatas?.length == 0">
+
+          </app-no-data-found>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #mymodal let-modal>
+
+
+
+
+  <div class="modal-header panel-hdr bg-primary-600 bg-info-gradient">
+
+    <h4 class="modal-title" id="modal-basic-title">{{"Assign Roles" | translate}}</h4>
+
+
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+
+      <span aria-hidden="true">×</span>
+
+    </button>
+
+  </div>
+
+  <div class="modal-body">
+
+    <app-tree-view [menuItems]="menuItems" (selectChange)="onSelectedChange($event)"> </app-tree-view>
+
+  </div>
+
+  <div class="modal-footer">
+
+    <button type="button" class="btn btn-secondary waves-effect waves-themed" (click)="modal.close('Save click')">{{"Ok"
+      | translate}}</button>
+
+  </div>
+
+</ng-template>

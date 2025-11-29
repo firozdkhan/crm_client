@@ -1,0 +1,77 @@
+<div class="row ">
+
+  <div class="col-md-9 col-lg-12 col-sm-12 col-xs-12">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Add New Invoice Setting'"> </app-entry-panel-header>
+
+      <div class="panel-container  show">
+        <div class="panel-content">
+          <form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()">
+            <fieldset class="scheduler-border">
+              <legend class="scheduler-border">{{"Required Information" | translate}}</legend>
+              <div class="form-row">
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-category-dropdown [catId]="36" formControlName="voucherId" [label]="'Vouccher Select'">
+                  </app-category-dropdown>
+                </div>
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-text-input formControlName="startIndex" [label]="'Start Index'">
+                  </app-text-input>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-text-input formControlName="preFix" [label]="'PreFix'"></app-text-input>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-text-input formControlName="suffix" [label]="'Suffix'">
+                  </app-text-input>
+                </div>
+              </div>
+            </fieldset>
+            <app-footer-buttons [buttonText]="'Submit'" [isValid]="!invoiceForm.valid" (resetForm)="cancel()">
+            </app-footer-buttons>
+
+            <div>
+            </div>
+
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+<div class="col-xl-12 mx-0 px-0">
+  <div id="panel-1" class="panel">
+    <div class="panel-hdr bg-primary-600 bg-info-gradient">
+      <h2>
+        {{"Voucher List"| translate}}<span class="fw-300"><i></i></span>
+      </h2>
+    </div>
+    <div class="panel-container show">
+      <div class="panel-content" style="overflow-x: auto;">
+
+        <commongrid *ngIf="invoices.length > 0" [totalitems]="totalRecords" [records]="invoices"
+          [gridfilter]="gridFilter" [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)"
+          [ShowSorting]="true" [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false"
+          [ShowSNo]="true" (ActionRow)="actionRow($event)">
+
+        </commongrid>
+
+        <app-no-data-found *ngIf="invoices?.length == 0">
+
+        </app-no-data-found>
+
+      </div>
+    </div>
+  </div>
+
+</div>

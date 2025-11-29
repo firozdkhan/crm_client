@@ -1,0 +1,14 @@
+<div style="display: block;">
+    <canvas baseChart  style="display: block; box-sizing: border-box; max-height: 400px; width: 400px;"
+      [datasets]="[
+      { data: presentStudent, label: 'Present' | translate, stack: 'a' },
+      { data: absentStudent, label: 'Absent' | translate , stack: 'a' }
+    ]"
+      [labels]="attendanceLabel"
+      [options]="barChartOptions"
+      [plugins]="barChartPlugins"
+      [legend]="barChartLegend"
+      [type]="barChartType">
+    </canvas>
+  </div>
+  

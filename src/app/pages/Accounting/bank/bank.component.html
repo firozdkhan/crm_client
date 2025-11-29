@@ -1,0 +1,71 @@
+<div class="row ">
+
+  <div class="col-xl-3">
+    <div id="panel-1" class="panel">
+      <div class="panel-hdr bg-info-600 bg-primary-gradient">
+        <h2>
+          {{"Add Bank & Balance" | translate}}<span class="fw-300"><i></i></span>
+        </h2>
+      </div>
+      <div class="panel-container  show">
+        <div class="panel-content">
+
+          <form [formGroup]="bankdetailsForm" (ngSubmit)="onSubmit()">
+
+            <!-- <app-category-dropdown [catId]="7" formControlName="bankAccountId"
+              [label]="'Pay Type'"></app-category-dropdown> -->
+            <app-text-input formControlName="bankName" [label]="'Name'"></app-text-input>
+
+            <app-category-dropdown [catId]="83" formControlName="accountTypeId"
+              [label]="'Account Type'"></app-category-dropdown>
+
+
+            <app-text-input formControlName="accountNumber" [label]="'Account Number'"></app-text-input>
+
+            <app-country-dropdown formControlName="countryId" [label]="'Country'"></app-country-dropdown>
+            <app-state-dropdown formControlName="stateId" [label]="'State'"></app-state-dropdown>
+
+            <app-city-dropdown formControlName="cityId" [label]="'City'"> </app-city-dropdown>
+
+
+
+            <app-text-input formControlName="openingBalance" [label]="'Opening Balance'"></app-text-input>
+
+            <app-footer-buttons [buttonText]="buttonText" [isValid]="!bankdetailsForm.valid"
+              (resetForm)="cancel()"></app-footer-buttons>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-xl-9 mx-0 px-0">
+    <div id="panel-1" class="panel">
+      <div class="panel-hdr bg-primary-600 bg-info-gradient">
+        <h2>
+          {{"List Of Bank & Balance"| translate}}<span class="fw-300"><i></i></span>
+        </h2>
+      </div>
+      <div class="panel-container show">
+        <div class="panel-content" style="overflow-x: auto;">
+
+          <commongrid *ngIf="banks.length > 0" [totalitems]="totalRecords" [records]="banks" [gridfilter]="gridFilter"
+            [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)" [ShowSorting]="true"
+            [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false" [ShowSNo]="true"
+            (ActionRow)="actionRow($event)">
+
+          </commongrid>
+
+          <app-no-data-found *ngIf="banks?.length == 0">
+
+          </app-no-data-found>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>

@@ -1,0 +1,68 @@
+<div class="form-row">
+  <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+    <app-category-dropdown [catId]="miscCategory.Document" (SelectChange)="selectDocument($event)"
+      (selectText)="selectDocumentText($event)" [(ngModel)]="misc" [label]="'Document'">
+    </app-category-dropdown>
+  </div>
+
+
+  <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+    <app-file-upload [resetValue]="resetValue" [serviceUrl]="'Core/UploadFile'" [id]="'documentName'"
+      [itemAlias]="'file'" [fileName]="fileName" [label]="'Upload Documents'"
+      (uploadResponse)="studentDocumentUploadResponse($event)">
+    </app-file-upload>
+  </div>
+
+
+  <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12 align-self-center">
+    <button type="button" class="btn btn-success float-right mt-3" (click)="setValue()">{{"Add Document" |
+      translate}}</button>
+  </div>
+</div>
+
+<div class="form-row mt-3">
+  <ng-container>
+    <div class="col-md-12">
+      <div class="frame-wrap">
+        <ng-container *ngIf="documentList.length > 0">
+          <table class="table table-bordered table-hover m-3">
+            <thead class="thead-themed">
+              <tr>
+                <th> {{"S. No." | translate}}
+                </th>
+                <th>{{"Document Name" | translate}}</th>
+                <th>{{"Uploaded" | translate}}</th>
+                <th>{{"Action" | translate}}</th>
+
+              </tr>
+            </thead>
+            <tbody *ngFor="let item of documentList; let i = index;">
+              <tr>
+                <td scope="row">{{i + 1}}</td>
+
+                <td> {{item.documentName}} </td>
+                <td> <a href="{{fileUrl + item.fileUrl}}" class="btn btn-info btn-sm float-center" target="_blank"> <i
+                      class="fal fa-download"></i> {{'View' | translate}} </a> </td>
+                <td class="align-self-center">
+
+                  <button type="button" class="btn btn-danger float-center" (click)="removeValue(i)">{{"Delete" |
+                    translate}}</button>
+                </td>
+
+
+
+              </tr>
+
+            </tbody>
+          </table>
+          <div>
+
+          </div>
+
+
+        </ng-container>
+      </div>
+    </div>
+
+  </ng-container>
+</div>

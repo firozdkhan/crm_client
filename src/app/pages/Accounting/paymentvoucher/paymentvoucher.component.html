@@ -1,0 +1,92 @@
+<div class="row ">
+
+  <div class="col-md-9 col-lg-12 col-sm-12 col-xs-12">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Payment Voucher'"> </app-entry-panel-header>
+
+      <div class="panel-container  show">
+        <div class="panel-content">
+          <form [formGroup]="paymentvoucherForm" (ngSubmit)="onSubmit()">
+            <fieldset class="scheduler-border">
+              <legend class="scheduler-border">{{"Required Information" | translate}}</legend>
+              <div class="form-row">
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-text-input formControlName="paymentInvoiceNo" [label]="'Payment Invoice'"
+                    isDisabled="true"></app-text-input>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-select-dropdown [label]="'Supplier'" [data]="supplierdroupdown" formControlName="supplierId"
+                    optionValue="id" optionLabel="name">
+                  </app-select-dropdown>
+                </div>
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <!-- <app-category-dropdown [catId]="7" formControlName="paymentTypeId"
+                    [label]="'Select Payment '"></app-category-dropdown> -->
+                  <app-select-dropdown [label]="'Payment Type'" [data]="bankdroupdown" formControlName="paymentTypeId"
+                    optionValue="id" optionLabel="name">
+                  </app-select-dropdown>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-date-picker [value]="today" formControlName="paymentDate" [label]="'Date'">
+                  </app-date-picker>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-text-input formControlName="debit" [label]="'Enter Payment'"></app-text-input>
+                </div>
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12 mt-3" style="padding-left: 0px;">
+                  <label for=""><strong>Amount</strong> </label>
+                  <input class="form-control" type="number" formControlName="amount" readonly>
+                </div>
+              </div>
+            </fieldset>
+            <br>
+
+            <app-footer-buttons [buttonText]="'Submit'" [isValid]="!paymentvoucherForm.valid" (resetForm)="cancel()">
+            </app-footer-buttons>
+
+            <div>
+            </div>
+
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+<div class="col-xl-12 mx-0 px-0">
+  <div id="panel-1" class="panel">
+    <div class="panel-hdr bg-primary-600 bg-info-gradient">
+      <h2>
+        {{"Voucher List"| translate}}<span class="fw-300"><i></i></span>
+      </h2>
+    </div>
+    <div class="panel-container show">
+      <div class="panel-content" style="overflow-x: auto;">
+
+        <commongrid *ngIf="paymentvouchers.length > 0" [totalitems]="totalRecords" [records]="paymentvouchers"
+          [gridfilter]="gridFilter" [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)" [ShowSum] = "true"
+          [ShowSorting]="true" [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false"
+          [ShowSNo]="true" (ActionRow)="actionRow($event)">
+
+        </commongrid>
+
+        <app-no-data-found *ngIf="paymentvouchers?.length == 0">
+
+        </app-no-data-found>
+
+      </div>
+    </div>
+  </div>
+
+</div>

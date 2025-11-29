@@ -1,0 +1,314 @@
+<header class="page-header" role="banner">
+  <!-- we need this logo when user switches to nav-function-top -->
+  <app-logo> </app-logo>
+  <!-- DOC: nav menu layout change shortcut -->
+  <div class="hidden-md-down dropdown-icon-menu position-relative">
+    <a href="#" class="header-btn btn js-waves-off" data-action="toggle" data-class="nav-function-hidden"
+      title="Hide Navigation">
+      <i class="ni ni-menu"></i>
+    </a>
+    <ul>
+      <li>
+        <a href="#" class="btn js-waves-off" data-action="toggle" data-class="nav-function-minify"
+          title="Minify Navigation">
+          <i class="ni ni-minify-nav"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="btn js-waves-off" data-action="toggle" data-class="nav-function-fixed"
+          title="Lock Navigation">
+          <i class="ni ni-lock-nav"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- DOC: mobile button appears during mobile width -->
+  <div class="hidden-lg-up">
+    <a href="#" class="header-btn btn press-scale-down" data-action="toggle" data-class="mobile-nav-on">
+      <i class="ni ni-menu"></i>
+    </a>
+  </div>
+
+  <!-- <div class="search col-md-3 col-lg-3 col-sm-6 col-xs-12">
+        <app-student-select [placeholder]="'Search Student'" [(ngModel)]="sId" [showLabel]="false"
+            (ngModelChange)="onSelectChange($event)" [label]="'Select Student'">
+        </app-student-select>
+
+    </div> -->
+
+
+
+  <div class="ml-auto d-flex">
+
+
+    <!-- <div class="pt-3">
+            <div class="btn-group">
+                <button type="button" class="btn btn-warning waves-effect waves-themed">{{'Session' | translate }}
+                    {{sessionName}}</button>
+                <button type="button"
+                    class="btn btn-warning dropdown-toggle dropdown-toggle-split waves-effect waves-themed"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">{{"Toggle Dropdown"| translate}}</span>
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" (click)="changeSession(item)"
+                        *ngFor="let item of sessions">{{item.name}}</a>
+                </div>
+            </div>
+
+
+
+        </div> -->
+
+    <!-- <div class="pt-3 pl-2">
+            <button class="button bg-transparent border-0" data-toggle="modal"
+                [attr.data-target]="'#exampleModal'+ packageId" data-whatever="@mdo"><img [src]="src" alt="Package"
+                    height="35px" width="35px" [tooltip]="tooltip"></button>
+        </div> -->
+
+
+    <div class="hidden-md-down">
+      <a routerLink="/dashboard" class="header-icon" style="cursor: pointer;">
+        <i class="ni ni-home"></i>
+      </a>
+    </div>
+
+    <!-- activate app search icon (mobile) -->
+    <div class="hidden-sm-up">
+      <a href="#" class="header-icon" data-action="toggle" data-class="mobile-search-on" data-focus="search-field"
+        title="Search">
+        <i class="fal fa-search"></i>
+      </a>
+    </div>
+    <!-- app settings -->
+    <div class="hidden-md-down">
+      <a href="#" class="header-icon" data-toggle="modal" data-target=".js-modal-settings">
+        <i class="fal fa-cog"></i>
+      </a>
+    </div>
+
+
+    <!-- app notification -->
+    <div>
+      <a href="#" class="header-icon" data-toggle="dropdown" title="My Apps" style="cursor: pointer;">
+        <i class="fal fa-cube"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-animated dropdown-xl">
+
+
+        <app-dropdown-notification></app-dropdown-notification>
+      </div>
+    </div>
+
+    <div class="hidden-md-down">
+      <a href="https://taleem.biz/document/taleemdesktop.zip" class="header-icon" style="cursor: pointer;">
+        <i class="fal fa-download"></i>
+      </a>
+    </div>
+
+    <!-- app user menu -->
+    <div>
+      <a href="#" data-toggle="dropdown" title=""
+        class="header-icon d-flex align-items-center justify-content-center ml-2">
+        <ng-container *ngIf="(currentUser$ | async) as user">
+          <img src="assets/img/profile/student-profile.png" class="profile-image rounded-circle" alt="{{user.name}}">
+        </ng-container>
+        <!-- you can also add username next to the avatar with the codes below:
+              <span class="ml-1 mr-1 text-truncate text-truncate-header hidden-xs-down">Me</span>
+              <i class="ni ni-chevron-down hidden-xs-down"></i> -->
+      </a>
+      <div class="dropdown-menu dropdown-menu-animated dropdown-lg">
+
+
+        <app-dropdown-menu></app-dropdown-menu>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<!-- for Sliver Package -->
+
+<div class="modal fade" id="exampleModalSilver" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header panel-hdr bg-primary-600 bg-info-gradient">
+        <h4 class="modal-title" id="modal-basic-title">{{"See Packages Detail Here" | translate}}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <div class="u-center-text mainDivModel u-margin-bottom-big">
+                    <h4 class="heading-secondary headingText">
+                        {{"See Plans" | translate}}
+                    </h4>
+                </div> -->
+        <div class="row mainDivRow">
+          <div class="col-12">
+            <div class="card mainCard">
+              <div class="card__side mainCardChild cardSideFront-1">
+                <div class="cardTitle cardTitle--1">
+                  <i class="fas fontIcon fa-paper-plane"></i>
+                  <h4 class="card__heading cardHeading">{{"Silver" | translate}}</h4>
+                </div>
+                <div class="card__details cardDetailsNav">
+                  <ul>
+                    <li>&#10003; {{"Dashboard" | translate}}</li>
+                    <li>&#10003; {{"Master" | translate}}</li>
+                    <li>&#10003; {{"Students" | translate}}</li>
+                    <li>&#10003; {{"Fees" | translate}}</li>
+                    <li>&#10003; {{"Accounts" | translate}}</li>
+                    <li>&#10003; {{"Inventory" | translate}}</li>
+
+                  </ul>
+                </div>
+              </div>
+              <div class="card__side mainCardChild cardSideBack cardSideBack-1">
+                <div class="card__cta cardCtaCss">
+                  <div class="card__price-box cardPriceBox">
+                    <div class="card__details cardDetailsNav">
+                      <ul>
+
+                        <li>&#10003; {{"Staff" | translate}}</li>
+
+                        <li>&#10003; {{"Settings" | translate}}</li>
+
+
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- <a href="#popup" class="btn battan btn--white">Select</a> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- for gold Package -->
+<div class="modal fade" id="exampleModalGold" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header panel-hdr bg-primary-600 bg-info-gradient">
+        <h4 class="modal-title" id="modal-basic-title">{{"See Packages Detail Here" | translate}}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <div class="u-center-text mainDivModel u-margin-bottom-big">
+                    <h4 class="heading-secondary headingText">
+                        {{"See Plans" | translate}}
+                    </h4>
+                </div> -->
+        <div class="row mainDivRow">
+          <div class="col-12">
+            <div class="card mainCard">
+              <div class="card__side mainCardChild cardSideFront-2">
+                <div class="cardTitle cardTitle--2">
+                  <i class="fas fontIcon fa-plane"></i>
+                  <h4 class="card__heading cardHeading">{{"Gold" | translate}}</h4>
+                </div>
+                <div class="card__details cardDetailsNav">
+                  <ul>
+                    <li>&#10003; {{"Dashboard" | translate}}</li>
+                    <li>&#10003; {{"Master" | translate}}</li>
+                    <li>&#10003; {{"Students" | translate}}</li>
+                    <li>&#10003; {{"Fees" | translate}}</li>
+                    <li>&#10003; {{"Accounts" | translate}}</li>
+                    <li>&#10003; {{"Inventory" | translate}}</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="card__side mainCardChild cardSideBack cardSideBack-2">
+                <div class="card__cta cardCtaCss">
+                  <div class="card__price-box cardPriceBox">
+                    <div class="card__details cardDetailsNav">
+                      <ul>
+
+                        <li>&#10003; {{"Staff" | translate}}</li>
+
+                        <li>&#10003; {{"Settings" | translate}}</li>
+
+
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- <a href="#popup" class="btn btn--white">Select</a> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- for paltinum package -->
+<div class="modal fade" id="exampleModalPlatinum" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header panel-hdr bg-primary-600 bg-info-gradient">
+        <h4 class="modal-title" id="modal-basic-title">{{"See Packages Detail Here" | translate}}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <div class="u-center-text mainDivModel u-margin-bottom-big">
+                    <h4 class="heading-secondary headingText">
+                        {{"See Plans" | translate}}
+                    </h4>
+                </div> -->
+        <div class="row mainDivRow">
+
+          <div class="col-12">
+            <div class="card mainCard">
+              <div class="card__side mainCardChild cardSideFront-3">
+                <div class="cardTitle cardTitle--3">
+                  <i class="fas fontIcon fa-rocket"></i>
+                  <h4 class="card__heading cardHeading">{{"Platinum" | translate}}</h4>
+                </div>
+                <div class="card__details cardDetailsNav">
+                  <ul>
+                    <li>&#10003; {{"Dashboard" | translate}}</li>
+                    <li>&#10003; {{"Master" | translate}}</li>
+                    <li>&#10003; {{"Students" | translate}}</li>
+                    <li>&#10003; {{"Fees" | translate}}</li>
+                    <li>&#10003; {{"Accounts" | translate}}</li>
+                    <li>&#10003; {{"Inventory" | translate}}</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="card__side mainCardChild cardSideBack cardSideBack-3">
+                <div class="card__cta cardCtaCss">
+                  <div class="card__price-box cardPriceBox">
+                    <div class="card__details cardDetailsNav">
+                      <ul>
+
+                        <li>&#10003; {{"Staff" | translate}}</li>
+
+                        <li>&#10003; {{"Settings" | translate}}</li>
+
+
+
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- <a href="#popup" class="btn btn--white">Select</a> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

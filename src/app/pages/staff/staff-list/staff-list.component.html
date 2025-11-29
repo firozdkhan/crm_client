@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-xl-12">
+    <div class="border-faded bg-faded p-3 mb-g d-flex">
+
+      <input type="text" [(ngModel)]="query" name="filter-contacts" class="form-control shadow-inset-2 form-control-lg"
+        placeholder="{{'Filter Staff' | translate}}">
+
+    </div>
+  </div>
+</div>
+
+
+<div class="row js-list-filter" id="js-contacts">
+  <div class="col-xl-4" *ngFor="let staff of staffList | filter:query">
+    <div id="c_1" class="card border shadow-0 shadow-sm-hover mb-g" data-filter-tags="oliver kopyov">
+      <div class="card-body border-faded border-top-0 border-left-0 border-right-0 rounded-top">
+        <div class="d-flex flex-row align-items-center">
+          <span class="mr-3">
+            <span class="rounded-circle profile-image d-block"
+              style="background-image:url('{{fileUrl + staff.photoUrl}}'); background-size: cover;"></span>
+          </span>
+          <div class="info-card-text flex-1">
+            <a [routerLink]="['/staff-details', staff.id]" class="fs-xl text-truncate text-truncate-lg text-info"
+              aria-expanded="false">
+              {{staff.name}}
+            </a>
+            <span class="text-truncate text-truncate-xl">{{staff.fatherName}} , {{staff.designationName}},</span>
+            <span class="text-truncate text-truncate-xl">{{staff.departmentName}}</span>
+            <!-- <a [routerLink]="['/staff/staff-details', staff.id]" type="button"
+              class="btn btn-sm btn-outline-success waves-effect waves-themed fw-n position-absolute pos-top pos-right mt-3 mr-3">
+              <span class="fal fa-address-card ng-star-inserted"></span>
+              Details
+            </a> -->
+          </div>
+        </div>
+      </div>
+      <div class="card-body p-0 collapse show">
+        <div class="p-3">
+          <a href="tel:{{staff.mobileNo}}" class="mt-1 d-block fs-sm fw-400 text-dark">
+            <i class="fas fa-mobile-alt text-muted mr-2"></i> {{staff.mobileNo}} </a>
+          <a href="{{ staff.dob|date:'dd/MM/yyyy' }}" class="mt-1 d-block fs-sm fw-400 text-info">
+            <i class="fa fa-calendar text-muted mr-2"></i> {{ staff.dob|date:'dd/MM/yyyy' }}
+          </a>
+
+          <a href="mailto:{{staff.emailId}}" class="mt-1 d-block fs-sm fw-400 text-success">
+            <i class="fas fa-envelope text-muted mr-2"></i> {{staff.emailId}}</a>
+
+          <address class="fs-sm fw-400 mt-4 text-danger">
+            <i class="fas fa-map-pin mr-2"></i> {{staff.currentAddress}}
+          </address>
+          <a [routerLink]="['/staff/update-staff', staff.id]" type="button" class="btn btn-sm btn-outline-primary">
+            <span class="fal fa-edit"></span>
+            Edit
+          </a>
+          <!-- <div class="d-flex flex-row">
+            <a [href]="staff?.socialLink?.faceBook" target="_blank" class="mr-2 fs-xxl" style="color:#3b5998">
+              <i class="fab fa-facebook-square"></i>
+            </a>
+            <a [href]="staff?.socialLink?.twitter" target="_blank" class="mr-2 fs-xxl" style="color:#38A1F3">
+              <i class="fab fa-twitter-square"></i>
+            </a>
+            <a [href]="staff?.socialLink?.linkedin" target="_blank" class="mr-2 fs-xxl" style="color:#0077B5">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a [href]="staff?.socialLink?.instagram" target="_blank" class="mr-2 fs-xxl color-danger-500">
+              <i class="fab fa-instagram"></i>
+            </a>
+           
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

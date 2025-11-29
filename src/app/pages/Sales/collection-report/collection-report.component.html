@@ -1,0 +1,77 @@
+<div class="row ">
+  <div class="col-md-9 col-lg-12 col-sm-12 col-xs-12">
+    <div id="panel-1" class="panel">
+
+      <app-entry-panel-header [title]="'Add New Invoice Setting'"> </app-entry-panel-header>
+      <div class="panel-container  show">
+        <div class="panel-content">
+          <!-- Date Filter Section -->
+          <div class="row g-3 px-2">
+            <div class="col-md-2">
+
+              <app-date-picker [(ngModel)]="fromDate" [label]="'From Date'" [value]="fromDate"></app-date-picker>
+            </div>
+            <div class="col-md-2">
+
+              <app-date-picker [(ngModel)]="toDate" [label]="'To Date'" [value]="toDate" ></app-date-picker>
+            </div>
+            <div class="col-md-3">
+              
+              <app-select-dropdown [label]="'Product'" [data]="productdroupdown"  [addAll]="true" [(ngModel)]="selectedProductId"
+                optionValue="id" optionLabel="name">
+              </app-select-dropdown>
+            </div>
+
+             <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
+                  <app-category-dropdown [catId]="6" [(ngModel)]="selectedCategoryId"  [addAll]="true"  [label]="'Product Category'">
+                  </app-category-dropdown>
+                </div>
+            <div class="col-md-2 d-flex align-items-end mt-3">
+              <button class="btn btn-primary" style="margin-right: 10px;" (click)="filterByDate()">Search</button>
+              <button class="btn btn-secondary" (click)="clearFilter()">Clear</button>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+<br>
+
+<div class="col-xl-12 mx-0 px-0">
+  <div id="panel-1" class="panel">
+    <div class="panel-hdr bg-primary-600 bg-info-gradient">
+      <h2>
+        {{"Stock Report"| translate}}<span class="fw-300"><i></i></span>
+      </h2>
+    </div>
+    <div class="panel-container show">
+      <div class="panel-content" style="overflow-x: auto;">
+
+        <commongrid *ngIf="stockposting.length > 0" [totalitems]="totalRecords" [records]="stockposting"
+          [gridfilter]="gridFilter" [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)"
+          [ShowSorting]="true" [PagingType]="'nextprevnumberadvanced'" [ShowSum]="true" [ShowPagesize]="true"
+          [ShowFilter]="false" [ShowSNo]="true" (ActionRow)="actionRow($event)">
+
+        </commongrid>
+
+        <app-no-data-found *ngIf="stockposting?.length == 0">
+
+        </app-no-data-found>
+
+      </div>
+    </div>
+
+    <!-- <div class="col-md-4 d-flex align-items-center">
+      <button type="button" class="btn btn-success" (click)="goToReport()">Show Report</button>
+    </div> -->
+
+  </div>
+
+</div>

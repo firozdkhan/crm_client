@@ -1,0 +1,37 @@
+<div class="row ">
+
+  <div class="col-xl-12">
+    <div id="panel-1" class="panel">
+
+      <div class="panel-container  show">
+        <div class="panel-content">
+
+          <form [formGroup]="stateForm" (ngSubmit)="onSubmit(stateForm)">
+
+
+            <app-category-dropdown [label]="'Country'" [selectedValue]="countryId" formControlName="countryId"
+              [catId]="_catLabels.Country_Name"> </app-category-dropdown>
+
+
+
+
+            <app-text-input [label]="'State Name'" [inputValue]="this.newName" [type]="'text'"
+              formControlName="name"></app-text-input>
+            `
+
+
+            <app-footer-buttons [buttonText]="buttonText" (resetForm)="cancel()" [isValid]="!stateForm.valid">
+            </app-footer-buttons>
+          </form>
+
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- end col -->
+</div>

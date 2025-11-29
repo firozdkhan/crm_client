@@ -1,0 +1,68 @@
+.print-section {
+  background: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  border-radius: 8px;
+}
+
+.print-section .title {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #343a40;
+  font-size: 1.5rem;
+}
+
+.print-section .invoice {
+  font-size: 1.1rem;
+  color: #6c757d;
+}
+
+.table th,
+.table td {
+  vertical-align: middle !important;
+  font-size: 14px;
+  padding: 10px;
+}
+
+.table-total {
+  background-color: #f1f1f1;
+  border-top: 2px solid #343a40;
+}
+
+.approved-by {
+  font-size: 16px;
+  margin-top: 40px;
+  text-align: right;
+}
+
+.signature-line {
+  border-top: 1px solid #000;
+  width: 200px;
+  margin-left: auto;
+  padding-top: 4px;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .print-section {
+    box-shadow: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .table th {
+    background-color: #e9ecef !important;
+    -webkit-print-color-adjust: exact;
+  }
+}

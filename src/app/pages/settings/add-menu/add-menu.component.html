@@ -1,0 +1,50 @@
+<div class="row ">
+  <div class="col-xl-3">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Create Menu'"> </app-entry-panel-header>
+
+      <div class="panel-container  show">
+        <div class="panel-content">
+
+          <form [formGroup]="menuForm" (ngSubmit)="onSubmit()">
+
+            <app-select-dropdown [data]="menuDropdown" [selectedValue]="parentMenuID" formControlName="parentMenuID"
+              [label]="'Parent Menu'">
+            </app-select-dropdown>
+            <app-text-input formControlName="menuName" [label]="'Menu Name'"></app-text-input>
+            <app-text-input formControlName="iSerialNo" [label]="'Serial No.'"></app-text-input>
+            <app-text-input formControlName="fabIcon" [label]="'Icon'"></app-text-input>
+            <app-text-input formControlName="pageUrl" [label]="'Page Url'"></app-text-input>
+            <app-footer-buttons [buttonText]="buttonText" [isValid]="!menuForm.valid"
+              (resetForm)="cancel()"></app-footer-buttons>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-xl-9">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Menu List'"> </app-entry-panel-header>
+
+      <div class="panel-container show">
+        <div class="panel-content">
+
+          <commongrid *ngIf="menuList.length > 0" [totalitems]="menuList.length" [records]="menuList"
+            [gridfilter]="gridFilter" [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)"
+            [ShowSorting]="true" [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false"
+            [ShowSNo]="true" (ActionRow)="actionRow($event)">
+          </commongrid>
+
+          <app-no-data-found *ngIf="menuList?.length == 0">
+
+          </app-no-data-found>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

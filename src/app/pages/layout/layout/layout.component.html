@@ -1,0 +1,47 @@
+<div class="page-wrapper">
+  <div class="page-inner">
+    <aside app-left-panel class="page-sidebar">
+
+    </aside>
+
+    <!-- END Left Aside -->
+    <div class="page-content-wrapper">
+      <!-- BEGIN Page Header -->
+      <app-page-header></app-page-header>
+      <!-- END Page Header -->
+      <!-- BEGIN Page Content -->
+      <!-- the #js-page-content id is needed for some plugins to initialize -->
+      <main id="js-page-content" role="main" class="page-content">
+        <app-page-breadcrumb></app-page-breadcrumb>
+        <router-outlet>
+
+        </router-outlet>
+      </main>
+      <!-- this overlay is activated only when mobile menu is triggered -->
+      <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
+      <!-- END Page Content -->
+      <!-- BEGIN Page Footer -->
+
+      <footer app-page-footer class="page-footer" role="contentinfo">
+
+      </footer>
+
+      <!-- END Page Footer -->
+      <!-- BEGIN Shortcuts -->
+      <!-- modal shortcut -->
+      <app-short-cut-model></app-short-cut-model>
+      <!-- END Shortcuts -->
+
+    </div>
+  </div>
+</div>
+<!-- END Page Wrapper -->
+<!-- BEGIN Quick Menu -->
+<!-- to add more items, please make sure to change the variable '$menu-items: number;' in your _page-components-shortcut.scss -->
+
+
+<app-short-cut-menu> </app-short-cut-menu>
+
+<!-- BEGIN Page Settings -->
+
+<app-page-settings></app-page-settings> <!-- END Page Settings -->

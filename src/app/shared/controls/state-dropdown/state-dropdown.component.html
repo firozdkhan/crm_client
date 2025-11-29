@@ -1,0 +1,48 @@
+<div class="form-group mt-3">
+  <label class="form-label" for="{{label}}">{{label | translate}}<span class="required-asterisk"
+      *appMarkAsterisk='validator'> * </span> </label>
+
+  <!-- 
+  <ng-select [ngClass]="(controlDir?.control?.touched)
+  ? !controlDir.control.valid ? 'is-invalid' : 'is-valid' : null" [items]="stateData$ | async" bindLabel="name"
+    (input)="onChange($event.target)" (blur)="onTouched()" #input (ngModelChange)="onValueChange($event)" bindValue="id"
+    [(ngModel)]="selectedValue" placeholder="{{'Select ' | translate}} {{label | translate}}" addTagText="Create New"
+    [addTag]="CreateNew" #select>
+
+
+  </ng-select> -->
+
+  <ng-select [ngClass]="(controlDir?.control?.touched)
+  ? !controlDir.control.valid ? 'is-invalid' : 'is-valid' : null" [items]="stateData$ | async" bindLabel="name"
+    (input)="onChange($event.target)" (blur)="onTouched()" #input [(ngModel)]="value"
+    (ngModelChange)="onValueChange($event)" bindValue="id" [(ngModel)]="selectedValue"
+    placeholder="{{'Select' | translate}} {{label | translate}}" [addTag]="CreateNew" #select addTagText="Create New">
+  </ng-select>
+
+
+  <span *ngIf="(!controlDir?.control?.valid && controlDir?.control?.touched)"
+    class='help-block validation-message'>{{label | translate }} {{'is required' |translate}}</span>
+
+
+
+
+</div>
+
+<ng-template #addMisc>
+  <div class="modal-header modal-xl panel-hdr bg-primary-600 bg-info-gradient">
+    <h4 class="modal-title pull-left">{{ "Add New " + label}}</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-add-new-state [countryId]="countryId" (stateAdd)="stateSave($event)" [newName]="selectedText">
+    </app-add-new-state>
+
+  </div>
+  <div class="modal-footer justify-content-between">
+    <button type="submit" (click)="closeModal()" class="btn btn-success ml-auto waves-themed">
+      Close
+    </button>
+  </div>
+</ng-template>

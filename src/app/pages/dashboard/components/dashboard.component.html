@@ -1,0 +1,296 @@
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-sm-6 col-xl-2">
+      <a type="Submit">
+        <div class="p-3 bg-primary-300 rounded overflow-hidden position-relative text-white mb-g">
+          <div class="">
+            <h3 class="display-4 d-block l-h-n m-0 fw-400" style="font-size: 27px;">
+              {{currencyname}} {{ dashboard.totalCollection }}
+              <small class="m-0 l-h-n">{{"Total Collection" | translate}}</small>
+            </h3>
+          </div>
+          <i class="fal fa-money-bill-alt position-absolute pos-right pos-bottom opacity-15 mb-n1 mr-n1"
+            style="font-size:6rem"></i>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-6 col-xl-2">
+      <a type="Submit">
+        <div class="p-3 bg-warning-400 rounded overflow-hidden position-relative text-white mb-g">
+          <div class="">
+            <h3 class="display-4 d-block l-h-n m-0 fw-400" style="font-size: 27px;">
+              {{currencyname}} {{dashboard.totalCollected}}
+              <small class="m-0 l-h-n">{{"Total Collected" | translate}}</small>
+            </h3>
+          </div>
+          <i class="fal fa-money-bill position-absolute pos-right pos-bottom opacity-15  mb-n1 mr-n4"
+            style="font-size: 6rem;"></i>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-6 col-xl-2">
+      <a type="Submit">
+        <div class="p-3 bg-success-200 rounded overflow-hidden position-relative text-white mb-g">
+          <div class="">
+            <h3 class="display-4 d-block l-h-n m-0 fw-400" style="font-size: 27px;">
+              {{currencyname}} {{dashboard.collectionDue}}
+              <small class="m-0 l-h-n">{{"Due" | translate }}</small>
+            </h3>
+          </div>
+          <i class="fal fa-money-check-alt position-absolute pos-right pos-bottom opacity-15 mb-n5 mr-n6"
+            style="font-size: 8rem;"></i>
+        </div>
+      </a>
+    </div>
+    <div class="col-sm-6 col-xl-2">
+      <a type="Submit">
+        <div class="p-3 bg-info-200 rounded overflow-hidden position-relative text-white mb-g">
+          <div class="">
+            <h3 class="display-4 d-block l-h-n m-0 fw-400" style="font-size: 27px;">
+              {{currencyname}} {{dashboard.paymenyVoucher}}
+              <small class="m-0 l-h-n">{{"Payment Voucher" | translate }}</small>
+            </h3>
+          </div>
+          <i class="fal fa-credit-card position-absolute pos-right pos-bottom opacity-15 mb-n1 mr-n4"
+            style="font-size: 6rem;"></i>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-sm-6 col-xl-2">
+      <a type="Submit">
+        <div class="p-3 bg-info-200 rounded overflow-hidden position-relative text-white mb-g">
+          <div class="">
+            <h3 class="display-4 d-block l-h-n m-0 fw-400" style="font-size: 27px;">
+              {{currencyname}} {{dashboard.receiptVoucher}}
+              <small class="m-0 l-h-n">{{"Receipt Voucher" | translate }}</small>
+            </h3>
+          </div>
+          <i class="fal fa-credit-card position-absolute pos-right pos-bottom opacity-15 mb-n1 mr-n4"
+            style="font-size: 6rem;"></i>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-sm-6 col-xl-2">
+      <a type="Submit">
+        <div class="p-3 bg-info-200 rounded overflow-hidden position-relative text-white mb-g">
+          <div class="">
+            <h3 class="display-4 d-block l-h-n m-0 fw-400" style="font-size: 27px;">
+              {{currencyname}} {{dashboard.purchaseDueAmount}}
+              <small class="m-0 l-h-n">{{"Purchase Due Amount" | translate }}</small>
+            </h3>
+          </div>
+          <i class="fal fa-credit-card position-absolute pos-right pos-bottom opacity-15 mb-n1 mr-n4"
+            style="font-size: 6rem;"></i>
+        </div>
+      </a>
+    </div>
+  </div>
+
+
+
+  <!-- Date Filter -->
+  <form [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="row g-3 mb-4 align-items-end mt-2">
+    <div class="col-12 col-sm-6 col-md-3">
+      <app-date-picker formControlName="fromDate" [value]="today" [label]="'From Date'">
+      </app-date-picker>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-3">
+      <app-date-picker formControlName="toDate" [value]="today" [label]="'To Date'">
+      </app-date-picker>
+    </div>
+
+    <div class="col-12 col-md-3">
+      <button type="submit" class="btn btn-primary w-100">Filter</button>
+    </div>
+  </form>
+
+  <!-- Graphs -->
+  <div>
+
+    <div class="row">
+
+      <div class="col-12 col-md-6 mb-4">
+        <div class="card shadow p-3 bg-white rounded h-100">
+          <h5 class="mb-3">Monthly Purchase Report</h5>
+          <canvas id="purchaseChart" height="200"></canvas>
+
+
+        </div>
+      </div>
+
+
+      <div class="col-12 col-md-6 mb-4">
+        <div class="card shadow p-3 bg-white rounded h-100">
+          <h5 class="mb-3">Monthly Sale Report</h5>
+          <canvas id="saleChart" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="row mt-4">
+
+  <!-- Top Supplier Table -->
+  <!-- <div class="col-md-6">
+    <div class="card shadow p-3 bg-white rounded h-100">
+      <h5 class="mb-3">Top Suppliers</h5>
+      <table class="table table-bordered table-striped">
+        <thead class="table-primary">
+          <tr>
+            <th>Name</th>
+            <th>State</th>
+            <th>Amount</th>
+            <th>Due</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let supplier of topSuppliers">
+            <td>{{ supplier.name }}</td>
+            <td>{{ supplier.stateName }}</td>
+            <td>₹{{ supplier.totalAmount | number }}</td>
+            <td>₹{{ supplier.dueAmount | number }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div> -->
+  <div class="col-md-6" style="overflow-x: auto;">
+    <div id="panel-1" class="panel">
+      <div class="panel-hdr bg-primary-600 bg-info-gradient">
+        <h2>
+          {{" Top Supplier List"| translate}}<span class="fw-300"><i></i></span>
+        </h2>
+      </div>
+      <div class="panel-container show">
+        <div class="panel-content" style="overflow-x: auto;">
+
+          <commongrid *ngIf="topSuppliers.length > 0" [totalitems]="totalRecords" [records]=" topSuppliers"
+            [gridfilter]="gridFilter" [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)"
+            [ShowSorting]="true" [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false"
+            [ShowSNo]="true" (ActionRow)="actionRow($event)" [currencySymbol]="currencyname">
+
+          </commongrid>
+
+          <app-no-data-found *ngIf="topSuppliers?.length == 0">
+
+          </app-no-data-found>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Top Buyer Table -->
+  <!-- <div class="col-md-6">
+    <div class="card shadow p-3 bg-white rounded h-100">
+      <h5 class="mb-3">Top Customers</h5>
+      <table class="table table-bordered table-striped">
+        <thead class="table-info">
+          <tr>
+            <th>Name</th>
+            <th>State</th>
+            <th>Amount</th>
+            <th>Due</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let customer of topCustomers">
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.stateName }}</td>
+            <td>₹{{ customer.totalAmount | number }}</td>
+            <td>₹{{ customer.dueAmount | number }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div> -->
+  <div class="col-md-6" style="overflow-x: auto;">
+    <div id="panel-1" class="panel">
+      <div class="panel-hdr bg-primary-600 bg-info-gradient">
+        <h2>
+          {{"Top Customer List"| translate}}<span class="fw-300"><i></i></span>
+        </h2>
+      </div>
+      <div class="panel-container show">
+        <div class="panel-content" style="overflow-x: auto;">
+
+          <commongrid *ngIf="topCustomers.length > 0" [totalitems]="totalRecords" [records]=" topCustomers"
+            [gridfilter]="gridFilter" [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)"
+            [ShowSorting]="true" [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false"
+            [ShowSNo]="true" (ActionRow)="actionRow($event)" [currencySymbol]="currencyname">
+
+          </commongrid>
+
+          <app-no-data-found *ngIf="topCustomers?.length == 0">
+
+          </app-no-data-found>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="row mt-4">
+
+  <div class="col-md-6" style="overflow-x: auto;">
+    <div id="panel-1" class="panel">
+      <div class="panel-hdr bg-primary-600 bg-info-gradient">
+        <h2>
+          {{"Top Customer List"| translate}}<span class="fw-300"><i></i></span>
+        </h2>
+      </div>
+      <div class="panel-container show">
+        <div class="panel-content" style="overflow-x: auto;">
+
+          <commongrid *ngIf="topProducts.length > 0" [totalitems]="totalRecords" [records]=" topProducts"
+            [gridfilter]="gridFilter" [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)"
+            [ShowSorting]="true" [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false"
+            [ShowSNo]="true" (ActionRow)="actionRow($event)" [currencySymbol]="currencyname">
+
+          </commongrid>
+
+          <app-no-data-found *ngIf="topProducts?.length == 0">
+
+          </app-no-data-found>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bank Balance Table -->
+  <div class="col-md-6">
+    <div class="card shadow p-3 bg-white rounded h-100">
+      <h5 class="mb-3">Bank Account Summary</h5>
+      <table class="table table-bordered table-striped" *ngIf="bankdata">
+        <thead class="table-warning">
+          <tr>
+            <th>Bank Name</th>
+            <th>Account No.</th>
+            <th>Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bank of bankdata">
+            <td>{{ bank.bankName }}</td>
+            <td>{{ bank.accountNumber ? bank.accountNumber : '-' }}</td>
+            <td>{{ bank.openingBalance | number:'1.2-2' }}</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

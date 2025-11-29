@@ -1,0 +1,60 @@
+<div class="form-row">
+
+  <div class=" p-2 col-md-4 col-lg-3 col-sm-12 col-xs-12">
+    <span class="text-truncate fs-sm fw-300 text-truncate-xl">
+      <span class="fw-500"> {{"Receipt No"| translate}} : </span> {{receiptDetails.receiptNo}} </span>
+  </div>
+  <div class=" p-2 col-md-4 col-lg-3 col-sm-12 col-xs-12">
+    <span class="text-truncate fs-sm fw-300 text-truncate-xl">
+      <span class="fw-500"> {{"Deposit Date"| translate}} </span> {{receiptDetails.depositDate | date: 'dd-MM-yyyy' }}
+    </span>
+  </div>
+  <!-- <div class="p-2 col-md-4 col-lg-3 col-sm-12 col-xs-12">
+    <span class="text-truncate fs-sm fw-300 text-truncate-xl">
+      <span class="fw-500"> {{"Deposit Amount"| translate}} </span> {{receiptDetails.totalAmount}} </span>
+  </div> -->
+  <div class="p-2 col-md-4 col-lg-3 col-sm-12 col-xs-12">
+    <span class="text-truncate fs-sm fw-300 text-truncate-xl">
+      <span class="fw-500"> {{"Balance Amount"| translate}} </span> {{receiptDetails.totalBalance}} </span>
+  </div>
+  <div class="p-2 col-md-4 col-lg-3 col-sm-12 col-xs-12">
+    <span class="text-truncate fs-sm fw-300 text-truncate-xl">
+      <span class="fw-500"> {{"Deposit By"| translate}} </span> {{receiptDetails.userName}} </span>
+  </div>
+  <!-- <div class="p-2 col-md-4 col-lg-3 col-sm-12 col-xs-12">
+    <span class="text-truncate fs-sm fw-300 text-truncate-xl">
+      <span class="fw-500"> {{"Bank Name"| translate}} </span> DIB </span>
+  </div> -->
+  <div class="p-2 col-md-4 col-lg-3 col-sm-12 col-xs-12">
+    <span class="text-truncate fs-sm fw-300 text-truncate-xl">
+      <span class="fw-500"> {{"Reference Id"| translate}} </span> {{receiptDetails.orderId}} </span>
+  </div>
+  <div class="p-2 col-md-4 col-lg-3 col-sm-12 col-xs-12">
+    <span class="text-truncate fs-sm fw-300 text-truncate-xl">
+      <span class="fw-500"> {{"Remark"| translate}} </span> {{receiptDetails.remark}} </span>
+  </div>
+</div>
+
+<div class="row mt-3">
+  <table class="table m-0 table-bordered">
+    <thead class="thead-primary bg-primary-400 ">
+
+      <tr>
+        <th>{{"S No."| translate}}</th>
+        <th>{{"Fees"| translate}}</th>
+        <th>{{"Amound"| translate}}</th>
+        <th>{{"Discount"| translate}}</th>
+        <th>{{"Fine"| translate}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let feesDetail of receiptDetails.feesDetail; let i = index;">
+        <th scope="row">{{i + 1}} </th>
+        <td>{{feesDetail.name}} </td>
+        <td>{{feesDetail.amount | currency:'AED'}} </td>
+        <td> {{feesDetail.discount | currency:'AED'}}</td>
+        <td> {{feesDetail.fine | currency:'AED'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

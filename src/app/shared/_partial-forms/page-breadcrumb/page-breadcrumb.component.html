@@ -1,0 +1,26 @@
+<div class="subheader">
+  <h1 class="subheader-title" *ngIf="breadcrumbs.length > 0">
+
+    <i class='subheader-icon {{breadcrumbs[breadcrumbs.length-1].icon}}'></i>
+    {{
+    breadcrumbs.length > 0 && breadcrumbs[breadcrumbs.length-1].label | titlecase | translate
+    }}
+
+
+  </h1>
+
+
+
+  <ol class="breadcrumb page-breadcrumb">
+
+    <li class="breadcrumb-item" *ngFor="let breadcrumb of breadcrumbs">
+
+      <a [routerLink]="breadcrumb.url" routerLinkActive="active">
+
+        {{ breadcrumb.label | translate}}
+
+      </a>
+    </li>
+
+  </ol>
+</div>

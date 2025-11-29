@@ -1,0 +1,78 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../src/assets/css/vendors.bundle.css";
+@import "../src/assets/css/app.bundle.css";
+@import "../src/assets/css/fa-regular.css";
+@import "../src/assets/css/fa-brands.css";
+@import "../src/assets/css/fa-solid.css";
+@import "../node_modules/ngx-toastr/toastr.css";
+/* @import "../node_modules/flag-icon-css/css/flag-icons.min.css"; */
+@import "../src/assets/css/datagrid/datatables/datatables.bundle.css";
+@import "../src/assets/css/formplugins/select2/select2.bundle.css";
+@import "../src/assets/css/notifications/sweetalert2/sweetalert2.bundle.css";
+@import "../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css";
+/* @import "../node_modules/@videogular/ngx-videogular/fonts/videogular.css"; */
+@import "../src/assets/css/theme-demo.css";
+@import "../src/assets/css/flatpickr.css";
+/* @import "../node_modules/bs-stepper/dist/css/bs-stepper.min.css"; */
+@import "../node_modules/@ng-select/ng-select/themes/default.theme.css";
+@import '../node_modules/tree-ngx/scss/main.scss';
+
+
+
+table th div.input-group ng2-flatpickr .form-control {
+  height: calc(1.5em + 0.75rem + 2px);
+  width: 100%;
+}
+
+table th div.input-group ng2-flatpickr {
+  position: relative;
+  flex: 1 1 auto;
+  width: 1%;
+  margin-bottom: 0;
+}
+
+.ng2-flatpickr-input-container {
+  width: 100%;
+}
+
+.ng2-flatpickr-input-container.form-control[readonly] {
+  background-color: #f7f7f7;
+}
+
+.input-group input.form-control.ng2-flatpickr-input {
+  width: 100%;
+}
+
+.table-filter select,
+.table-filter .ng2-flatpickr-input-container input {
+  height: 34px !important;
+}
+
+.input-group .filter-textbox,
+.input-group .ng2-flatpickr-input.form-control {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.card .card-title .table-filter.summary input.ng2-flatpickr-input-container {
+  width: 100%;
+}
+
+.rtl .ng2-flatpickr-input {
+  width: 100% !important;
+}
+
+.required-asterisk {
+  color: red;
+  font-weight: bold;
+  margin-left: 3px;
+  font-size: 1.2em;
+}
+
+/* Importing Bootstrap SCSS file. */
+
+
+/* Importing Bootstrap SCSS file. */
+
+
+/* Importing Bootstrap SCSS file. */

@@ -1,0 +1,307 @@
+<div class="row ">
+  <div class="col-lg-6 col-xl-3 order-lg-1 order-xl-1">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Logo Signature'"> </app-entry-panel-header>
+      <div class="panel-container  show">
+        <div class="panel-content">
+          <!-- profile summary -->
+          <div class="row no-gutters row-grid">
+            <div class="col-12">
+              <div class="d-flex flex-column align-items-center justify-content-center p-4">
+                <app-image-upload [serviceUrl]="'core/uploadFile'" [id]="'StudentPhoto'" [itemAlias]="'file'"
+                  [fileName]="'Logo'" [label]="'Upload School Logo'" [directory]="directory" [imageUrl]="schoolLogo"
+                  (uploadResponse)="logoUploadResponse($event)">
+                </app-image-upload>
+                <app-image-upload [serviceUrl]="'core/uploadFile'" [id]="'schoolLogo'" [itemAlias]="'file'"
+                  [fileName]="'Signature'" [label]="'Upload Father Image'" [directory]="directory"
+                  [imageUrl]="signatureImage" (uploadResponse)="signatureUploadResponse($event)">
+                </app-image-upload>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- photos -->
+  </div>
+  <div class="col-lg-12 col-xl-6 order-lg-3 order-xl-2">
+    <div id="panel-3" class="panel">
+      <div class="panel-hdr">
+        <h2>
+          {{"Institute" | translate}} <span class="fw-300"><i>{{"Details" | translate}}</i></span>
+        </h2>
+        <div class="panel-toolbar">
+          <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse" data-toggle="tooltip"
+            data-offset="0,10" data-original-title="Collapse"></button>
+          <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen" data-toggle="tooltip"
+            data-offset="0,10" data-original-title="Fullscreen"></button>
+        </div>
+      </div>
+      <div class="panel-container show">
+        <div class="panel-content">
+          <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <app-text-input [isDisabled]="onUpdateDisable" formControlName="name" [label]="'Name'"></app-text-input>
+              </div>
+              <div class="col-md-6 mb-3">
+                <app-text-input [isDisabled]="true" formControlName="aliceName" [label]="'Alice Name'"></app-text-input>
+              </div>
+              <div class="col-md-6 mb-3">
+                <app-text-input formControlName="address" [label]="'Address'"></app-text-input>
+              </div>
+              <div class="col-md-6 mb-3">
+                <app-text-input formControlName="contactNo" [label]="'Contact No'"></app-text-input>
+              </div>
+              <div class="col-md-6 mb-3">
+                <app-text-input placeHolder="Use - Country Code" formControlName="adminContact"
+                  [label]="'Admin Contact'"></app-text-input>
+              </div>
+              <div class="col-md-6 mb-3">
+                <app-text-input formControlName="email" [label]="'Email Id'"></app-text-input>
+              </div>
+              <div class="col-md-6 mb-3">
+                <app-text-input formControlName="gstNumber" [label]="'GST Number'"></app-text-input>
+              </div>
+              <div class="col-md-6 mb-3">
+                <app-text-input formControlName="website" [label]="'Website'"></app-text-input>
+              </div>
+              <!-- <div class="col-md-6 mb-3">
+                          <app-text-input formControlName="affilationNo" [label]="'Affilation No.'"></app-text-input>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                          <app-text-input formControlName="registrationNo" [label]="'Registration No.'"></app-text-input>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                          <app-text-input formControlName="schoolCdoe" [label]="'School Code'"></app-text-input>
+                      </div> -->
+              <div class="col-md-6 mb-3">
+                <app-country-dropdown formControlName="regionId" [label]="'Country'">
+                </app-country-dropdown>
+              </div>
+              <div class="col-md-6 mb-3">
+                <app-state-dropdown [(ngModel)]="stateId" formControlName="stateId" [label]="'State'"
+                  (SelectChange)="getCity($event)"></app-state-dropdown>
+                <!-- <app-select-dropdown [data]="states" [(ngModel)]="stateId" formControlName="stateId" [label]="'State'" (SelectChange)="getCity($event)"></app-select-dropdown>                   -->
+              </div>
+              <div class="col-md-6">
+                <app-select-dropdown [data]="city" [selectedValue]="cityId" formControlName="cityId"
+                  [label]="'City'"></app-select-dropdown>
+              </div>
+              <!-- <div class="col-md-6 mb-3">
+                          <app-text-input [isDisabled]="onUpdateDisable" formControlName="activationKey" [isDisabled]="keyDisabled" [label]="'Activation Key'"></app-text-input> -->
+              <!-- <div class="col-md-4">
+                              <button type="button" *ngIf="isActive==false"  (click)="checkActivation()" class="btn btn-success waves-themed">{{'Activate' |translate}}</button>
+                              </div> -->
+              <!-- </div>
+                      <div class="col-md-6 mb-3"> -->
+              <!-- <app-date-picker  isDisabled="true"   formControlName="activationDate" [label]="'Activation Date'"></app-date-picker>
+                      </div> -->
+              <!-- <div class="col-md-6 mb-3">
+                          <app-date-picker isDisabled="true"    formControlName="expiryDate" [label]="'Expiry Date'"></app-date-picker>
+                      </div> -->
+              <!-- <div class="col-md-6 mb-3">
+                        <app-text-input [isDisabled]="onUpdateDisable" formControlName="packageCode" [label]="'Enter Package SKU Code'"></app-text-input>
+                      </div> -->
+
+              <!-- <div class="col-md-6">
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><i class="fal fa-save"></i>
+                          {{"See Packages Detail" | translate }}</button>
+                      </div> -->
+              <div class="col-md-6 mb-3 ali"> </div>
+            </div>
+            <!-- <div class="d-flex justify-content-end">
+                      <input
+                          type="checkbox"
+                          formControlName="isAgree"
+                          >
+                      <span class="hidden-md-down fw-700 ml-1">  {{"I agree" | translate}}&nbsp;<a href='https://taleem.biz/document/Terms&Condition.pdf' class='text-primary fw-500'  target='_blank'>{{"Terms & Conditions" | translate}}</a></span>
+                  </div> -->
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default waves-themed" (click)="cancel()"><i
+                  class="ni ni-refresh"></i> {{"Reset" | translate}} </button>
+              <button type="submit" class="btn btn-primary ml-auto waves-themed">
+                <i class="fal fa-save"></i>
+                {{"Submit" | translate}}
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 col-xl-3 order-lg-2 order-xl-3">
+    <!-- add : -->
+    <div id="panel-1" class="panel">
+      <div class="panel-hdr bg-success-600 bg-success-gradient">
+        <h2>
+          {{"Social links" | translate}}
+        </h2>
+      </div>
+      <div class="panel-container  show">
+        <div class="panel-content">
+          <div class="panel-body">
+            <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+              <div class="form-row">
+                <div class="col-md-12 mb-3">
+                  <i class="fab fa-facebook-square fa-2x" style="color: #3b5998;"></i>
+                  <app-text-input formControlName="facebook" [label]="'Face Book'"></app-text-input>
+                </div>
+                <div class="col-md-12 mb-3">
+                  <i class="fab fa-youtube-square fa-2x" style="color: #ec0726"></i>
+                  <app-text-input formControlName="youTube" [label]="'YouTube'"></app-text-input>
+                </div>
+                <div class="col-md-12 mb-3">
+                  <i class="fab fa-twitter-square fa-2x" style="color: #38A1F3"></i>
+                  <app-text-input formControlName="twitter" [label]="'Twitter'"></app-text-input>
+                </div>
+                <div class="col-md-12 mb-3">
+                  <i class="fab fa-instagram color-danger-500 fa-2x"></i>
+                  <app-text-input formControlName="instagram" [label]="'Instagram'"></app-text-input>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1"   aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div  class="modal-header panel-hdr bg-primary-600 bg-info-gradient">
+              <h4 class="modal-title" id="modal-basic-title">{{"See Packages Detail Here" | translate}}</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <div class="u-center-text mainDivModel u-margin-bottom-big">
+                  <h4 class="heading-secondary headingText">
+                      {{"See Plans" | translate}}
+                  </h4>
+              </div>
+              <div class="row mainDivRow">
+                  <div class="col-1-of-3">
+                      <div class="card mainCard">
+                          <div class="card__side mainCardChild cardSideFront-1">
+                              <div class="cardTitle cardTitle--1">
+                                  <i class="fas fontIcon fa-paper-plane"></i>
+                                  <h4 class="card__heading cardHeading">{{"Silver" | translate}}</h4>
+                              </div>
+                              <div class="card__details cardDetailsNav">
+                                  <ul>
+                                      <li>&#10003; {{"Academic" | translate}}</li>
+                                      <li>&#10003; {{"Student" | translate}}</li>
+                                      <li>&#10003; {{"Fees" | translate}}</li>
+                                      <li>&#10006; {{"Attendance" | translate}}</li>
+                                       <li>&#10003; {{"Examination" | translate}}</li>
+
+                                  </ul>
+                              </div>
+                          </div>
+                          <div class="card__side mainCardChild cardSideBack cardSideBack-1">
+                              <div class="card__cta cardCtaCss">
+                                  <div class="card__price-box cardPriceBox">
+                                    <div class="card__details cardDetailsNav">
+                                      <ul>
+
+                                        <li>&#10006; {{"Accounts" | translate}}</li>
+                                        <li>&#10006; {{"Core" | translate}}</li>
+                                        <li>&#10006; {{"Inventory" | translate}}</li>
+                                        <li>&#10003; {{"Setting" | translate}}</li>
+                                        <li>&#10003; {{"Human Resources" | translate}}</li>
+
+
+                                      </ul>
+                                  </div>
+                                  </div>
+                                  <a href="#popup" class="btn battan btn--white">Select</a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-1-of-3">
+                      <div class="card mainCard">
+                          <div class="card__side mainCardChild cardSideFront-2">
+                              <div class="cardTitle cardTitle--2">
+                                  <i class="fas fontIcon fa-plane"></i>
+                                  <h4 class="card__heading cardHeading">{{"Gold" | translate}}</h4>
+                              </div>
+                              <div class="card__details cardDetailsNav">
+                                  <ul>
+                                    <li>&#10003; {{"Academic" | translate}}</li>
+                                    <li>&#10003; {{"Student" | translate}}</li>
+                                    <li>&#10003; {{"Fees" | translate}}</li>
+                                    <li>&#10003; {{"Attendance" | translate}}</li>
+                                     <li>&#10003; {{"Examination" | translate}}</li>
+                                  </ul>
+                              </div>
+                          </div>
+                          <div class="card__side mainCardChild cardSideBack cardSideBack-2">
+                              <div class="card__cta cardCtaCss">
+                                  <div class="card__price-box cardPriceBox">
+                                    <div class="card__details cardDetailsNav">
+                                      <ul>
+
+                                        <li>&#10006; {{"Accounts" | translate}}</li>
+                                        <li>&#10003; {{"Core" | translate}}</li>
+                                        <li>&#10006; {{"Inventory" | translate}}</li>
+                                        <li>&#10003; {{"Setting" | translate}}</li>
+                                        <li>&#10003; {{"Human Resources" | translate}}</li>
+
+
+                                      </ul>
+                                  </div>
+                                  </div>
+                                  <a href="#popup" class="btn btn--white">Select</a> -->
+<!-- </div>
+                          </div>
+                      </div>
+                  </div> -->
+<!-- <div class="col-1-of-3">
+                      <div class="card mainCard">
+                          <div class="card__side mainCardChild cardSideFront-3">
+                              <div class="cardTitle cardTitle--3">
+                                  <i class="fas fontIcon fa-rocket"></i>
+                                  <h4 class="card__heading cardHeading">{{"Platinum" | translate}}</h4>
+                              </div>
+                              <div class="card__details cardDetailsNav">
+                                <ul>
+                                  <li>&#10003; {{"Academic" | translate}}</li>
+                                  <li>&#10003; {{"Student" | translate}}</li>
+                                  <li>&#10003; {{"Fees" | translate}}</li>
+                                  <li>&#10003; {{"Attendance" | translate}}</li>
+                                   <li>&#10003; {{"Examination" | translate}}</li>
+                                </ul>
+                              </div>
+                          </div>
+                          <div class="card__side mainCardChild cardSideBack cardSideBack-3">
+                              <div class="card__cta cardCtaCss">
+                                  <div class="card__price-box cardPriceBox">
+                                    <div class="card__details cardDetailsNav">
+                                      <ul>
+
+                                        <li>&#10003; {{"Accounts" | translate}}</li>
+                                        <li>&#10003; {{"Core" | translate}}</li>
+                                        <li>&#10003; {{"Inventory" | translate}}</li>
+                                        <li>&#10003; {{"Setting" | translate}}</li>
+                                        <li>&#10003; {{"Human Resources" | translate}}</li>
+
+
+                                      </ul>
+                                  </div>
+                                  </div> -->
+<!-- <a href="#popup" class="btn btn--white">Select</a> -->
+<!-- </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div> -->

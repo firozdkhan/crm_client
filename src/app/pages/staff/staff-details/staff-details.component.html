@@ -1,0 +1,100 @@
+<div class="row" *ngIf="employee">
+
+  <div class="col-xl-3">
+
+    <div id="c_1" class="card border shadow-0 shadow-sm-hover mb-g" data-filter-tags="oliver kopyov">
+      <div class="card-body border-faded border-top-0 border-left-0 border-right-0 rounded-top">
+
+        <div class="d-flex flex-row align-items-center">
+          <div class="col-12">
+            <div class="d-flex flex-column align-items-center justify-content-center p-4">
+              <img src="{{fileUrl + employee.photoUrl | lowercase}}" class="rounded-circle shadow-2 img-thumbnail"
+                style="height: 150px;" alt="">
+              <h5 class="mb-0 fw-700 text-center mt-3">
+                {{employee.name}} / {{employee.fatherName}}
+                <span class="text-truncate fs-sm fw-300 text-truncate-xl">
+                  <span class="fw-500"> Department : </span> {{employee.departmentName}}
+
+
+                </span>
+              </h5>
+              <div class="mt-4 text-center demo">
+                <span class="mt-1 d-block fs-sm fw-400 text-dark">
+                  <span class="fw-500"> {{"Post"| translate}} : </span> {{employee.designationName}}</span>
+
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+      <div class="card-body p-0 collapse show">
+        <div class="p-3">
+          <a href="tel:{{employee.mobileNo}}" class="mt-1 d-block fs-sm fw-400 text-dark">
+            <i class="fas fa-mobile-alt text-muted mr-2"></i> {{employee.mobileNo}}</a>
+          <a href="mailto:{{employee.emailId}}" class="mt-1 d-block fs-sm fw-400 text-dark">
+            <i class="fas fa-mouse-pointer text-muted mr-2"></i> {{employee.emailId}}</a>
+          <address class="fs-sm fw-400 mt-4 text-muted">
+            <i class="fas fa-map-pin mr-2"></i> {{employee.currentAddress}}
+          </address>
+          <div class="d-flex flex-row">
+            <a href="{{employee?.socialLink?.faceBook}};" target="_blank" class="mr-2 fs-xxl" style="color:#3b5998">
+              <i class="fab fa-facebook-square"></i>
+            </a>
+            <a href="{{employee?.socialLink?.twitter}};" target="_blank" class="mr-2 fs-xxl" style="color:#38A1F3">
+              <i class="fab fa-twitter-square"></i>
+            </a>
+            <a href="{{employee?.socialLink?.linkedin}};" target="_blank" class="mr-2 fs-xxl" style="color:#0077B5">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="{{employee?.socialLink?.instagram}};" target="_blank" class="mr-2 fs-xxl color-danger-500">
+              <i class="fab fa-instagram"></i>
+            </a>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-xl-9" *ngIf="employee">
+    <div id="panel-6" class="panel">
+
+      <div class="panel-container show">
+        <div class="panel-content">
+          <ul class="nav nav-tabs nav-tabs-clean" role="tablist">
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#tab-home" role="tab"
+                aria-selected="true">{{"Home"| translate}}</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-profile" role="tab"
+                aria-selected="false">{{"Profile"| translate}}</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-time" role="tab"
+                aria-selected="false">{{"Time"| translate}}</a></li>
+          </ul>
+
+          <div class="tab-content p-3">
+            <div class="tab-pane fade active show" id="tab-home" role="tabpanel" aria-labelledby="tab-home">Raw denim
+              you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master
+              cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh
+              dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia
+              cillum iphone.</div>
+            <div class="tab-pane fade" id="tab-profile" role="tabpanel" aria-labelledby="tab-profile">Food truck fixie
+              locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog
+              sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo
+              booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo
+              nostrud organic. </div>
+            <div class="tab-pane fade" id="tab-time" role="tabpanel" aria-labelledby="tab-time">Etsy mixtape wayfarers,
+              ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi
+              farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore
+              carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred
+              pitchfork.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,23 @@
+<div class="col-xl-12">
+  <div id="panel-1" class="panel">
+    <app-entry-panel-header [title]="'Query List'"> </app-entry-panel-header>
+
+    <div class="panel-container show" style="overflow-x: auto;">
+      <div class="panel-content">
+
+        <commongrid *ngIf="helpsss.length > 0" [totalitems]="totalRecords" [records]="helpsss" [gridfilter]="gridFilter"
+          [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)" [ShowSorting]="true"
+          [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false" [ShowSNo]="true"
+          (ActionRow)="actionRow($event)">
+
+        </commongrid>
+
+        <app-no-data-found *ngIf="helpsss.length == 0">
+
+        </app-no-data-found>
+
+      </div>
+    </div>
+  </div>
+
+</div>

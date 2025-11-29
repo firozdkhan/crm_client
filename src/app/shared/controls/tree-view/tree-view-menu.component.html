@@ -1,0 +1,21 @@
+<div class="section">
+  <div class="row">
+    <div class="col-12">
+      <!-- <ngx-treeview [config]="config" [items]="menuItems" (selectedChange)="onSelectedChange($event)" (filterChange)="onFilterChange($event)"
+      (selectedChange)="values = $event">
+    </ngx-treeview> -->
+
+    <tree-ngx #firstTreeRef (selectedItems)="selecedItemsChanged($event)"  [nodeItems]="menuItems" [callbacks]="firstTreecallbacks"
+    [options]="firstTreeoptions">
+   
+     
+  </tree-ngx>
+
+    
+
+  
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,352 @@
+<div #condition id="condition" class="filter_list" [style.left.px]="[left]" [style.top.px]="[top]"
+  [hidden]="!isShowfiltermenu">
+  <ul id="string" class="filter_list_ul">
+    <li hidden="true"><input type="text" [(ngModel)]="ColumnIndex" /></li>
+    <li value="" class="selected1" (click)="FilterConditionClick($event,'')">{{'No Filter'| translate}}</li>
+    <li value="equal" [hidden]="isDate" (click)="FilterConditionClick($event,'equal')">{{'Is'| translate}}</li>
+    <li class="dropdown-item" value="notequal" [hidden]="isDate" (click)="FilterConditionClick($event,'notequal')">
+      {{'Is Not'| translate}}</li>
+    <li value="contain" [hidden]="!isString" (click)="FilterConditionClick($event,'contain')">{{'Contain'| translate}}
+    </li>
+    <li value="doesnotcontain" [hidden]="!isString" (click)="FilterConditionClick($event,'doesnotcontain')">
+      {{'Not Contain'| translate}}</li>
+    <li value="startwith" [hidden]="!isString" (click)="FilterConditionClick($event,'startwith')">{{'Start With'|
+      translate}}</li>
+    <li value="endwith" [hidden]="!isString" (click)="FilterConditionClick($event,'endwith')">{{'End With'| translate}}
+    </li>
+    <li value="after" [hidden]="!isDate" (click)="FilterConditionClick($event,'after')">{{'After'| translate}}</li>
+    <li value="before" [hidden]="!isDate" (click)="FilterConditionClick($event,'before')">{{'Before'| translate}}</li>
+    <li value="greaterthan" [hidden]="!isNumber" (click)="FilterConditionClick($event,'greaterthan')">{{'Greater Than'|
+      translate}}</li>
+    <li value="lessthan" [hidden]="!isNumber" (click)="FilterConditionClick($event,'lessthan')">{{'Less Than'|
+      translate}}</li>
+    <li value="greaterthanequal" [hidden]="!isNumber" (click)="FilterConditionClick($event,'greaterthanequal')">
+      {{'Greater Than & Equals'| translate}}</li>
+    <li value="lessthanequal" [hidden]="!isNumber" (click)="FilterConditionClick($event,'lessthanequal')">{{'Less Than &
+      Equals'| translate}}</li>
+    <li value="isnull" (click)="FilterConditionClick($event,'isnull')">{{'Is Null'| translate}}</li>
+    <li value="isnotnull" (click)="FilterConditionClick($event,'isnotnull')">{{'Not Null'| translate}}</li>
+  </ul>
+</div>
+
+<div class="dataTables_wrapper dt-bootstrap4" #container style="position:relative;">
+  <div class="row mb-3">
+    <div class="col-sm-12 col-md-6 d-flex align-items-center justify-content-start">
+
+      <div class="dataTables_length" id="dt-basic-example_length">
+        <label>{{'Show' | translate}}
+          <select *ngIf="ShowPagesize" [(ngModel)]="pagesize" (change)="PageSizeChange($event)"
+            name="dt-basic-example_length" aria-controls="dt-basic-example" class="form-control custom-select">
+            <option value="10">{{'10' | translate}}</option>
+            <option value="20">{{'20' | translate}}</option>
+            <option value="30">{{'30' | translate}}</option>
+            <option value="50">{{'50' | translate}}</option>
+            <option value="100">{{'100' | translate}}</option>
+            <option value="500">{{'500' | translate}}</option>
+            <option value="1000">{{'1000' | translate}}</option>
+            <option value="10000">{{'10000' | translate}}</option>
+            <option value="999999">{{'All' | translate}}</option>
+          </select>
+          {{'entries' | translate}}</label>
+      </div>
+
+    </div>
+
+    <div class="col-sm-12 d-flex align-items-center justify-content-end">
+      <div id="dt-basic-example_filter" class="dataTables_filter">
+        <label>
+          <div
+            class="input-group-text d-inline-flex width-3 align-items-center justify-content-center border-bottom-right-radius-0 border-top-right-radius-0 border-right-0">
+            <i class="fal fa-search"></i>
+          </div>
+          <input type="text"
+            class="form-control border-top-left-radius-0 border-bottom-left-radius-0 ml-0 width-lg shadow-inset-1"
+            name="filter" placeholder="{{'Search' | translate}}" [(ngModel)]="txtSearch"
+            (keyup)="SearchFilter($event);">
+
+        </label>
+        <ng-container *ngIf="extraButtons">
+          <label class="ml-2" *ngFor="let button of extraButtons">
+            <button class="waves-effect waves-themed" [ngClass]="button.class" [tooltip]="button.tooltip | translate"
+              type="button" (click)="ButtonClick(button, button.type)">
+              <i [ngClass]="button.font"></i> {{button.text}}
+            </button>
+          </label>
+        </ng-container>
+        <label class="ml-2">
+          <button class="btn btn-success btn-icon waves-effect waves-themed"
+            tooltip="{{'Show Hide Column Filter' | translate}}" type="button" (click)="ShowHideColumnFilter()"> <i
+              class="fa fa-eye-slash"></i></button>
+        </label>
+        <label class="ml-2">
+          <button type="button" class="btn btn-info btn-icon rounded waves-effect waves-themed"
+            tooltip="{{'Select Columns' | translate}}" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="fal fa-cog"></i>
+          </button>
+          <ul class="dropdown-menu" (click)="$event.stopPropagation()">
+            <li *ngFor="let filter of gridfilter;let i = index;" class="dropdown-item">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="chkfltr-{{i}}" [(ngModel)]="filter.Is_Visible"
+                  (change)="filter.Is_Visible != $any($event.target).value;">
+                <label class="custom-control-label" for="chkfltr-{{i}}">
+                  <span>{{filter.DisplayText | translate }}</span>
+                </label>
+              </div>
+            </li>
+          </ul>
+        </label>
+        <label class="ml-2">
+          <button type="button" class="btn btn-primary btn-icon rounded waves-effect waves-themed"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tooltip="{{'Export Data' | translate}}">
+            <i class="fal fa-cloud-download-alt"></i>
+          </button>
+          <ul class="dropdown-menu fadeinup cursor">
+            <li class="dropdown-item" (click)="Export('pdf')">
+              <label>
+                <span> <i class="fal fa-file-pdf-o"></i> <strong> {{'Pdf' | translate}} </strong> </span>
+              </label>
+            </li>
+            <li class="dropdown-item" (click)="Export('csv')">
+              <label>
+                <span> <i class="fal fa-file-alt"></i> <strong> {{'Csv' | translate}} </strong> </span>
+              </label>
+            </li>
+          </ul>
+        </label>
+      </div>
+    </div>
+  </div>
+  <table class="table table-bordered w-100 dtr-inline" role="grid" cellpadding="0" cellspacing="0">
+    <thead>
+      <tr>
+        <th *ngIf="ShowCheckbox" class="text-center" width="4%">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="chkAll" [(ngModel)]="selectedAll"
+              (change)="selectAll();">
+            <label class="custom-control-label" for="chkAll"></label>
+          </div>
+        </th>
+        <th *ngIf="ShowSNo" width="4%"> {{'S.No.' | translate}} </th>
+        <ng-container *ngFor="let filter of gridfilter;let i = index">
+          <th [hidden]="!filter.Is_Visible"
+            *ngIf="filter.ColumnName !== 'HasAttachment' && filter.ColumnName !== 'Action' "
+            [style.width.%]="filter.Width?filter.Width:null" class="min-1201" [ngClass]="filter.TextAlign">
+
+            <a *ngIf="ShowSorting && filter['Is_Sort'] != false && totalitems > 0; else elseBlock"
+              (click)="changeSorting(filter.SortColumnName ? filter.SortColumnName : filter.ColumnName, filter.Type)"
+              class="{{ShowSorting && filter['Is_Sort'] == true && totalitems > 0 ? 'sort' : ''}}">
+              {{filter.DisplayText | translate }}
+              <span
+                ngClass="{{SortDirection?.toLowerCase() == 'asc' ? (filter.ColumnName == SortField || filter.SortColumnName == SortField ? 'asc' : '' ) : (SortDirection?.toLowerCase() == 'desc' ? (filter.ColumnName == SortField || filter.SortColumnName == SortField ? 'desc' : '' ) : '') }}"></span>
+            </a>
+            <ng-template #elseBlock>
+              {{filter.DisplayText | translate }}
+            </ng-template>
+            <div class="input-group input-group-sm hidden-phone"
+              *ngIf="ShowFilter && (filter.Type == 'string' || filter.Type == 'number' )">
+              <input type="text" class="form-control" [(ngModel)]="filter.Value"
+                (keyup.enter)="FilterOnTextboxEnter(filter.Type,filter.Value,i,$event)" />
+              <div class="input-group-prepend">
+                <button type="button" #currentTarget class="btn btn-secondary btn-sm  waves-effect waves-themed"
+                  (click)="ColumnFilter(filter.Type,filter.Value,i,$event)" [id]="'filter'+i">
+
+                  <i class="fa fa-filter"></i>
+
+                </button>
+              </div>
+            </div>
+
+            <div class="input-group hidden-phone input-group-sm"
+              *ngIf="ShowFilter && (filter.Type == 'date' || filter.Type == 'datetime')">
+              <ng2-flatpickr [config]="dtConfig" altInputClass="form-control filter-textbox" [(ngModel)]="filter.Value"
+                (change)="DateChange($event,filter);"></ng2-flatpickr>
+              <span class="input-group-prepend">
+                <button type="button" #currentTarget class="btn btn-secondary btn-sm waves-effect waves-themed"
+                  (click)="ColumnFilter(filter.Type,filter.Value,i,$event)" [id]="'filter'+i">
+                  <i class="fa fa-filter"></i>
+                </button>
+              </span>
+
+            </div>
+            <div class="input-group input-group-sm hidden-phone bool" *ngIf="ShowFilter && filter.Type == 'bool'">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="{{filter.ColumnName}}"
+                  [(ngModel)]="filter.Value" (onchange)="ColumnFilter(filter.Type,filter.Value,i,$event)" />
+                <label class="custom-control-label" for="{{filter.ColumnName}}"></label>
+              </div>
+              <div class="input-group-prepend">
+                <button type="button" #currentTarget class="btn btn-secondary btn-sm  waves-effect waves-themed"
+                  (click)="ColumnFilter(filter.Type,filter.Value,i,$event)" [id]="'filter'+i">
+                  <i class="fa fa-filter"></i>
+                </button>
+              </div>
+            </div>
+          </th>
+          <th *ngIf="filter.ColumnName === 'Action'" [style.width.%]="filter.Width?filter.Width:null"> {{'Action' |
+            translate}} </th>
+        </ng-container>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container>
+        <tr *ngFor="let item of pagedItems;let i = index;" [class.active]="item['selectedRow']"
+          (click)="RowClick(item, $event,i)" (dblclick)="RowDbClick(item)">
+          <td *ngIf="ShowCheckbox" class="text-center">
+
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" value="{{item['Id']}}"
+                [(ngModel)]="item['selectedRow']" (change)="checkIfAllSelected($event,i);">
+              <label class="custom-control-label"></label>
+            </div>
+          </td>
+
+          <td *ngIf="ShowSNo" class="text-center">
+            <span>{{i + 1}}
+            </span>
+
+          </td>
+          <td *ngFor="let filter of gridfilter" [hidden]="!filter.Is_Visible"
+            [ngClass]="(filter.TextAlign ? filter.TextAlign : '' ) + ' ' + (filter.Is_TDClass && item['TDClass'] ? item['TDClass'] : '')">
+            <ng-container *ngIf="filter.ColumnName !== 'HasAttachment' && filter.ColumnName !== 'Action'">
+              <ng-container *ngIf="!filter.Is_EditLink">
+                <span *ngIf="filter.Type == 'image'">
+                  <img *ngIf="item[filter.ColumnName]" class="img-xs rounded-circle profile-list-pic"
+                    src="{{fileFolderPath +  item[filter.ColumnName]+'?'+RefreshTime}}" />
+                  <img *ngIf="!item[filter.ColumnName]" class="img-xs rounded-circle profile-list-pic"
+                    src="{{'/assets/img/images/imageIcon.jpg'}}" />
+                </span>
+
+                <span *ngIf="filter.Type == 'attechment'">
+
+                  <a *ngIf="item[filter.ColumnName]"
+                    href="{{service?.Settings?.Base_File_Path +  item[filter.ColumnName]+'?'+RefreshTime}}"
+                    target="_blank" class="btn btn-info waves-effect waves-themed">
+                    <span class="fal fa-download mr-1"></span> {{'Download' | translate}} </a>
+
+                </span>
+                <span *ngIf="filter.Type == 'string' || (filter.Type == 'number' && !filter.Is_Price)">
+                  {{item[filter.ColumnName]}}
+                </span>
+                <span *ngIf="filter.Type == 'number' && filter.Is_Price">{{item[filter.ColumnName] |
+                  number:'1.2-2'}}</span>
+                <span *ngIf="filter.Type == 'date'">{{item[filter.ColumnName] | date:'dd MMM yyyy' }}</span>
+                <span *ngIf="filter.Type == 'datetime'">{{item[filter.ColumnName] | date:'dd MMM yyyy hh:mm a' }}</span>
+                <span *ngIf="filter.Type == 'bool'">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" (input)="ActionClick(item, filter.ColumnName);"
+                      [checked]="item[filter.ColumnName]" class="custom-control-input"
+                      id="active{{i + filter.ColumnName}}">
+                    <label class="custom-control-label" for="active{{i + filter.ColumnName}}"></label>
+                  </div>
+                </span>
+                <div *ngIf="filter.Type == 'color'" class="clrBox" [style.background]="item[filter.ColumnName]"></div>
+              </ng-container>
+              <ng-container *ngIf="filter.Is_EditLink">
+                <span (click)="$event.preventDefault();ActionClick(item, filter.EditType ? filter.EditType : 'view')"
+                  class="link">{{item[filter.ColumnName]}}</span>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="filter.Type == 'boolean'">
+              <div class="custom-control custom-switch">
+                <input type="checkbox" (input)="ActionClick(item, filter.EditType);" [checked]="item[filter.ColumnName]"
+                  class="custom-control-input" id="active{{i}}">
+                <label class="custom-control-label" for="active{{i}}"></label>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="filter.ColumnName == 'HasAttachment'">
+              <i *ngIf="filter.ColumnName == 'HasAttachment' && item['HasAttachment']"
+                class="fa fa-paperclip font-22"></i>
+            </ng-container>
+            <ng-container *ngIf="filter.Type == 'badge'">
+              <ng-container *ngFor="let badge of filter.Badges">
+                <ng-container *ngIf="item[filter.ColumnName] === badge.text">
+                  <span class="badge badge-{{badge.condition}} fs-sm">
+                    {{item[filter.ColumnName]}}
+                  </span>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="filter.ColumnName == 'Action' && filter.Actions">
+              <ng-container *ngFor="let action of filter.Actions">
+                <button
+                  class="btn btn-sm {{action.class ? action.class : 'btn-outline-primary' }} btn-icon waves-effect waves-themed action ml-2"
+                  [tooltip]="action.tooltip | translate" (click)="ActionClick(item,action.type);">
+                  <i *ngIf="action.font" [class]="action.font"></i> {{action.text}}
+                </button>
+              </ng-container>
+
+            </ng-container>
+          </td>
+        </tr>
+
+        <tr [hidden]="!ShowSum">
+
+          <td *ngIf="ShowSNo" class="text-center">
+
+
+          </td>
+
+
+          <td *ngFor="let filter of gridfilter;let i = index;" [hidden]="!filter.Is_Visible">
+
+            <span *ngIf="i === 0"> <b> {{'Total' | translate}}</b></span>
+
+            <span *ngIf="filter.Is_Sum">
+
+              <span>
+                {{ filter.Is_Currency ? (filter.CurrencySymbol + ' ') : currencyname }}
+                {{getTotal(pagedItems,filter.ColumnName) | number:'1.2-2' }}
+              </span>
+
+            </span>
+
+          </td>
+        </tr>
+
+        <tr *ngIf="pagedItems?.length == 0">
+          <td [attr.colspan]="gridfilter.length + 1" class="text-center" style="font-weight:bold;line-height:100px;">
+            {{'No Data' | translate}}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-5">
+      <div class="table-footer" *ngIf="pagedItems?.length > 0" class="dataTables_info" id="dt-basic-example_info"
+        role="status" aria-live="polite">
+
+        <span *ngIf="PagingType !== 'nextprevnumber'">
+          {{'Showing' | translate}} {{pager.startIndex+1}} {{'To' | translate}} {{pager.endIndex+1}} {{'Of' |
+          translate}} {{pager.totalItems}} {{'entries' | translate}}
+        </span>
+        <span *ngIf="PagingType == 'nextprevnumber'">
+          {{'Page' | translate}} {{pager.currentPage}} {{'Of' | translate}} {{pager.totalPages}} / {{pager.totalItems}}
+          {{'In' | translate}}
+          {{pager.totalPages}} {{'entries' | translate }}
+        </span>
+
+
+
+
+
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-7">
+      <div class="dataTables_paginate paging_simple_numbers" id="dt-basic-example_paginate">
+        <pagination *ngIf="pager.pages && pager.pages.length" [boundaryLinks]="true" [maxSize]=5
+          [totalItems]="totalitems" [(ngModel)]="currentPage" [itemsPerPage]="this.pagesize" previousText="&lsaquo;"
+          nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" (pageChanged)="setPage($event)">
+
+        </pagination>
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

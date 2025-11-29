@@ -1,0 +1,105 @@
+<div class="row">
+  <div class="col-xl-12">
+    <div id="panel-1" class="panel">
+      <div class="panel-hdr bg-info-600 bg-primary-gradient">
+        <h2>
+          {{ "Add New Supplier" | translate }} <span class="fw-300"><i></i></span>
+        </h2>
+      </div>
+
+      <div class="panel-container show">
+        <div class="panel-content">
+          <form [formGroup]="supplierForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-text-input formControlName="suppliersName" [label]="'Name'"></app-text-input>
+              </div>
+
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-text-input formControlName="code" [label]="'Code'"></app-text-input>
+              </div>
+
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-text-input formControlName="address" [label]="'Address'"></app-text-input>
+              </div>
+
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-text-input formControlName="gstNumber" [label]="'GST Number'"></app-text-input>
+              </div>
+
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-text-input formControlName="phoneNumber" [label]="'Phone Number'"></app-text-input>
+              </div>
+
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-country-dropdown formControlName="countryId" [label]="'Country'"></app-country-dropdown>
+              </div>
+
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-state-dropdown formControlName="stateId" [label]="'State'"></app-state-dropdown>
+              </div>
+
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-city-dropdown formControlName="cityId" [label]="'City'"></app-city-dropdown>
+              </div>
+
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-text-input formControlName="email" [label]="'Email'"></app-text-input>
+              </div>
+
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-text-input formControlName="creditPeriod" [label]="'Credit Period'"></app-text-input>
+              </div>
+
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-text-input formControlName="creditLimit" [label]="'Credit Limit'"></app-text-input>
+              </div>
+
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-text-input formControlName="openingBalance" [label]="'Opening Balance'"></app-text-input>
+              </div>
+            </div>
+
+            <app-footer-buttons
+              [buttonText]="buttonText"
+              [isValid]="!supplierForm.valid"
+              (resetForm)="cancel()">
+            </app-footer-buttons>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="row">
+   <div class="col-xl-12 mx-0 px-0">
+    <div id="panel-1" class="panel">
+      <div class="panel-hdr bg-primary-600 bg-info-gradient">
+        <h2>
+          {{"Supplier List"| translate}}<span class="fw-300"><i></i></span>
+        </h2>
+      </div>
+      <div class="panel-container show">
+        <div class="panel-content" style="overflow-x: auto;">
+
+          <commongrid *ngIf="suppliers.length > 0" [totalitems]="totalRecords" [records]="suppliers"
+            [gridfilter]="gridFilter" [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)"
+            [ShowSorting]="true" [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false"
+            [ShowSNo]="true" (ActionRow)="actionRow($event)">
+
+          </commongrid>
+
+          <app-no-data-found *ngIf="suppliers?.length == 0">
+
+          </app-no-data-found>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

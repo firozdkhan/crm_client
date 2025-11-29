@@ -1,0 +1,17 @@
+ng-select.is-invalid.ng-touched {
+  border-color: #fd3995;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 1px #fd3995;
+}
+
+.validation-message {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #fd3995;  
+  
+}
+
+ng-select.is-valid.ng-touched {
+  border-color: #1dc9b7;
+
+}

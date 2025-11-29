@@ -1,0 +1,31 @@
+<div class="form-group mt-3">
+  <label class="form-label" for="{{label}}">{{label | translate}} <span class="required-asterisk"
+      *appMarkAsterisk='validator'> * </span></label>
+
+  <div class="input-group">
+    <input [ngClass]="(controlDir?.control?.touched)
+        ? !controlDir.control.valid ? 'is-invalid' : 'is-valid' : null" [type]="type" #dp="bsDatepicker"
+      (input)="onChange($any($event.target).value)" (blur)="onTouched()" #input [(ngModel)]="value"
+      [disabled]="isDisabled" (ngModelChange)="onValueChange($event)" bsDatepicker class="form-control"
+      placeholder="{{label | translate}}"
+      [bsConfig]="{ isAnimated: true, dateInputFormat: dateFormat, showWeekNumbers: false }" [maxDate]="maxDate"
+      [disabled]="isDisabled">
+
+    <div class="input-group-append">
+      <span class="input-group-text fs-xl" (click)="dp.toggle()">
+        <i class="fal fa-calendar-check"></i>
+      </span>
+    </div>
+  </div>
+
+
+  <div *ngIf="controlDir?.control?.status === 'PENDING'" class="fa fa-spinner fa-spin loader"></div>
+
+  <div class="help-block validation-message" *ngIf="(!controlDir?.control?.valid && controlDir?.control?.touched)">
+    <span *ngIf="controlDir.control.errors?.required">{{label | translate }} {{'is required' |translate}}</span>
+
+
+  </div>
+
+
+</div>

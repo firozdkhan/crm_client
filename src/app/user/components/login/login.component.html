@@ -1,0 +1,62 @@
+<div class="blankpage-form-field">
+    <div
+        class="page-logo m-0 w-100 align-items-center justify-content-center rounded border-bottom-left-radius-0 border-bottom-right-radius-0 px-4">
+        <a href="javascript:void(0)" class="page-logo-link press-scale-down d-flex align-items-center">
+            <img src="../../../assets/img/logo.png" alt="SmartAdmin WebApp" aria-roledescription="logo">
+            <span class="page-logo-text mr-1">{{"Admin" | translate}}</span>
+            <!-- <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i> -->
+        </a>
+    </div>
+    <div class="card p-4 border-top-left-radius-0 border-top-right-radius-0" *ngIf="singinForm">
+
+        <form [formGroup]="singinForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label class="form-label" for="userId">{{"Username" | translate}}</label>
+                <input type="email" id="userId" class="form-control" placeholder="user name" formControlName="userId">
+                <span *ngIf="!singinForm.get('userId').valid && singinForm.get('userId').touched"
+                    class='help-block validation-message'>{{"Please enter user name!" | translate}}</span>
+
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="password">{{"Password" | translate}}</label>
+
+                <div class="input-group bg-white shadow-inset-2">
+                    <input [type]="isOldPasswordVisible ? 'text' : 'password'" id="password" formControlName="password"
+                        class="form-control border-right-0 bg-transparent pr-0" placeholder="password">
+                    <div class="input-group-append">
+                        <span class="input-group-text bg-transparent border-left-0">
+                            <i style="cursor: pointer;" (click)="toggleVisibility('oldPassword')" class=""
+                                [ngClass]="isOldPasswordVisible ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+                        </span>
+                    </div>
+                    <span *ngIf="!singinForm.get('password').valid && singinForm.get('password').touched"
+                        class='help-block validation-message'>{{"Please enter password!" | translate}}</span>
+
+                </div>
+
+
+
+
+            </div>
+            <div class="form-group text-left">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" formControlName="remember" id="rememberme">
+                    <label class="custom-control-label" for="rememberme"> {{"Remember me for the next 30 days" |
+                        translate}}</label>
+                </div>
+            </div>
+
+            <a type="button" routerLink="/forgot-password" class="btn btn-primary float-right"> {{"Recover Password" |
+                translate}} </a>
+            <button type="submit" class="btn btn-success float-left" [disabled]="!singinForm.valid"> {{"Sign In" |
+                translate}}</button>
+        </form>
+    </div>
+
+</div>
+
+<video poster="../../../assets/img/backgrounds/clouds.png" id="bgvid" playsinline autoplay muted loop>
+    <source src="../../../assets/media/video/cc.webm" type="video/webm">
+    <source src="../../../assets/media/video/cc.mp4" type="video/mp4">
+</video>

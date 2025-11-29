@@ -1,0 +1,20 @@
+<div class="info-card">
+  <ng-container *ngIf="profile">
+    <img src="{{logo}}" class="profile-image rounded-squre" alt="{{profile.name}}">
+    <div class="info-card-text">
+      <a routerLink="/settings/school-profile" title="{{profile.name}}" class="d-flex align-items-center text-white">
+        <span class="text-truncate text-truncate-sm d-inline-block">
+          {{profile.name}}
+        </span>
+      </a>
+      <span title="{{profile.address}}" class="d-inline-block text-truncate text-truncate-sm"
+        style="margin-top: 10px;">{{profile.address}}</span>
+    </div>
+  </ng-container>
+
+  <img src="assets/img/card-backgrounds/cover-5-lg.png" class="cover" alt="cover">
+  <a routerLink="/settings/school-profile" onclick="return false;" class="" data-action="toggle"
+    data-class="list-filter-active" data-target=".page-sidebar" data-focus="nav_filter_input">
+    <!-- <i class="fal fa-angle-down"></i> -->
+  </a>
+</div>

@@ -1,0 +1,81 @@
+<div class="container-fluid print-section" *ngIf="expenseData" style="padding: 40px;">
+  <!-- Header Section -->
+  <div class="row mb-4 align-items-center">
+    <!-- Company Info -->
+    <div class="col-md-6">
+      <h4 class="mb-1 fw-bold title">{{companyProfile.name}}</h4>
+      <p class="mb-0">{{companyProfile.address}}</p>
+      <p class="mb-0">{{companyProfile.contactNo}}</p>
+      <p class="mb-0">{{companyProfile.website}}</p>
+    </div>
+
+    <!-- Invoice Info -->
+    <div class="col-md-6 text-md-end text-start mt-3 mt-md-0">
+      <h3 class="title mb-1">Expense Report</h3>
+      <p class="invoice mb-0"><strong>Invoice No:</strong> {{ expenseData.invoiceNo }}</p>
+      <p class="mb-0"><strong>Date:</strong> {{ expenseData.expenseDate | date: 'dd/MM/yyyy' }}</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Payment Info -->
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <span style="font-size: 18px;"><strong>Payment Type:</strong></span>
+      <strong style="font-size: 18px;"> {{ expenseData.bankName }}</strong>
+    </div>
+    <div class="col-sm-6 text-end">
+      <span style="font-size: 18px;"><strong>Date:</strong></span>
+      <span style="font-size: 18px;">{{ expenseData.expenseDate | date: 'dd/MM/yyyy' }}</span>
+    </div>
+  </div>
+
+  <!-- Description -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <span style="font-size: 18px;"><strong>Description:</strong> </span>
+      <span style="font-size: 18px;"> {{ expenseData.description }} </span>
+    </div>
+  </div>
+
+  <!-- Expense Table -->
+  <table class="table table-bordered table-striped">
+    <thead class="table-light">
+      <tr>
+        <th style="width: 5%">#</th>
+        <th style="width: 25%">Expense Type</th>
+        <th>Description</th>
+        <th style="width: 20%" class="text-end">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let detail of expenseData.expensesReportDetails; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ detail.expensesTypeName }}</td>
+        <td>{{ detail.expensesDescription }}</td>
+        <td class="text-end">{{ detail.expenseAmount | number: '1.2-2' }}</td>
+      </tr>
+      <tr class="table-total fw-bold">
+        <td colspan="3" class="text-end">Total</td>
+        <td class="text-end">{{ expenseData.totalAmount | number: '1.2-2' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Approved By -->
+  <div class="row mt-5">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 text-end approved-by">
+      <p class="mb-5"><strong>Approved By</strong></p>
+      <p class="signature-line">Signature</p>
+    </div>
+  </div>
+
+  <!-- Print Button -->
+  <div class="text-end mt-5 no-print text-center">
+    <button class="btn btn-primary px-4" (click)="print()">
+      <i class="fa fa-print me-2"></i> Print
+    </button>
+  </div>
+</div>

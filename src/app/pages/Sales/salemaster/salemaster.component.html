@@ -1,0 +1,435 @@
+
+
+<div class="row">
+  <div class="col-md-9 col-lg-12 col-sm-12 col-xs-12">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Add New Sale '"> </app-entry-panel-header>
+      <div class="panel-container  show">
+        <div class="panel-content">
+          <form [formGroup]="saleForm" (ngSubmit)="submitForm()">
+
+            <div class="form-row">
+              <div class="form-group col-md-2">
+
+                <app-text-input formControlName="invoiceNo" [label]="'Invoice No'" isDisabled="true"></app-text-input>
+
+              </div>
+
+              <div class=" form-group col-md-3 ">
+
+                <!-- <select class=" form-control" formControlName="supplierId">
+                  <option value="">-- Select Supplier --</option>
+                  <option *ngFor="let s of suppliers" [value]="s.id">{{ s.name }}</option>
+                  </select> -->
+
+                <!-- <app-category-dropdown [catId]="9" formControlName="customerId"
+                  [label]="'Customer '"></app-category-dropdown> -->
+                <app-select-dropdown [label]="'Customer'" [data]="customerdata" formControlName="customerId"
+                  optionValue="id" optionLabel="name">
+                </app-select-dropdown>
+
+
+
+              </div>
+
+              <div class="form-group col-md-2">
+                <!-- <label>Purchase Date</label>
+      <input type="date" class="form-control" formControlName="purchaseDate" /> -->
+                <app-date-picker formControlName="purchaseDate" [label]="'Date'"></app-date-picker>
+              </div>
+              <div class="form-group col-md-2">
+                <!-- <label>Purchase Date</label>
+      <input type="date" class="form-control" formControlName="purchaseDate" /> -->
+                <app-text-input formControlName="purchaseInvoiceNumber" [label]="'Purchase Bill No'"></app-text-input>
+              </div>
+
+              <div class="form-group col-md-2">
+                <app-select-dropdown [data]="bankData" formControlName="bankId" [isLabelShow]="true"
+                  [label]="'Payment Type'" valueField="bankAccountId" displayField="bankAccountName"
+                  (SelectChange)="onBankChange($event)">
+                </app-select-dropdown>
+
+                <!-- <div style="margin-top: 3%;">
+                  <label for=""> <strong>Select Payment Type</strong> </label> <br>
+                  <select (change)="onBankChange($event)" [value]="selectedBankId" formControlName="bankId"
+                    style=" padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; min-width: 200px; font-size: 14px; background-color: #fff; color: #333;">
+                    <option value="null"> -- Select Bank -- </option>
+                    <option *ngFor="let bank of bankList" [value]="bank.bankAccountId">
+                      {{ bank.bankAccountName }}
+                    </option>
+                  </select>
+                </div> -->
+
+
+              </div>
+            </div>
+
+            <!-- Product Table -->
+            <div formArrayName="saleDetails">
+              <table class="table table-bordered mt-4">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Description</th>
+                    <th>Rate</th>
+                    <th>Discount (%)</th>
+                    <th>Tax Name</th>
+                    <th>Tax Rate (%)</th>
+                    <th>Tax Amount</th>
+                    <th>Inc. Tax</th>
+                    <th>Total Amount</th>
+                    <th>Action</th>
+                    <!-- <th>Tax Edit</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of saleDetails.controls; let i = index" [formGroupName]="i">
+                    <td class="col-2">
+
+                      <!-- <app-select-dropdown [isLabelShow]="false" [data]="productData" formControlName="productId"
+                        (SelectChange)="onProductChange(i)" (NewItemAdd)="openAddProductForm($event)"
+                        [label]="'Product'"></app-select-dropdown> -->
+                      <select class="form-control" formControlName="productId"
+                        (change)="onProductChange(i, $event.target.value)">
+                        <option [value]="''">-- Select Product --</option>
+                        <option *ngFor="let p of products" [value]="p.id">{{ p.productsName }}</option>
+                      </select>
+                      <!-- <select class="form-control" formControlName="productId" (change)="onProductChange(i)">
+                        <option [ngValue]="null">-- Select Product --</option>
+                        <option *ngFor="let p of products" [ngValue]="p.id">{{ p.productsName }}</option>
+                      </select> -->
+
+
+
+                    </td>
+                    <td style="width: 100px;"><input type="number" class="form-control" formControlName="quantity"
+                        (input)="calculateItemAmount(item)" /></td>
+                    <td style="width: 150px;"><input type="string" class="form-control"
+                        formControlName="productDescription" /></td>
+                    <td style="width: 120px;"><input type="number" class="form-control" formControlName="purchasePrice"
+                        (input)="calculateItemAmount(item)" /></td>
+                    <td style="width: 120px;"><input type="number" class="form-control"
+                        formControlName="productDiscount" (input)="calculateItemAmount(item)" /></td>
+                    <td style="width: 120px;"><input type="text" class="form-control" formControlName="taxNumber"
+                        readonly /></td>
+                    <td style="width: 100px;"><input type="number" class="form-control" formControlName="taxRate"
+                        readonly /></td>
+                    <td style="width: 120px;"><input type="number" class="form-control" formControlName="taxAmount"
+                        readonly /></td>
+                    <td style=" vertical-align: top;">
+                      <input type="checkbox" class="form-check-input" formControlName="incTax"
+                        (change)="calculateItemAmount(item)" style="margin-left: 0%;" />
+                    </td>
+                    <td style="width: 150px;"><input type="number" class="form-control" formControlName="amount"
+                        readonly /></td>
+                    <td>
+                      <button type="button" class="btn btn-sm btn-outline-danger me-1" (click)="removeProductItem(i)"
+                        title="Remove">
+                        <i class="fa fa-trash"></i>
+                      </button>
+
+                      <button type="button" class="btn btn-sm btn-outline-info me-1" (click)="openEditTaxForm(i)"
+                        title="Edit">
+                        <i class="fas fa-edit"></i>
+                      </button>
+
+                      <button type="button" class="btn btn-sm btn-outline-primary" (click)="addProductItem()"
+                        title="Add New Row">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </td>
+
+                    <!-- <td><input type="text" class="form-control my-1" formControlName="taxNumberName" readonly />
+
+                      </td> -->
+
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="d-flex justify-content-start" style="gap: 2%;">
+                <!-- <div>
+                  <button type="button" class="btn btn-primary" (click)="addProductItem()">+ </button>
+                </div> -->
+                <div> <button type="button" class="btn   btn-success" (click)="openAddProductForm('abc')"
+                    title="Add New Product">+ </button>
+
+                </div>
+              </div>
+              <!-- Product Button  -->
+
+
+
+            </div>
+
+            <!-- Summary Fields -->
+            <div class="row mt-4">
+              <div class="form-group col-md-3">
+                <label>Bill Discount</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">{{ currencyname }}</span>
+                    <input type="number" class="form-control" formControlName="billDiscount"
+                      (input)="calculateSummary()" />
+                  </div>
+
+                </div>
+
+              </div>
+              <div class="form-group col-md-3">
+                <label>Shipping Amount</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">{{ currencyname }}</span>
+                    <input type="number" class="form-control" formControlName="shippingAmount"
+                      (input)="calculateSummary()" />
+                  </div>
+
+                </div>
+
+              </div>
+              <div class="form-group col-md-3">
+                <label>Pay Amount</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">{{ currencyname }}</span>
+                    <input type="number" class="form-control" formControlName="payAmount"
+                      (input)="onPayAmountChange()" />
+                  </div>
+
+                </div>
+
+              </div>
+              <div class="form-group col-md-3">
+                <label>Balance Due</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">{{ currencyname }}</span>
+                    <input type="number" class="form-control" formControlName="balanceDue" readonly />
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Totals -->
+            <div class="row mt-3">
+              <div class="form-group col-md-3">
+                <label>Total Tax</label>
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">{{ currencyname }}</span>
+                    <input type="number" class="form-control" formControlName="totalTaxAmount" readonly />
+                  </div>
+
+                </div>
+
+              </div>
+              <div class="form-group col-md-3">
+                <label>Total Product Discount</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">{{ currencyname }}</span>
+                    <input type="number" class="form-control" formControlName="totalProductDiscount" readonly />
+                  </div>
+
+                </div>
+
+              </div>
+              <div class="form-group col-md-3">
+                <label>Net Amount</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">{{ currencyname }}</span>
+                    <input type="number" class="form-control" formControlName="netAmount" readonly />
+                  </div>
+
+                </div>
+
+              </div>
+              <div class="form-group col-md-3">
+                <label>Grand Total</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">{{ currencyname }}</span>
+                    <input type="number" class="form-control" formControlName="grandtotal" readonly />
+                  </div>
+
+                </div>
+
+              </div>
+              <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <app-text-area formControlName="billDescription" [label]="'Bill Description'">
+                </app-text-area>
+              </div>
+            </div>
+            <div class="d-flex" style="justify-content: space-between;">
+              <div>
+                <button type="submit" class="btn  mt-3" style="background-color: #7553a8;"> <span style="color: white;">
+                    <strong>Submit</strong> </span>
+                </button>
+              </div>
+
+              <!-- <div>
+                <button type="button" class="btn btn-success mt-3" [disabled]="isUpdateDisabled"
+                  (click)="editcategory(purchase.id)">Update
+                  Purchase</button>
+              </div> -->
+            </div>
+
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Overlay -->
+<div *ngIf="showAddProductForm">
+  <div class="modal-overlay" (click)="closeAddProductForm()"></div>
+
+  <div class="modal-content-custom">
+    <span class="modal-close-btn" (click)="closeAddProductForm()">×</span>
+
+    <div class="panel mx-1">
+
+      <app-entry-panel-header [title]="'Add New Product'"></app-entry-panel-header>
+
+      <div class="panel-container show">
+        <div class="panel-content">
+
+
+          <form [formGroup]="addNewProduct" (ngSubmit)="submitProduct()">
+            <fieldset class="scheduler-border">
+              <legend class="scheduler-border">Required Information</legend>
+
+              <div class="form-row">
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-text-input formControlName="productsName" [label]="'Name'"></app-text-input>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-category-dropdown [catId]="6" formControlName="categoryId"
+                    [label]="'Category'"></app-category-dropdown>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-category-dropdown [catId]="4" formControlName="unitId"
+                    [label]="'Unit Measurement'"></app-category-dropdown>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-category-dropdown [catId]="5" formControlName="brandId"
+                    [label]="'Select Brand'"></app-category-dropdown>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-category-dropdown [catId]="1" formControlName="taxId"
+                    [label]="'Select Tax'"></app-category-dropdown>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-text-input formControlName="productCode" [label]="'Product Code'"></app-text-input>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-text-input formControlName="quantityAlert" [OnlyNumber]="true"
+                    [label]="'Quantity Alert'"></app-text-input>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-text-input formControlName="openStock" [OnlyNumber]="true"
+                    [label]="'Opening Stock'"></app-text-input>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-date-picker [value]="today" formControlName="currentDate" [label]="'Date'"></app-date-picker>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-text-input formControlName="purchasePrice" [OnlyNumber]="true"
+                    [label]="'Purchase Price'"></app-text-input>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-text-input formControlName="sellingPrice" [OnlyNumber]="true"
+                    [label]="'Selling Price'"></app-text-input>
+                </div>
+
+                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                  <app-text-area formControlName="description" [label]="'Description'"></app-text-area>
+                </div>
+              </div>
+            </fieldset>
+
+            <app-footer-buttons [buttonText]="'Submit'" [isValid]="!addNewProduct.valid"
+              (resetForm)="closeAddProductForm()">
+            </app-footer-buttons>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .modalssss-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+  }
+
+  .modalssss-content-custom {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 25px;
+    z-index: 1000;
+    width: 400px;
+    border-radius: 8px;
+  }
+
+  .modalssss-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+</style>
+
+
+
+
+<!-- Edit Tax Modal -->
+<div *ngIf="showEditTaxForm">
+  <div class="modalssss-overlay" (click)="closeEditTaxForm()"></div>
+
+  <div class="modalssss-content-custom">
+    <span class="modalssss-close-btn" (click)="closeEditTaxForm()">×</span>
+
+    <form [formGroup]="editTaxForm" (ngSubmit)="applySelectedTax()">
+      <div class="form-group">
+        <label for="taxId">Select GST</label>
+        <select class="form-control" id="taxId" formControlName="taxId">
+          <option value="">-- Select GST --</option>
+          <option *ngFor="let tax of taxs" [value]="tax.taxId">
+            {{ tax.taxName }} - {{ tax.taxRate }}%
+          </option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-success btn-sm">Apply</button>
+    </form>
+  </div>
+</div>

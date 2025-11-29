@@ -1,0 +1,90 @@
+<div class="row ">
+
+
+  <div class="col-xl-3">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Create Menu'"> </app-entry-panel-header>
+
+      <div class="panel-container  show">
+        <div class="panel-content">
+
+          <form [formGroup]="roleForm" (ngSubmit)="onSubmit()">
+            <app-text-input formControlName="name" [label]="'User Name'"></app-text-input>
+            <app-text-input formControlName="userName" [label]="'User Id'"></app-text-input>
+            <app-select-dropdown [data]="roles" formControlName="userTypeId" (SelectChange)="getUserType($event);"
+              [label]="'Type'"></app-select-dropdown>
+            <app-password-input formControlName="password" [label]="'Password'"
+              [type]="passwordVisible ? 'text' : 'password'">
+            </app-password-input>
+
+            <app-text-input formControlName="phoneNumber" [label]="'Mobile Number'"></app-text-input>
+            <app-text-input formControlName="email" [label]="'Email Id'"></app-text-input>
+
+            <app-footer-buttons [buttonText]="buttonText" [isValid]="!roleForm.valid"
+              (resetForm)="cancel()"></app-footer-buttons>
+
+ 
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-xl-9">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'User List'"> </app-entry-panel-header>
+
+      <div class="panel-container show">
+        <div class="panel-content">
+
+          <commongrid *ngIf="users.length > 0" [totalitems]="totalRecords" [records]="users " [gridfilter]="gridFilter"
+            [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)" [ShowSorting]="true"
+            [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false" [ShowSNo]="true"
+            (ActionRow)="actionRow($event)">
+          </commongrid>
+          <app-no-data-found *ngIf="users?.length == 0">
+
+          </app-no-data-found>
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<ng-template #mymodal let-modal>
+
+
+
+
+  <div class="modal-header panel-hdr bg-primary-600 bg-info-gradient">
+
+    <h4 class="modal-title" id="modal-basic-title">{{"Assign Roles" | translate}}</h4>
+
+
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+
+      <span aria-hidden="true">×</span>
+
+    </button>
+
+  </div>
+
+  <div class="modal-body">
+
+    <app-tree-view [menuItems]="menuItems" (selectChange)="onSelectedChange($event)"> </app-tree-view>
+
+  </div>
+
+  <div class="modal-footer">
+
+    <button type="button" class="btn btn-secondary waves-effect waves-themed" (click)="modal.close('Save click')">{{"Ok"
+      | translate}}</button>
+
+  </div>
+
+</ng-template>

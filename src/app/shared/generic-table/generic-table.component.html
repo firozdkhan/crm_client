@@ -1,0 +1,36 @@
+
+  <div class="btn-group btn-group-sm">
+
+    <a href="javascript:void(0);" (click) ="btn_print()"  data-toggle="tooltip" data-original-title="Print Document" class="btn btn-outline-info btn-icon waves-effect waves-themed">
+      <i class="fal fa-print"></i>
+    </a>
+    <a href="javascript:void(0);" (click) ="btn_copy()"  data-toggle="tooltip" data-original-title="Copy Document" class="btn btn-outline-danger btn-icon waves-effect waves-themed">
+      <i class="fal fa-copy"></i>
+    </a>
+    <a href="javascript:void(0);" (click) ="btn_excel()"  data-toggle="tooltip" data-original-title="Export to Excel" class="btn btn-outline-success btn-icon waves-effect waves-themed">
+      <i class="fal fa-file-excel"></i>
+    </a>
+     <a href="javascript:void(0);" (click) ="btn_csv()"  data-toggle="tooltip" data-original-title="Export to CSV" class="btn btn-outline-warning btn-icon waves-effect waves-themed">
+      <i class="fal fa-file-word"></i>
+    </a>
+    <a href="javascript:void(0);" (click) ="btn_pdf()"  data-toggle="tooltip" data-original-title="Export to PDF" class="btn btn-outline-primary btn-icon waves-effect waves-themed">
+      <i class="fal fa-file-pdf"></i>
+    </a>
+
+</div>
+<table datatable class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th *ngFor="let columnHead of columns">{{ columnHead.header }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of rows">
+      <td *ngFor="let columnHead of columns">
+        <!-- {{row[columnHead.name] }} -->
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+

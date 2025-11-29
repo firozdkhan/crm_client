@@ -1,0 +1,65 @@
+import { IPaidFees } from "../fees/paid";
+import { IAttendance } from "./attendance";
+import { IDocument } from "./student-docs";
+
+export interface IStudentView {
+  id: number;
+  name: string;
+  srNo: string;
+  className: string;
+  classId: number;
+  section: string;
+  sectionId: number;
+  admissionDate: Date;
+  mobileNo: string;
+  dob: Date;
+  photoUrl: string;
+  genderId: number;
+  genderName: string;
+  email: string;
+  religion: string;
+  religionId: number;
+  category: string;
+  catId: number;
+  caste: string;
+  casteId: number;
+  currentAddress: string;
+  permanentAddress: string;
+  currentCity: string;
+  currentCityId: number;
+  countryId: number;
+  countryName: string;
+  permanentCity: string;
+  permanentCityId: number;
+  house: string;
+  houseId: string;
+  userId: number;
+  fatherName: string;
+  fatherOccupation: string;
+  fatherOccupationId: number;
+  fatherMobNo: string;
+  fatherImageUrl: string;
+  motherName: string;
+  motherOccupation: string;
+  motherOccupationId: number;
+  motherMobNo: string;
+  motherImageUrl: string;
+  remarks: string;
+  guardianName: string;
+  guardianMobNo: string;
+  guardianAddress: string;
+  guardianImageUrl: string;
+  sessionId: number;
+  studentDocs: IDocument[];
+  attendanceList: IAttendance[];
+  paidFees: IPaidFees[];
+  selectedRow: boolean;
+
+
+  // siblings: ISibling[];
+  // studentFee: IStudentFee[];
+  // siblingDetails: ISiblingDetail[];
+  // previousHistory: IPreviousHistory[];
+  // subjects: ISubject[];
+  // healthRecords: IHealthRecord;
+}

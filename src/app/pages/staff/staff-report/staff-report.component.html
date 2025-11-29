@@ -1,0 +1,24 @@
+<div class="row" *ngIf="staffReport">
+
+  <div class="col-xl-12">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Staff Report'"> </app-entry-panel-header>
+
+      <div class="panel-container show">
+        <div class="panel-content" *ngIf="staffReport">
+
+          <commongrid *ngIf="staffReport.length > 0" [totalitems]="totalRecords" [records]="staffReport"
+            [gridfilter]="gridFilter" [pagesize]="10" (change)="pageChanged($event)" [ShowSorting]="true"
+            [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false" [ShowSNo]="true">
+          </commongrid>
+
+          <app-no-data-found *ngIf="staffReport.length == 0">
+
+          </app-no-data-found>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

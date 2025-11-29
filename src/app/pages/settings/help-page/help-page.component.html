@@ -1,0 +1,54 @@
+<div class="row ">
+  <div class="col-xl-3">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Send Query'"> </app-entry-panel-header>
+
+      <div class="panel-container  show">
+        <div class="panel-content">
+
+          <form [formGroup]="helpForm" (ngSubmit)="onSubmit()">
+
+            <app-text-input formControlName="subject" [label]="'Subject'"></app-text-input>
+
+            <app-text-area formControlName="description" [label]="'Description'"></app-text-area>
+
+
+            <app-file-upload [resetValue]="resetValue" [serviceUrl]="'core/uploadFile'" [id]="'documentName'"
+              [itemAlias]="'file'" [fileName]="fileUrl" [label]="'Upload File'" [directory]="'Temp'"
+              (uploadResponse)="DocumentUploadResponse($event)">
+            </app-file-upload>
+
+            <app-footer-buttons [buttonText]="buttonText" [isValid]="!helpForm.valid" (resetForm)="cancel()">
+            </app-footer-buttons>
+          </form>
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-xl-9">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Query List'"> </app-entry-panel-header>
+
+      <div class="panel-container show" style="overflow-x: auto;">
+        <div class="panel-content">
+
+          <commongrid *ngIf="helpsss.length > 0" [totalitems]="totalRecords" [records]="helpsss"
+            [gridfilter]="gridFilter" [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)"
+            [ShowSorting]="true" [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false"
+            [ShowSNo]="true" (ActionRow)="actionRow($event)">
+
+          </commongrid>
+
+          <app-no-data-found *ngIf="helpsss.length == 0">
+
+          </app-no-data-found>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

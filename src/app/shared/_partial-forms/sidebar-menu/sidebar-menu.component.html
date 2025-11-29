@@ -1,0 +1,45 @@
+<ng-container *ngFor="let m of sidebarmenu">
+
+
+
+  <li *ngIf="m.child.length == 0" routerLinkActive="active">
+    <a routerLink="{{m.pageUrl}}" title="{{m.menuName |translate}}" (click)="setTitle(m.menuName)"
+      routerLinkActive="active">
+      <i class="nav-icon {{m.fabIcon}}"> </i>
+      <span class="nav-link-text"> {{m.menuName | translate}}</span>
+    </a>
+  </li>
+
+
+  <!-- <li *ngIf="m.child.length > 0" class="nav-item has-treeview" appSmartMenu>
+    <a href="javascript:void(0)" title="{{m.menuName | translate}}" routerLinkActive="active">
+      <i class="nav-icon {{m.fabIcon}}"> </i>
+      <span class="nav-link-text"> {{m.menuName | translate}}</span>
+
+    </a>
+    <ul [sidebarmenu]='m.child' name="childParent" class="nav nav-treeview">
+    </ul>
+  </li> -->
+
+  <li *ngIf="m.child.length > 0" class="nav-item has-treeview" appSmartMenu routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: false}">
+    <a href="javascript:void(0)" title="{{m.menuName | translate}}">
+      <i class="nav-icon {{m.fabIcon}}"></i>
+      <span class="nav-link-text">{{m.menuName | translate}}</span>
+    </a>
+
+    <ul class="nav nav-treeview">
+      <ng-container *ngFor="let child of m.child">
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a routerLink="{{child.pageUrl}}" title="{{child.menuName | translate}}" (click)="setTitle(child.menuName)">
+            <i class="nav-icon {{child.fabIcon}}"></i>
+            <span class="nav-link-text">{{child.menuName | translate}}</span>
+          </a>
+        </li>
+      </ng-container>
+    </ul>
+  </li>
+
+
+
+</ng-container>

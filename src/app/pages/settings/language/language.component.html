@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-xl-3">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Add Language Field'"></app-entry-panel-header>
+
+      <div class="panel-container show">
+        <div class="panel-content">
+
+          <form [formGroup]="fieldForm" (ngSubmit)="onSubmit()">
+
+            <app-select-dropdown [data]="languages" (SelectChange)="changeLanguage($event)" formControlName="languageId"
+              label="Language"></app-select-dropdown>
+            <app-text-input formControlName="title" label="Title"></app-text-input>
+            <app-text-input formControlName="value" label="Value"></app-text-input>
+
+            <app-footer-buttons [buttonText]="buttonText" [isValid]="!fieldForm.valid"
+              (resetForm)="cancel()"></app-footer-buttons>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-9">
+    <div id="panel-2" class="panel">
+      <app-entry-panel-header [title]="'Language List'"></app-entry-panel-header>
+
+      <div class="panel-container show">
+        <div class="panel-content">
+
+          <commongrid *ngIf="fields && fields.length > 0" [totalitems]="totalRecords" [records]="fields"
+            [gridfilter]="gridFilter" [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)"
+            [ShowSorting]="true" [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false"
+            [ShowSNo]="true" (ActionRow)="actionRow($event)"></commongrid>
+
+          <app-no-data-found *ngIf="!fields || fields.length === 0"></app-no-data-found>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

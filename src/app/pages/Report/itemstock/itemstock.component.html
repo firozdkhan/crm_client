@@ -1,0 +1,71 @@
+<div class="col-xl-12 mx-0 px-0">
+  <div id="panel-1" class="panel">
+    <div class="panel-hdr bg-primary-600 bg-info-gradient">
+      <h2>
+        {{"Supplier List"| translate}}<span class="fw-300"><i></i></span>
+      </h2>
+    </div>
+    <div class="panel-container show">
+      <div class="panel-content" style="overflow-x: auto;">
+
+        <commongrid *ngIf="ItemStocks.length > 0" [totalitems]="totalRecords" [records]="ItemStocks"
+          [gridfilter]="gridFilter" [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)"
+          [ShowSorting]="true" [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false"
+          [ShowSNo]="true" (ActionRow)="actionRow($event)">
+
+        </commongrid>
+
+        <app-no-data-found *ngIf="ItemStocks?.length == 0">
+
+        </app-no-data-found>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<!-- Modal Overlay -->
+<div class="col-xl-12 mx-0 px-0">
+  <div id="panel-1" class="panel">
+    <div *ngIf="showPurchaseReport" class="custom-modal-overlay" (click)="closeReportModal()"></div>
+
+    <!-- Modal Content -->
+    <div *ngIf="showPurchaseReport" class="custom-modal-content">
+      <span class="custom-modal-close" (click)="closeReportModal()">×</span>
+
+
+      <div class="panel-hdr bg-primary-600 bg-info-gradient">
+        <h2>
+          {{"Product Report"| translate}}<span class="fw-300"><i></i></span>
+        </h2>
+      </div>
+
+      <h4 class="text-center mb-3 font-weight-bold">
+        Purchase History for: <span class="text-primary">{{ selectedProductName }}</span>
+      </h4>
+
+      <table class="table table-hover table-striped table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th class="text-center"> Date</th>
+            <th class="text-center"> Qty</th>
+            <th class="text-center">Rate</th>
+            <th class="text-center"> Invoice No</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of purchaseReports">
+            <td class="text-center">{{ item.purchaseDate | date: 'dd-MM-yyyy hh:mm a' }}</td>
+            <td class="text-center">{{ item.qty }}</td>
+            <td class="text-center">{{ item.purchaseRate | number:'1.2-2' }}</td>
+            <td class="text-center text-primary"> <strong>{{ item.invoiceNo }}</strong> </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

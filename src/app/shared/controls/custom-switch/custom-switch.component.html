@@ -1,0 +1,11 @@
+<div class="form-group mt-3">
+  <label class="form-label" for="{{label}}">{{label | translate}}</label>
+
+  <div class="custom-control custom-switch">
+    <input type="checkbox"
+    (input)="onChange($event.target)" (blur)="onTouched()" #input [(ngModel)]="value"
+    (ngModelChange)="onValueChange($event)"
+    class="custom-control-input" [(ngModel)]="checked"  id="{{formControlId}}">
+    <label class="custom-control-label" for="{{formControlId}}">{{checkString }}</label>
+  </div>
+</div>

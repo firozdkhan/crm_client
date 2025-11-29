@@ -1,0 +1,45 @@
+<div id="printSection"
+  style="width: 100%; min-height: auto; margin: auto; padding: 20mm; font-family: Arial, sans-serif; font-size: 12pt; background: white; color: black;">
+
+  <!-- Company Header -->
+  <div style="text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px;">
+    <h2 style="margin: 0;">{{ schoolprofile?.name }}</h2>
+    <p style="margin: 0;">{{ schoolprofile?.address }}</p>
+    <p style="margin: 0;">Contact: {{ schoolprofile?.contactNo }}</p>
+    <p style="margin: 0;">Email: {{ schoolprofile?.email }} | Website: {{ schoolprofile?.website }}</p>
+  </div>
+
+  <!-- Report Title -->
+  <div style="text-align: center; margin-bottom: 20px;">
+    <h3 style="margin: 0;">Product Sale Report</h3>
+  </div>
+
+  <!-- Purchase Table -->
+  <table style="width: 100%; border-collapse: collapse;" border="1">
+    <thead style="background-color: #f2f2f2;">
+      <tr>
+        <th style="padding: 8px;">#</th>
+        <th style="padding: 8px;">Product Name</th>
+        <th style="padding: 8px;">Purchase Date</th>
+        <th style="padding: 8px;">Qty</th>
+        <th style="padding: 8px;">Rate</th>
+        <th style="padding: 8px;">Invoice No</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of salereport; let i = index">
+        <td style="padding: 8px; text-align: center;">{{ i + 1 }}</td>
+        <td style="padding: 8px;">{{ item.productName }}</td>
+        <td style="padding: 8px;">{{ item.saleDate | date: 'dd-MM-yyyy hh:mm a' }}</td>
+        <td style="padding: 8px; text-align: right;">{{ item.qty }}</td>
+        <td style="padding: 8px; text-align: right;">{{ item.saleRate }}</td>
+        <td style="padding: 8px;">{{ item.invoiceNo }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Print Button -->
+  <div style="text-align: right; margin-top: 20px;" class="no-print">
+    <button class="btn btn-primary" (click)="print()">Print</button>
+  </div>
+</div>

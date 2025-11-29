@@ -1,0 +1,246 @@
+.mainDivModel {
+  text-align: center !important;
+}
+
+.headingText {
+  font-size: 1.9rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: transparent;
+  letter-spacing: 0.2rem;
+  line-height: 1;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  color: #8d26a7;
+}
+
+.battan, .battan:link, .battan:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1.5rem 4rem;
+  display: inline-block;
+  border-radius: 0.5rem;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  position: relative;
+  font-size: 1.6rem;
+  border: none;
+  cursor: pointer;
+}
+
+.battan:hover {
+  -webkit-transform: translateY(-3px);
+          transform: translateY(-3px);
+  -webkit-box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.battan:hover::after {
+  -webkit-transform: scaleX(1.4) scaleY(1.6);
+          transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+.battan:active, .battan:focus {
+  outline: none;
+  -webkit-transform: translateY(-1px);
+          transform: translateY(-1px);
+  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.battan {
+  background-color: #fff;
+  color: #777;
+}
+
+.battan::after {
+  background-color: #fff;
+}
+
+.mainCard {
+  -webkit-perspective: 150rem;
+          perspective: 150rem;
+  -moz-perspective: 150rem;
+  position: relative;
+  height: 34rem;
+}
+
+.mainCardChild {
+  height: 34rem;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  border-radius: 3px;
+  overflow: hidden;
+  -webkit-box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+          box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+}
+
+.cardSideFront-1 {
+  background: linear-gradient(-45deg, #f403d1, #64b5f6);
+}
+.cardSideFront-2 {
+  background: linear-gradient(-45deg, #f321d7, #ffec61);
+}
+
+.cardSideFront-3 {
+  background: linear-gradient(-45deg, #24ff72, #9a4eff);
+}
+
+.cardSideBack {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.cardSideBack-1 {
+  background: linear-gradient(-45deg, #64b5f6, #f403d1);
+}
+
+.cardSideBack-2 {
+  background: linear-gradient(-45deg, #ffec61, #f321d7);
+}
+
+.cardSideBack-3 {
+  background: linear-gradient(-45deg, #9a4eff, #24ff72);
+}
+
+.mainCard:hover .cardSideFront-1,
+.mainCard:hover .cardSideFront-2,
+.mainCard:hover .cardSideFront-3 {
+  -webkit-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
+}
+
+.mainCard:hover .cardSideBack {
+  -webkit-transform: rotateY(0);
+          transform: rotateY(0);
+}
+
+.cardTitle {
+  height: 10rem;
+  padding: 4rem 2rem 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.cardTitle--1 .fontIcon {
+  font-size: 2.5rem;
+}
+
+.cardTitle--2 .fontIcon {
+  font-size: 2.5rem;
+}
+
+.cardTitle--3 .fontIcon {
+  font-size: 2.5rem;
+}
+
+.cardHeading {
+  font-size: 2rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+  width: 75%;
+}
+
+.cardDetailsNav {
+  padding: 0 2rem 2rem;
+  margin-right: 12%;
+}
+
+.cardDetailsNav ul {
+  list-style: none;
+  width:100%;
+  margin:  auto;
+
+}
+
+.cardDetailsNav ul li {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 1rem;
+}
+
+.cardDetailsNav ul li:not(:last-child) {
+  border-bottom: 1px solid #eee;
+}
+
+.cardCtaCss {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 90%;
+  text-align: center;
+}
+
+.cardPriceBox {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 2rem;
+}
+
+.cardPricePeragraph {
+  font-size: 1.4rem;
+  text-transform: uppercase;
+}
+
+.cardPricePeragraphValue {
+  font-size: 6rem;
+  font-weight: 100;
+}
+
+.mainDivRow {
+  max-width: 114rem;
+  margin: 0 auto;
+}
+
+.mainDivRow:not(:last-child) {
+  margin-bottom: 5rem;
+  margin-top: 5rem;
+}
+
+.mainDivRow::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.mainDivRow [class^="col-"] {
+  float: left;
+}
+
+.mainDivRow [class^="col-"]:not(:last-child) {
+  margin-right: 6rem;
+}
+
+.mainDivRow .col-1-of-3 {
+  width: calc((100% - 2 * 6rem) / 3);
+}
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 25% !important;
+    margin: 1.75rem auto !important;
+  }
+}
+
+ 

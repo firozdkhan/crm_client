@@ -1,0 +1,35 @@
+<div [ngClass]="isLabelShow?'form-group mt-3':''">
+  <label *ngIf="isLabelShow" class="form-label" for="{{label}}">{{label | translate}} <span class="required-asterisk"
+      *appMarkAsterisk='validator'> * </span> </label>
+
+
+  <ng-select [ngClass]="(controlDir?.control?.touched)
+    ? !controlDir.control.valid ? 'is-invalid' : 'is-valid' : null" [items]="data" bindLabel="name"
+    (input)="onChange($event.target)" (blur)="onTouched()" #input [(ngModel)]="value"
+    (ngModelChange)="onValueChange($event)" bindValue="id" [(ngModel)]="selectedValue"
+    placeholder="{{'Select' | translate}} {{label | translate}}" [multiple]="multiple" #select [addTagText]="tagName"
+    [addTag]="CreateNew" [searchable]="true">
+  </ng-select>
+
+  <!-- <ng-select [items]="data" bindLabel="name" bindValue="id" (input)="onChange($event.target)"
+    [formControl]="controlDir.control" [(ngModel)]="value" (ngModelChange)="onValueChange($event)"
+    [ngClass]="(controlDir?.control?.touched) ? !controlDir.control.valid ? 'is-invalid' : 'is-valid' : null"
+    [multiple]="multiple" [searchable]="true" placeholder="{{'Select' | translate}} {{label | translate}}"
+    (change)="onChange($event)" (blur)="onTouched()" (ngModelChange)="onValueChange($event)"
+    [formControl]="controlDir.control" [addTag]="CreateNew" [addTagText]="tagName">
+  </ng-select> -->
+
+
+
+
+
+
+
+
+  <span *ngIf="(!controlDir?.control?.valid && controlDir?.control?.touched)"
+    class='help-block validation-message'>{{label | translate }} {{'is required' |translate}}</span>
+
+
+
+
+</div>

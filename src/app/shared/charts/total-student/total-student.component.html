@@ -1,0 +1,14 @@
+<div style="display: block">
+  <canvas style="display: block; box-sizing: border-box; max-height: 400px; width: 400px;" baseChart class="chart"
+    [data]="{
+        labels: studentClass,
+        datasets: [
+          { data: studentCount, label: 'Total Student' | translate },
+          { data: newStudent, label: 'New Student' | translate},
+        ],
+      }" [options]="barChartOptions" [type]="barChartType" (chartHover)="chartHovered($event)"
+    (chartClick)="chartClicked($event)">
+  </canvas>
+
+
+</div>

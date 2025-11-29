@@ -1,0 +1,46 @@
+<div class="form-group mt-3">
+  <label class="form-label" for="{{label}}">{{label | translate}} <span class="required-asterisk"
+      *appMarkAsterisk='validator'> * </span> </label>
+  <input [ngClass]="(controlDir?.control?.touched)  ? !controlDir.control.valid ? 'is-invalid' : 'is-valid' : null"
+    [type]="type" (input)="onChange($event.target.value)" (blur)="onTouched()" [(ngModel)]="inputValue"
+    (ngModelChange)="valuechange($event)" (focusout)="focusOutFunction($any($event.target).value)" #input
+    class="form-control"
+    [attr.placeholder]="(placeHolder | translate)? (placeHolder | translate) : ('Insert ' | translate)+ label | translate"
+    [disabled]="isDisabled">
+
+
+
+
+
+
+
+
+
+  <div class="help-block validation-message" *ngIf="(!controlDir?.control?.valid && controlDir?.control?.touched)">
+    <span *ngIf="controlDir.control.errors?.required">{{label | translate }} {{'is required' |translate}}</span>
+    <span *ngIf="controlDir.control.errors?.decimal"> {{"Only numeric allow" | translate}} </span>
+    <span *ngIf="controlDir.control.errors?.minlength"> {{label}} {{"must be at least" | translate}}
+      {{controlDir.control.errors?.minlength.requiredLength }} {{"characters long." | translate}}</span>
+    <span *ngIf="controlDir.control.errors?.maxlength"> {{label}} {{"can be max" | translate}}
+      {{controlDir.control.errors?.maxlength.requiredLength }} {{"characters long."| translate}}</span>
+    <span *ngIf="controlDir.control.errors?.email">{{"Invalid email address" | translate}}</span>
+    <span *ngIf="controlDir.control.errors?.pattern">{{"Invalid characters" | translate}} </span>
+    <span *ngIf="controlDir.control.errors?.passwordMatch">{{"Value are mis match" | translate}} </span>
+    <span *ngIf="controlDir.control.errors?.whitespace && !controlDir.control.errors?.required">{{"Invalid characters" |
+      translate}} </span>
+
+  </div>
+
+  <div class="help-block validation-message" *ngIf="(!controlDir?.control?.valid && controlDir?.control?.dirty)">
+    <span *ngIf="controlDir.control.errors?.emailExists">{{"Email address is in use" | translate}}</span>
+  </div>
+  <div *ngIf="controlDir && controlDir.control && controlDir.control.status ==='PENDING'" class="loader-spin">
+    <i class="fas fa-circle-notch fa-spin"></i>
+  </div>
+
+
+  <div class="help-block validation-message" *ngIf="(!controlDir?.control?.valid && controlDir?.control?.dirty)">
+    <span *ngIf="controlDir.control.errors?.rollNoExists">{{'Roll No. is in use' | translate}}</span>
+
+  </div>
+</div>

@@ -1,0 +1,137 @@
+<div class="invoice-box full-bordered" *ngIf="sale">
+  <div class="no-print text-right mb-3">
+    <button class="btn btn-primary me-2" (click)="onEditInvoice()">Edit Invoice</button>
+    <button class="btn btn-success" onclick="window.print()">Print Invoice</button>
+  </div>
+
+  <!-- Header -->
+  <div *ngIf="companyprofile" style="display: flex; justify-content: center; margin-bottom: 20px;">
+    <div style="display: flex; align-items: center; gap: 20px; width: 100%; max-width: 800px;justify-content: center;">
+      <!-- Logo -->
+      <div style="flex-shrink: 0;">
+        <img [src]="Base_File_Path + companyprofile.schoolLogo" alt="Logo" style="
+          height: 100px;
+          width: 100px;
+          object-fit: contain;
+          border-radius: 50%;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        ">
+      </div>
+
+      <!-- Company Info -->
+      <div style="text-align: left;">
+        <h2 style="margin: 5px 0;font-weight: 700;">{{ companyprofile.name }}</h2>
+        <p style="margin: 2px 0;">{{ companyprofile.address }}</p>
+        <p style="margin: 2px 0;">{{ companyprofile.contactNo }} | {{ companyprofile.email }}</p>
+        <p style="margin: 2px 0;">{{ companyprofile.website }}</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="center">Sale Invoice</h3>
+
+  <!-- Invoice Info -->
+  <table class="info-table">
+    <tr>
+      <td><strong style="font-weight: 700;">Invoice No :</strong> {{ sale.invoiceNo }}</td>
+      <td><strong style="font-weight: 700;">Status :</strong> {{ sale.status }}</td>
+    </tr>
+    <tr>
+      <td><strong style="font-weight: 700;">Supplier :</strong> {{ sale.customerName }}</td>
+      <td><strong style="font-weight: 700;">Bank :</strong> {{ sale.bankName }}</td>
+    </tr>
+    <tr>
+      <td><strong style="font-weight: 700;">Date :</strong> {{ sale.purchaseDate | date:'dd-MM-yyyy' }}
+      </td>
+      <td><strong style="font-weight: 700;">GST Number :</strong> {{ sale.customerGst }}</td>
+    </tr>
+  </table>
+
+  <!-- Product Table -->
+  <table class="bordered">
+    <thead>
+      <tr class="heading">
+        <th style="font-weight: 700;">#</th>
+        <th style="font-weight: 700;">Product</th>
+        <th style="font-weight: 700;">Tax</th>
+        <th style="font-weight: 700;">Qty</th>
+        <th style="font-weight: 700;">Price ({{ currencyname }})</th>
+        <th style="font-weight: 700;">Tax Amt ({{ currencyname }})</th>
+        <th style="font-weight: 700;">Total ({{ currencyname }})</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of sale.saleDetails; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ item.productName }}</td>
+        <td>{{ item.taxNumber }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.purchasePrice | number:'1.2-2' }}</td>
+        <td>{{ item.taxAmount | number:'1.2-2' }}</td>
+        <td>{{ item.amount | number:'1.2-2' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Totals & Tax Summary Side-by-Side -->
+  <div style="display: flex; justify-content: space-between; margin-top: 20px; gap: 30px; flex-wrap: wrap;">
+    <!-- Tax Summary Table -->
+    <div style="flex: 1; min-width: 250px;">
+      <table class="totals-table">
+        <tr>
+          <td><strong style="font-weight: 700;">IGST:</strong></td>
+          <td class="text-right">{{ currencyname }} {{ sale.igst }}</td>
+        </tr>
+        <tr>
+          <td> <strong style="font-weight: 700;">CGST:</strong></td>
+          <td class="text-right">{{ currencyname }} {{ sale.cgst }}</td>
+        </tr>
+        <tr>
+          <td><strong style="font-weight: 700;">SGST:</strong></td>
+          <td class="text-right">{{ currencyname }} {{ sale.sgst }}</td>
+        </tr>
+      </table>
+    </div>
+
+
+    <!-- Totals Table -->
+    <div style="flex: 1;" style="align-content: end;">
+      <table class="totals-table  ">
+        <tr>
+          <td style="font-weight: 700;">Product Discount:</td>
+          <td class="text-right">{{ currencyname }} {{ sale.totalProductDiscount | number:'1.2-2' }}</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 700;">Bill Discount:</td>
+          <td class="text-right">{{ currencyname }} {{ sale.billDiscount | number:'1.2-2' }}</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 700;">Shipping:</td>
+          <td class="text-right">{{ currencyname }} {{ sale.shippingAmount | number:'1.2-2' }}</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 700;">Total Tax:</td>
+          <td class="text-right">{{ currencyname }} {{ sale.totalTaxAmount | number:'1.2-2' }}</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 700;">Net Amount:</td>
+          <td class="text-right">{{ currencyname }} {{ sale.netAmount | number:'1.2-2' }}</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 700;">Paid:</td>
+          <td class="text-right">{{ currencyname }} {{ sale.payAmount | number:'1.2-2' }}</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 700;">Balance Due:</td>
+          <td class="text-right">{{ currencyname }} {{ sale.balanceDue | number:'1.2-2' }}</td>
+        </tr>
+        <tr class="grand-total">
+          <td style="font-weight: 700;">Grand Total:</td>
+          <td class="text-right"><strong>{{ currencyname }} {{ sale.grandtotal | number:'1.2-2' }}</strong></td>
+        </tr>
+      </table>
+    </div>
+
+
+  </div>
+</div>

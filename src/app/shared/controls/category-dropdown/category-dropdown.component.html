@@ -1,0 +1,66 @@
+<div class="form-group mt-3">
+  <label class="form-label" *ngIf="isLabelShow" for="{{label}}">{{label | translate}} <span class="required-asterisk"
+      *appMarkAsterisk='validator'> * </span></label>
+  <ng-select [ngClass]="(controlDir?.control?.touched)
+  ? !controlDir.control.valid ? 'is-invalid' : 'is-valid' : null"
+    [ngClass]="(!!controlDir?.control?.value)  ? !controlDir.control.valid ? 'is-invalid' : 'is-valid' : null"
+    class="flex-grow-1" [items]="miscdata" bindLabel="name" [(ngModel)]="value"
+    (input)="onChange($any($event.target).value)" (blur)="onTouched()" #input appPrefixFocusAndSelect
+    (ngModelChange)="onValueChange($event)" bindValue="id" [(ngModel)]="selectedValue"
+    [placeholder]="isLabelShow ? ('Select ' + label | translate) : ('Select' | translate)" #select
+    [addTagText]="tagName" [addTag]="CreateNew">
+  </ng-select>
+
+
+  <span
+    *ngIf="(!controlDir?.control?.valid && controlDir?.control?.touched) ||  (!controlDir?.control?.valid && !!controlDir?.control?.value)"
+    class='help-block validation-message'>{{label + " is required" | translate}}</span>
+
+
+
+
+</div>
+
+<ng-template #addMisc>
+  <div class="modal-header modal-xl panel-hdr bg-primary-600 bg-info-gradient">
+    <h4 class="modal-title pull-left">{{ "Add New" + label | translate }}</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="miscForm" (ngSubmit)="savecategory()">
+      <div class="form-row">
+        <div class="col-md-8 col-lg-8 col-sm-6 col-xs-12">
+          <app-text-input formControlName="name" [label]="'Name'" [inputValue]="catName"
+            [isFocus]="true"></app-text-input>
+        </div>
+        <div class="
+            col-md-4 col-lg-4 col-sm-6 col-xs-12
+            d-flex
+            align-content-end
+            flex-wrap flex-row-reverse
+            justify-content-between
+          ">
+
+          <button type="submit" [disabled]="!miscForm.valid" class="btn btn-success waves-themed">
+            {{"Submit" | translate}}
+          </button>
+
+        </div>
+
+        <!-- <app-footer-buttons
+          [buttonText]="buttonText"
+          [isValid]="!patternForm.valid"
+          (resetForm)="cancel()"
+        ></app-footer-buttons> -->
+      </div>
+    </form>
+
+  </div>
+  <div class="modal-footer justify-content-between">
+    <button type="submit" (click)="closeModal()" class="btn btn-primary ml-auto waves-themed">
+      {{"Close" | translate}}
+    </button>
+  </div>
+</ng-template>
