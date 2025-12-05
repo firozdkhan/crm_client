@@ -27,7 +27,7 @@ export class GridComponent {
   @Input() gridfilter: Array<GridFilter>;
   pager: Pager = new Pager();
   @Input() totalitems: number = 0; // pass when page wise data come
-  @Input() pagesize: number = 10;
+  @Input() pagesize: number = 25;
   @Input() SortField: string = '';
   @Input() SortDirection: string = '';
   SortType: string = 'string';
@@ -169,7 +169,7 @@ export class GridComponent {
     );
 
     if (res) {
-      this.countryid = res.regionId;
+      this.countryid = res.countryId;
       await this.getCountryById(this.countryid);
     }
   }

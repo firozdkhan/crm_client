@@ -1,0 +1,57 @@
+{{juned | json}}
+
+<div class="row">
+  <div class="col-xl-12">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Attendance Report'">
+      </app-entry-panel-header>
+      <div class="panel-container show">
+        <div class="panel-content">
+          <form [formGroup]="attendanceForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+
+              <div class="col-md-3">
+                <app-employee-dropdown formControlName="staffId" [label]="'Name'">
+                </app-employee-dropdown>
+              </div>
+
+              <div class="col-md-3">
+                <app-date-picker [value]="today" formControlName="dateOfJoining" [label]="' Select Month'">
+                </app-date-picker>
+              </div>
+
+              <div class="col-md-3 d-flex align-items-center mt-4 justify-content-around">
+                <button type="submit" class="btn btn-primary waves-themed me-2" [disabled]="!attendanceForm.valid">
+                  {{"Show" | translate}}
+                </button>
+                <button type="reset" class="btn btn-default waves-themed" (click)="reset()">
+                  {{"Reset" | translate}}
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div id="panel-1" class="panel">
+      <div class="panel-hdr bg-primary-600 bg-info-gradient">
+        <h2>{{"Monthwise Attendance Report List" | translate}}</h2>
+      </div>
+      <div class="panel-container show" style="overflow-x: auto;">
+        <div class="panel-content">
+          <commongrid *ngIf="reportdata.length > 0" [totalitems]="totalRecords" [records]="reportdata"
+            [gridfilter]="gridFilter" [pagesize]="10" (change)="pageChanged($event)" [ShowSorting]="true"
+            [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false" [ShowSNo]="true"
+            [ShowSum]="true" (ActionRow)="actionRow($event)">
+          </commongrid>
+          <app-no-data-found *ngIf="reportdata?.length == 0"></app-no-data-found>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

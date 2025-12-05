@@ -1,0 +1,87 @@
+
+
+<!-- {{ leaveRequestForm.get('assignedLeave')?.value | json }}
+{{ leaveRequestForm.get('approvedLeave')?.value | json }}
+{{ leaveRequestForm.get('remainingLeave')?.value | json }}
+{{ leaveRequestForm.value | json }} -->
+<div class="row ">
+  <div class="col-xl-3">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Create Leave Request'">
+      </app-entry-panel-header>
+
+      <div class="panel-container  show">
+        <div class="panel-content">
+
+          <form [formGroup]="leaveRequestForm" (ngSubmit)="onSubmit()">
+
+            <app-category-dropdown [catId]="15" formControlName="leaveId"
+              [label]="'Leave Type'"></app-category-dropdown>
+
+            <app-employee-dropdown formControlName="staffId"
+              [label]="'Name'"></app-employee-dropdown>
+
+            <div class="form-group mt-3">
+              <label>Assigned Leave</label>
+              <input type="text" class="form-control"
+                formControlName="assignedLeave" readonly />
+            </div>
+
+            <div class="form-group">
+              <label>Approved Leave</label>
+              <input type="text" class="form-control"
+                formControlName="approvedLeave" readonly />
+            </div>
+
+            <div class="form-group">
+              <label>Remaining Leave</label>
+              <input type="text" class="form-control"
+                formControlName="remainingLeave" readonly />
+            </div>
+
+            <app-date-picker [(ngModel)]="startDate" [value]="today"
+              formControlName="fromDate" [label]="'From'"
+              [maxDate]="false">
+            </app-date-picker>
+            <app-date-picker [(ngModel)]="endDate" [value]="today"
+              formControlName="toDate" [label]="'To'"
+              [maxDate]="false">
+            </app-date-picker>
+            <app-text-area formControlName="reason"
+              [label]="'Reason'"></app-text-area>
+            <app-footer-buttons [buttonText]="buttonText"
+              [isValid]="!leaveRequestForm.valid" (resetForm)="cancel()">
+            </app-footer-buttons>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- {{leaveRequestForm.value| json}} -->
+  <div class="col-xl-9">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Leave Request List'">
+      </app-entry-panel-header>
+      <div class="panel-container show">
+        <div class="panel-content">
+
+          <commongrid *ngIf="requestList.length > 0" [totalitems]="totalRecords"
+            [records]="requestList" [gridfilter]="gridFilter"
+            [SearchText]="txtSearch" [pagesize]="30"
+            (change)="pageChanged($event)" [ShowSorting]="true"
+            [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true"
+            [ShowFilter]="false" [ShowSNo]="true"
+            (ActionRow)="actionRow($event)">
+          </commongrid>
+          <app-no-data-found *ngIf="requestList?.length == 0">
+          </app-no-data-found>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

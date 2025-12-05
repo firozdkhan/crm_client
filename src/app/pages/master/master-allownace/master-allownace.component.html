@@ -1,0 +1,65 @@
+<div class="row" #goUp>
+  <div class="col-12 mb-4">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Allowance Form'"> </app-entry-panel-header>
+      <div class="panel-container show">
+        <div class="panel-content">
+          <form [formGroup]="MasterAllownaceform" (ngSubmit)="onSubmit(MasterAllownaceform)">
+            <div class="form-row">
+              <div class="col-3">
+                <app-category-dropdown [catId]="23" [label]="'Allowance Name'" formControlName="miscAllowanceId">
+                </app-category-dropdown>
+
+              </div>
+
+
+              <div class="col-3">
+                <app-category-dropdown [catId]="33" [label]="'Post Name'" formControlName="postId">
+                </app-category-dropdown>
+
+              </div>
+
+              <div class="col-2">
+                <app-text-input [label]="'Percentage'" [placeHolder]="'Enter percentage'" formControlName="inPercent">
+                </app-text-input>
+              </div>
+
+              <div class="col-1">
+                <app-text-input [label]="'Approximate'" [placeHolder]="'Enter Amount'"
+                  formControlName="approximateAmount">
+                </app-text-input>
+              </div>
+              <div class="col-3" style="margin-top: 1.2rem">
+                <app-footer-buttons [buttonText]="buttonText" (resetForm)="cancel()"
+                  [isValid]="!MasterAllownaceform.valid">
+                </app-footer-buttons>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-xl-12">
+  <div id="panel-1" class="panel">
+    <div class="panel-hdr bg-primary-600 bg-info-gradient">
+      <h2>
+        {{"Allowance List" | translate}}<span class="fw-300"><i></i></span>
+      </h2>
+    </div>
+    <div class="panel-container show" style="overflow-x: auto;">
+      <div class="panel-content">
+        <commongrid *ngIf="MasterAllownacelist.length > 0" [totalitems]="totalRecords" [records]="MasterAllownacelist"
+          [gridfilter]="gridFilter" [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)"
+          [ShowSorting]="true" [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false"
+          [ShowSNo]="true" (ActionRow)="actionRow($event)">
+        </commongrid>
+
+        <app-no-data-found *ngIf="MasterAllownacelist?.length == 0">
+        </app-no-data-found>
+      </div>
+    </div>
+  </div>
+</div>

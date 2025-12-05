@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="col-xl-12">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Attendance Category'"></app-entry-panel-header>
+
+      <div class="panel-container show">
+        <div class="panel-content">
+          <form [formGroup]="applyForm" (ngSubmit)="onSubmit(applyForm)">
+            <div class="row">
+              <div class="col-xl-3">
+                <app-category-dropdown [catId]="12" formControlName="departmentId"
+                  [label]="'Department'"></app-category-dropdown>
+              </div>
+              <div class="col-xl-3">
+                <app-category-dropdown [catId]="29" formControlName="designationId"
+                  [label]="'Designation'"></app-category-dropdown>
+              </div>
+              <div class="col-xl-3">
+                <app-date-picker formControlName="date" [value]="today" [label]="'Date'"></app-date-picker>
+              </div>
+              <div class="col-xl-3" style="margin-top: 1.5rem">
+                <app-footer-buttons [buttonText]="buttonText" (resetForm)="cancel()"
+                  [isValid]="!applyForm.valid"></app-footer-buttons>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+
+      <ng-container *ngIf="AttendanceList.length > 0">
+        <div class="col-md-12">
+          <table class="table table-bordered m-0">
+            <thead class="thead-themed">
+              <tr>
+                <th>{{"S.No." | translate}}</th>
+                <th>{{"Emp Code" | translate}}</th>
+                <th>{{"Name" | translate}}</th>
+                <th>{{"Date" | translate}}</th>
+                <th>{{"Attendance" | translate}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of AttendanceList; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.empCode }}</td>
+                <td>{{ item.empName}}</td>
+                <td>{{ item.date | date: 'dd-MM-yyyy' }}</td>
+
+                <td>
+                  <div *ngFor="let type of attendaceStatus; let sno = index"
+                    class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" [checked]="item.attendanceStatus === type.id"
+                      (click)="radioChecked(item.staffId, type.id)" [value]="type.id" class="custom-control-input"
+                      id="{{ 'defaultInline1Radio' + i + sno }}" name="{{ 'inlineDefaultRadiosExample' + i }}" />
+                    <label class="custom-control-label" for="{{ 'defaultInline1Radio' + i + sno }}">{{ type.name
+                      }}</label>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-md-12 d-flex align-content-end flex-wrap flex-row-reverse">
+            <div style="display: flex; gap: 5%;">
+              <button type="button" (click)="submitAttendance()" class="btn btn-success waves-themed">
+                {{"Save Attendance" | translate}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<app-no-data-found *ngIf="AttendanceList.length === 0"></app-no-data-found>

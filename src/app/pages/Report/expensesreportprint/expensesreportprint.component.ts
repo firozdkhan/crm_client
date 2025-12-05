@@ -62,7 +62,7 @@ export class ExpensesreportprintComponent {
     );
 
     if (res) {
-      this.countryid = res.regionId;
+      this.countryid = res.countryId;
       this.companyProfile = res;
       this.getCountryById(this.countryid);
     }

@@ -1,0 +1,42 @@
+<div class="row ">
+  <div class="col-xl-3">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Session Form'"  > </app-entry-panel-header>
+
+      <div class="panel-container  show">
+        <div class="panel-content">
+
+          <form [formGroup]="sessionForm" (ngSubmit)="onSubmit()">
+          <app-text-input formControlName="name" [label]="'Name'" [placeHolder] = "'Session Name Like 2025-2026'"></app-text-input>
+          <app-date-picker [value]="today" formControlName="startDate" [label]="'Start Date'" [maxDate]="false"></app-date-picker>
+          <app-date-picker [value]="today" formControlName="endDate" [label]="'End Date'" [maxDate]="false"></app-date-picker>
+          <app-footer-buttons [buttonText] ="buttonText" [isValid]="!sessionForm.valid" (resetForm)="cancel()"></app-footer-buttons >
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-9">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Session List'"> </app-entry-panel-header>
+
+      <div class="panel-container show">
+        <div class="panel-content">
+
+          <commongrid *ngIf="sessions && sessions.length > 0" [totalitems]="totalRecords"  [records]="sessions" [gridfilter]="gridFilter"
+            [SearchText]="txtSearch" [pagesize]="10"   (change)="pageChanged($event)" [ShowSorting]="true"
+            [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false" [ShowSNo]="true"
+            (ActionRow) ="actionRow($event)"
+            >
+
+          </commongrid>
+          <app-no-data-found  *ngIf="sessions?.length == 0" >
+          </app-no-data-found>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

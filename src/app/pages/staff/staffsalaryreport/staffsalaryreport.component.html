@@ -1,0 +1,54 @@
+<div class="row ">
+  <div class="col-xl-12">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Salary'">
+      </app-entry-panel-header>
+      <div class="panel-container show">
+        <div class="panel-content">
+          <form [formGroup]="reportForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-2">
+                <app-employee-dropdown formControlName="staffId" [label]="'Name'"
+                  [addAll]="true"></app-employee-dropdown>
+              </div>
+
+              <div class="col-2">
+                <app-date-picker formControlName="fromDate" [label]="'Date & Year'" [maxDate]="false"
+                  placeHolder=" Select Date % Year"></app-date-picker>
+              </div>
+
+              <div class="col-xl-3" style="margin-top: 1.2rem">
+                <app-footer-buttons [buttonText]="buttonText" (resetForm)="cancel()"
+                  [isValid]="!reportForm.valid"></app-footer-buttons>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="row" *ngIf="salarylist.length > 0">
+  <div class="col-xl-12">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Employee List'">
+      </app-entry-panel-header>
+      <div class="panel-container show" style="overflow-x: auto;">
+        <div class="panel-content">
+          <commongrid *ngIf="salarylist.length > 0" [totalitems]="totalRecords" [records]="salarylist"
+            [gridfilter]="gridFilter" [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)"
+            [ShowSorting]="true" [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false"
+            [ShowSNo]="true" (ActionRow)="actionRow($event)">
+          </commongrid>
+
+          <app-no-data-found *ngIf="salarylist.length === 0"></app-no-data-found>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

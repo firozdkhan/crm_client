@@ -40,14 +40,14 @@ export class UpdateStaffComponent implements OnInit {
     const res = await this.genericService.ExecuteAPI_Get<IResponse>("Staff/GetOneEmployee", params);
     if (res.isSuccess) {
       this.employee = res.data;
-      this.employee.joiningDate = this.datePipe.transform(this.employee.joiningDate, "dd MMM yyy");
+      this.employee.dateOfJoining = this.datePipe.transform(this.employee.dateOfJoining, "dd MMM yyy");
       this.employee.dob = this.datePipe.transform(this.employee.dob, "dd MMM yyy");
     }
   }
 
   async updateStaff($event: IEmployee) {
 
-    $event.joiningDate = this.changeDateFormat.transform($event.joiningDate);
+    $event.dateOfJoining = this.changeDateFormat.transform($event.dateOfJoining);
     $event.dob = this.changeDateFormat.transform($event.dob);
     const res = await this.genericService.ExecuteAPI_Put<IResponse>("Staff/UpdateEmployee", $event);
     if (res) {

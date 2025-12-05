@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="col-xl-12">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Upload Data'"> </app-entry-panel-header>
+
+      <div class="panel-container show">
+        <div class="panel-content">
+
+          <form [formGroup]="myForm" (ngSubmit)="OnSubmit()">
+            <fieldset class="scheduler-border">
+              <legend class="scheduler-border">{{"Documents"|translate}} </legend>
+              <div class="form-row">
+
+
+                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                  <app-file-upload [accept]='".xls, .xlsx,.txt"' [id]="'documentName'" [itemAlias]="'file'"
+                    [fileName]="fileName" [resetValue]="resetValue" [label]="'Upload Documents'" [directory]="'Temp'"
+                    (uploadResponse)="studentDocumentUploadResponse($event)">
+                  </app-file-upload>
+                </div>
+
+                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12 align-self-center">
+                  <button type="button" class="btn btn-success float-right mt-3" (click)="setValue()">{{"Add
+                    Document"|translate}}
+                  </button>
+                </div>
+                <!-- 
+                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12 align-self-center">
+                  <a type="button" href="https://taleem.biz/document/SmartUploadStaffData.xlsx"
+                    class="btn btn-primary float-left mt-3"> <i class="fa fa-download"></i>
+                    {{"Blank Data Sheet"|translate}}
+                  </a>
+                </div> -->
+              </div>
+            </fieldset>
+          </form>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-xl-12">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Staff Attendance Upload'"> </app-entry-panel-header>
+
+      <div class="panel-container show">
+        <div class="panel-content">
+          <table class="table m-0 table-bordered">
+            <thead class="thead-primary bg-primary-400 ">
+
+              <tr>
+
+                <th>{{"No"|translate}}</th>
+                <th>{{"TMNo"|translate}}</th>
+                <th>{{"EnNo "|translate}}</th>
+                <th>{{"Name"|translate}}</th>
+                <th>{{"GMN"|translate}}</th>
+                <th>{{"Mode"|translate}}</th>
+                <th>{{"In_Out"|translate}}</th>
+                <th>{{"Antipass"|translate}}</th>
+                <th>{{"ProxyWork"|translate}}</th>
+                <th>{{"DateTime "|translate}}</th>
+              </tr>
+            </thead>
+            <tbody>
+
+
+              <tr *ngFor="let data of uploadFields;let i = index;">
+                <th scope="row" [ngClass]="data.No?'' : 'color'"> {{ data.no}}</th>
+                <td [ngClass]="data.TMNo ? '' : 'color'"> {{ data.tmNo}}</td>
+                <td [ngClass]="data.EnNo ? '' : 'color'"> {{ data.enNo}}</td>
+                <td [ngClass]="data.Name	 ? '' : 'color'"> {{ data.name}}</td>
+                <td [ngClass]="data.GMN ? '' : 'color'"> {{ data.gmn}}</td>
+                <td [ngClass]="data.Mode? '' : 'color'"> {{ data.mode}}</td>
+                <td [ngClass]="data.In_Out ? '' : 'color'"> {{ data.in_Out}}</td>
+                <td [ngClass]="data.Antipass ?'' : 'color'"> {{ data.antipass}}</td>
+                <td [ngClass]="data.ProxyWork ? '' : 'color'"> {{ data.proxyWork}}</td>
+                <td [ngClass]="data.DateTime ? '' : 'color'"> {{ data.dateTime | date:" dd/MMM/yyyy 'at' hh:mm a"}}
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+
+
+
+          <app-no-data-found *ngIf="uploadFields?.length == 0">
+          </app-no-data-found>
+          <div class="container d-flex justify-content-start">
+            <button type="submit" class="btn btn-primary waves-themed" (click)="OnSubmit()">
+              <i class="fal fa-save"></i>
+              {{buttonText | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

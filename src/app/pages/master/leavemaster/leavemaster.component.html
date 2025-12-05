@@ -1,0 +1,64 @@
+<div class="row ">
+  <div class="col-xl-12">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Leave Form'"> </app-entry-panel-header>
+      <div class="panel-container  show">
+        <div class="panel-content">
+
+          <form [formGroup]="LeaveForm" (ngSubmit)="onSubmit()">
+
+            <div class="row">
+              <div class="col-3">
+                <!-- <app-text-input formControlName="holidayName" [label]="'HolidayName'"
+                  placeHolder="Enter Holiday"></app-text-input> -->
+                <app-category-dropdown [catId]="15" formControlName="leaveId"  [label]="'Select Leave'"
+                  placeHolder="Select Leave"></app-category-dropdown>
+              </div>
+
+              <div class="col-3">
+                <app-text-input formControlName="leaveDays" [label]="'Define Days'"
+                  placeHolder=" Days"></app-text-input>
+              </div>
+
+
+
+
+              <div class="col-3" style="margin-top: 1.5rem;">
+                <app-footer-buttons [buttonText]="buttonText" (resetForm)="cancel()" [isValid]="!LeaveForm.valid">
+                </app-footer-buttons>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-12">
+    <div id="panel-1" class="panel">
+      <div class="panel-hdr bg-primary-600 bg-info-gradient">
+        <h2>
+          {{"Leave List" | translate}} <span class="fw-300"><i></i></span>
+        </h2>
+      </div>
+      <div class="panel-container show">
+        <div class="panel-content">
+          <commongrid *ngIf="leavemasterss.length > 0" [totalitems]="totalRecords" [records]="leavemasterss"
+            [gridfilter]="gridFilter" [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)"
+            [ShowSorting]="true" [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false"
+            [ShowSNo]="true" (ActionRow)="actionRow($event)">
+          </commongrid>
+
+          <app-no-data-found *ngIf="leavemasterss?.length == 0">
+          </app-no-data-found>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

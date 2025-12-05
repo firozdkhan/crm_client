@@ -22,19 +22,18 @@ export class CategoryComponent implements OnInit {
 
   constructor(
     private http: HttpClient,private fb: FormBuilder,private toastrService: ToastrService,private ngZone: NgZone,private storedData: StoredDataService,
-    private systemService: SystemService,private genericSErvice: GenericService,private trans: TranslatePipe) {
+    private systemService: SystemService,private genericSErvice: GenericService,private trans: TranslatePipe
 
+  ) {
     this.gridFilter.push(<GridFilter>{ DisplayText: "Name", ColumnName: "name", Type: "string", Is_Visible: true });
-
     this.gridFilter.push(<GridFilter>{ DisplayText: "Parent Name", ColumnName: "parentName", Type: "string", Is_Visible: true });
-
     this.gridFilter.push(<GridFilter>{ DisplayText: "Edit", ColumnName: "Action", Type: "string", Actions: this.actions, Is_Visible: true });
     this.categories = []
   }
   gridFilter: Array<GridFilter> = [];
   actions: Action_Type[] = [
-    { class: 'btn-outline-primary', text: null, font: 'fal fa-edit', type: 'edit',tooltip :'Edit' },
-    { class: 'btn-outline-danger', text: null, font: 'fal fa-trash-alt', type: 'delete' , tooltip :'Delete' },
+    { class: 'btn-outline-primary', text: null, tooltip: "Edit", font: 'fal fa-edit', type: 'edit' },
+    { class: 'btn-outline-danger', text: null, tooltip: "Delete", font: 'fal fa-trash-alt', type: 'delete' },
   ];
 
 
@@ -64,9 +63,10 @@ export class CategoryComponent implements OnInit {
 
 
   async bindDropdowns() {
+
     let params = new HttpParams().set("miscId", null)
     let res = await this.genericSErvice.ExecuteAPI_Get<IResponse>("MasterMisc/GetParentCategory");
-    if (res) {
+    if (res.isSuccess) {
       this.parentMenu = res.data;
     }
 
@@ -85,9 +85,7 @@ export class CategoryComponent implements OnInit {
     this.categoryForm = this.fb.group({
       id: [0, [Validators.nullValidator, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       parentId: [null, [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      name: ['', [Validators.required]]
-
-
+      name: ['', [Validators.required, Validators.pattern(/.*\S.*/)]],
     });
   }
 
@@ -145,7 +143,7 @@ export class CategoryComponent implements OnInit {
   async deleteMenu(miscId: number) {
     Swal.fire({
       title: 'Are you sure?',
-      text: 'You will not be able to recover this imaginary file!',
+      text: 'You will not be able to recover this Data!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
@@ -159,15 +157,13 @@ export class CategoryComponent implements OnInit {
           this.categories = this.categories.filter(category => category.id !== miscId);
           Swal.fire(
             this.trans.transform('Deleted!'),
-            this.trans.transform('Your imaginary file has been deleted.'),
+            this.trans.transform('Your Data has been deleted.'),
             'success'
           );
         }
       }
     });
   }
-
-
 
 
 

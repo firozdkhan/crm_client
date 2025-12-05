@@ -4,6 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ISaleMaster } from 'src/app/interfaces/sales/saleMaster';
+import { ChangeDatePipe } from 'src/app/pipes/change-date.pipe';
 import { GenericService } from 'src/app/services/generic.service.service';
 import { Action_Type, GridFilter } from 'src/app/shared/models/common_model';
 import { TranslatePipe } from 'src/app/translate/translate.pipe';
@@ -28,7 +29,11 @@ export class SaleinvoiceviewComponent {
   categories: any[];
   gridFilter: Array<GridFilter> = [];
 
-  constructor(private fb: FormBuilder,private genericSErvice: GenericService,private trans: TranslatePipe,private toastr: ToastrService, private router: Router
+  constructor(private fb: FormBuilder,private genericSErvice: GenericService,
+    
+    private trans: TranslatePipe,
+    private toastr: ToastrService, 
+    private router: Router
   ) {
     this.gridFilter.push(<GridFilter>{ DisplayText: 'Invoice no', ColumnName: 'invoiceNo', Type: 'string', Is_Visible: true, });
     this.gridFilter.push(<GridFilter>{DisplayText: 'Customer Name',ColumnName: 'customerName',Type: 'string',Is_Visible: true,});
@@ -83,6 +88,10 @@ export class SaleinvoiceviewComponent {
         }
       }
     });
+  }
+
+   pageChanged(event) {
+
   }
 
   actionRow(RowItem: any) {

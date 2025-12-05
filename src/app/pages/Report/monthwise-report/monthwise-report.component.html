@@ -1,0 +1,106 @@
+<div class="row ">
+  <div class="col-xl-12">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Month-wise Attendance Report'">
+      </app-entry-panel-header>
+      <div class="panel-container show">
+        <div class="panel-content">
+          <form [formGroup]="reportForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-2">
+                <app-employee-dropdown formControlName="staffId" [label]="'Name'"
+                  [addAll]="true"></app-employee-dropdown>
+              </div>
+
+              <div class="col-2">
+                <app-date-picker formControlName="fromDate" [label]="'Date & Year'" [maxDate]="false"
+                  placeHolder=" Select Date % Year"></app-date-picker>
+              </div>
+
+              <!-- <div class="col-xl-3" style="margin-top: 1rem !important;">
+                <label for="month">Month</label>
+                <select formControlName="month" id="month" class="form-control">
+                  <option value>Select Month</option>
+                  <option *ngFor="let month of monthsList; let i = index"
+                    [value]="i + 1">{{month}}</option>
+                </select>
+              </div> -->
+
+              <!-- <div class="col-xl-3" style="margin-top: 1rem !important;">
+                <label for="year">Year</label>
+                <select formControlName="year" id="year" class="form-control">
+                  <option value>Select Year</option>
+                  <option
+                    *ngFor="let year of [2019,2020,2021,2022,2023,2024,2025]"
+                    [value]="year">{{year}}</option>
+                </select>
+              </div> -->
+
+              <div class="col-2" style="margin-top: 1rem !important;">
+                <label>Total Company Working Days</label>
+                <input type="number" class="form-control" formControlName="totalCompanyWorkingDays"
+                  placeholder="Enter working days" readonly />
+              </div>
+              <div *ngIf="workingDaysData" class="col-xl-6 row mt-3">
+                <div class="col-4">
+                  <label>Total Days</label>
+                  <input type="text" class="form-control" [value]="workingDaysData.totalDays" disabled />
+                </div>
+                <div class="col-4">
+                  <label>Sundays</label>
+                  <input type="text" class="form-control" [value]="workingDaysData.sundays" disabled />
+                </div>
+                <div class="col-4">
+                  <label>Holidays</label>
+                  <input type="text" class="form-control" [value]="workingDaysData.holidays" disabled />
+                </div>
+                <!-- <div class="col-xl-3">
+                  <label>Working Days</label>
+                  <input type="text" class="form-control"
+                    [value]="workingDaysData.workingDays" disabled />
+                </div> -->
+              </div>
+
+              <div class="col-xl-3" style="margin-top: 1.2rem">
+                <app-footer-buttons [buttonText]="buttonText" (resetForm)="cancel()"
+                  [isValid]="!reportForm.valid"></app-footer-buttons>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="row">
+  <div class="col-12">
+    <div id="panel-1" class="panel">
+      <div class="panel-hdr bg-primary-600 bg-info-gradient">
+        <h2>{{"Monthwise Attendance Report List" | translate}}</h2>
+
+        <div class="panel-toolbar">
+          <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse" data-toggle="tooltip"
+            data-offset="0,10" data-original-title="Collapse"></button>
+          <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen" data-toggle="tooltip"
+            data-offset="0,10" data-original-title="Fullscreen"></button>
+          <button class="btn btn-panel waves-effect waves-themed" data-action="panel-close" data-toggle="tooltip"
+            data-offset="0,10" data-original-title="Close"></button>
+        </div>
+      </div>
+      <div class="panel-container show">
+        <div class="panel-content" style="overflow-x:auto ;">
+          <commongrid *ngIf="reportlist.length > 0" [totalitems]="totalRecords" [records]="reportlist"
+            [gridfilter]="gridFilter" [pagesize]="10" (change)="pageChanged($event)" [ShowSorting]="true"
+            [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false" [ShowSNo]="true"
+            (ActionRow)="actionRow($event)">
+          </commongrid>
+          <app-no-data-found *ngIf="reportlist?.length == 0"></app-no-data-found>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

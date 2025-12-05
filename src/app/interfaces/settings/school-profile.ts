@@ -5,8 +5,9 @@ export interface ISchoolProfile {
   gstNumber: string;
   cityId: string;
   stateId: string;
-  city: string;
-  state: string;
+  countryId:string;
+  cityName: string;
+  stateName: string;
   contactNo: string;
   adminContact: string;
   email: string;

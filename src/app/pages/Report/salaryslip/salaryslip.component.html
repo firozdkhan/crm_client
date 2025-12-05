@@ -1,0 +1,84 @@
+
+<div class="container my-4 p-4 shadow-lg rounded bg-white border">
+
+  <div class="text-center mb-4 d-print-none">
+    <button (click)="printSlip()" class="btn btn-primary px-4">
+       Print Salary Slip
+    </button>
+  </div>
+
+  <div class="text-center border-bottom pb-3 mb-4">
+    <h2 class="fw-bold text-dark mb-1">{{ salary?.companyName }}</h2>
+    <p class="text-muted mb-0">
+      Salary Slip for <b>{{ salary?.issueDate | date:'MMMM yyyy' }}</b>
+    </p>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <p><strong>Employee Name :</strong> {{ salary?.staffName }}</p>
+      <p><strong>Father Name :</strong> {{ salary?.fatherName }}</p>
+      <p><strong>Department :</strong> {{ salary?.departmentName }}</p>
+      <p><strong>Designation :</strong> {{ salary?.designationName }}</p>
+    </div>
+    <div class="col-md-6 text-md-end">
+      <p><strong>Payment Mode:</strong> {{ salary?.paymentMode }}</p>
+      <p><strong>Issue Date:</strong> {{ salary?.issueDate | date:'dd-MMM-yyyy' }}</p>
+    </div>
+  </div>
+
+  <div class="table-responsive mb-4">
+    <table class="table table-bordered align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>Earnings</th>
+          <th class="text-end">Amount (₹)</th>
+          <th>Deductions</th>
+          <th class="text-end">Amount (₹)</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td>Basic Salary (After Absent Deduction)</td>
+          <td class="text-end">{{ salary?.proratedBasicSalary | number:'1.0-0' }}</td>
+          <td>Absent Deduction</td>
+          <td class="text-end">{{ salary?.absentAmount | number:'1.0-0' }}</td>
+        </tr>
+
+        <!-- Allowances -->
+        <tr *ngFor="let a of salary?.updateAllowances">
+          <td>{{ a.allowanceName || 'Allowance' }}</td>
+          <td class="text-end">{{ a.allowanceAmount | number:'1.0-0' }}</td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <!-- Deductions -->
+        <tr *ngFor="let d of salary?.updateDeductions">
+          <td></td>
+          <td></td>
+          <td>{{ d.deductionName || 'Deduction' }}</td>
+          <td class="text-end">{{ d.deductionAmount | number:'1.0-0' }}</td>
+        </tr>
+
+        <tr class="fw-bold table-light">
+          <td>Total Earnings</td>
+          <td class="text-end">{{ totalEarnings | number:'1.0-0' }}</td>
+          <td>Total Deductions</td>
+          <td class="text-end">{{ totalDeductions | number:'1.0-0' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Final Net Payable -->
+  <div class="text-center bg-primary text-white p-4 rounded">
+    <h4 class="fw-bold mb-1">Final Payable Amount</h4>
+    <p class="fs-2 fw-bold mb-0">{{ finalPayable | number:'1.0-0' }} ₹</p>
+  </div>
+
+  <div class="text-center text-muted small mt-4 pt-3 border-top">
+    <p>This is a system-generated salary slip and does not require a signature.</p>
+  </div>
+</div>

@@ -80,7 +80,7 @@ export class PrintpurchaseinvoiceComponent {
     );
 
     if (res) {
-      this.countryid = res.regionId;
+      this.countryid = res.countryId;
       this.companyprofile = res;
       this.getCountryById(this.countryid);
     }

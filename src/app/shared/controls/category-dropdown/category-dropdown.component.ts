@@ -45,6 +45,8 @@ export class CategoryDropdownComponent
   @Input() label = 'string';
   @Input() isFocus: boolean = false;
   @Input() isLabelShow: boolean = true;
+    @Input() isDisabled: boolean = false;
+
 
   miscData$: Observable<Array<IMisc>>;
   miscdata: Array<IMisc>;

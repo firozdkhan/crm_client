@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-xl-12 mb-3">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Salary Report'">
+      </app-entry-panel-header>
+      <form [formGroup]="monthform">
+        <div class="col-md-2" style="margin-top: 1rem !important; margin-bottom: 1rem;">
+          <label for="month">Month</label>
+          <select formControlName="selectedMonth" id="selectedMonth" class="form-control">
+            <option value>Select Month</option>
+            <option *ngFor="let month of monthsList; let i = index" [value]="i + 1">
+              {{ month }}
+            </option>
+          </select>
+        </div>
+
+
+      </form>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<div class="row">
+  <div class="col-12">
+    <div id="panel-1" class="panel">
+      <div class="panel-hdr bg-primary-600 bg-info-gradient">
+        <h2>{{"Monthwise Attendance Report List" | translate}}</h2>
+      </div>
+      <div class="panel-container show">
+        <div class="panel-content" style="overflow-x: auto;">
+          <commongrid *ngIf="reportdata.length > 0" [totalitems]="totalRecords" [records]="reportdata"
+            [gridfilter]="gridFilter" [pagesize]="10" (change)="pageChanged($event)" [ShowSorting]="true"
+            [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false" [ShowSNo]="true"
+            [ShowSum]="true" (ActionRow)="actionRow($event)">
+          </commongrid>
+          <app-no-data-found *ngIf="reportdata?.length == 0"></app-no-data-found>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

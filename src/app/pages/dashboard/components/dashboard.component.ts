@@ -277,7 +277,7 @@ export class DashboardComponent implements OnInit {
     );
 
     if (res) {
-      this.countryid = res.regionId;
+      this.countryid = res.countryId;
       this.getCountryById(this.countryid);
     }
   }

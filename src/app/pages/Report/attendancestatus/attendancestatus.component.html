@@ -1,0 +1,44 @@
+<div class="row ">
+  <div class="col-xl-3">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Datewise Attendance Report'"> </app-entry-panel-header>
+      <div class="panel-container  show">
+        <div class="panel-content">
+          <label for="status">Select Attendance Status:</label>
+          <select class="form-control" [(ngModel)]="selectedStatus" name="status"
+            (change)="GetStaffAttendnceStatus(selectedStatus)">
+            <option *ngFor="let status of attendanceStatusList" [value]="status">
+              {{ status }}
+            </option>
+          </select>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-xl-9">
+    <div id="panel-1" class="panel">
+      <div class="panel-hdr bg-primary-600 bg-info-gradient">
+        <h2>
+          {{"Datewise Attendance Report List" | translate}} <span class="fw-300"><i></i></span>
+        </h2>
+      </div>
+      <div class="panel-container show">
+        <div class="panel-content">
+          <commongrid *ngIf="attendancestatus.length > 0" [totalitems]="totalRecords" [records]="attendancestatus"
+            [gridfilter]="gridFilter" [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)"
+            [ShowSorting]="true" [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false"
+            [ShowSNo]="true" (ActionRow)="actionRow($event)">
+          </commongrid>
+
+          <app-no-data-found *ngIf="attendancestatus?.length == 0">
+          </app-no-data-found>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

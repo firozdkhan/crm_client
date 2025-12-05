@@ -1,0 +1,6 @@
+.school-marker {
+  transition: transform 0.2s ease-in-out;
+}
+.school-marker:hover {
+  transform: scale(1.3);
+}

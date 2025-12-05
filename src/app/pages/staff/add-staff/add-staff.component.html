@@ -1,2 +1,276 @@
-<app-staff-partial [resetForm]="reset" (staffEvent)="saveStaff($event)" (resetDocumentList)="resetDocumentList()">
-</app-staff-partial>
+
+<div class="row ">
+  <div class="col-md-9 col-lg-9 col-sm-12 col-xs-12">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="' Employee Registration Form'">
+      </app-entry-panel-header>
+
+      <div class="panel-container  show">
+        <div class="panel-content">
+          <form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm)">
+            <fieldset class="scheduler-border">
+              <legend class="scheduler-border">{{"Required Information" |
+                translate}}</legend>
+              <div class="form-row">
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-text-input formControlName="empCode" [label]="'Employee Code'" [readOnly]="true"  ></app-text-input>
+                </div>
+
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-text-input formControlName="empName" [label]="'Name'"></app-text-input>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-category-dropdown [catId]="11" formControlName="companyId"
+                    [label]="'Company Name'"></app-category-dropdown>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-category-dropdown [catId]="12" formControlName="departmentId"
+                    [label]="'Department'"></app-category-dropdown>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-category-dropdown [catId]="29" formControlName="designationId"
+                    [label]="'Designation'"></app-category-dropdown>
+                </div>
+
+                <!-- <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-category-dropdown [catId]="1" formControlName="categoryId"
+                    [label]="'Category'"></app-category-dropdown>
+                </div> -->
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-select-dropdown [data]="staffTime" [label]="'Shift Name'" formControlName="staffShiftMasterId">
+                  </app-select-dropdown>
+
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-category-dropdown [catId]="33" [label]="'Post Name'" formControlName="postId"
+                    (SelectChange)="onPostChange($event)">
+                  </app-category-dropdown>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-text-input formControlName="machineID" [label]="'Machine Id'"></app-text-input>
+                </div>
+
+                <!-- <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-category-dropdown [catId]="6" formControlName="leaveId"
+                    [label]="'Leave Name'"></app-category-dropdown>
+                </div> -->
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-text-input formControlName="fatherName" [label]="'Father / Husband Name'"></app-text-input>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-text-input formControlName="motherName" [label]="'Mother Name'"></app-text-input>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-text-input formControlName="phoneNumber" [OnlyNumber]="true"
+                    [label]="'Mobile No.'"></app-text-input>
+                </div>
+
+                <!-- <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-category-dropdown [catId]="8" formControlName="weekOffId"
+                    [label]="'Week Off'"></app-category-dropdown>
+                </div> -->
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-category-dropdown [catId]="35" formControlName="genderId"
+                    [label]="'Gender'"></app-category-dropdown>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-date-picker [value]="today" formControlName="dateOfJoining"
+                    [label]="'Joining Date'"></app-date-picker>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-date-picker [value]="today" formControlName="dob" [label]="'DOB'"></app-date-picker>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-text-input formControlName="email" [label]="'Email'"></app-text-input>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-text-input formControlName="address" [label]="'Address'"></app-text-input>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-country-dropdown formControlName="countryId" [label]="'Country'"
+                    (SelectChange)="countryChange($event)">
+                  </app-country-dropdown>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-state-dropdown [(ngModel)]="stateId" [countryId]="this.countryId" formControlName="stateId"
+                    [label]="'State'" (AddNewState)="addNewState($event)"
+                    (SelectChange)="stateChange($event)"></app-state-dropdown>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-city-dropdown [selectedValue]="cityId" [stateId]="stateId" formControlName="cityId"
+                    [label]="'City'"></app-city-dropdown>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <app-text-input formControlName="basicSalary" [label]="'Basic salary'"
+                    [OnlyNumber]="true"></app-text-input>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                  <div class="form-group mt-3">
+                    <label class="form-label">Location Fetching</label><br>
+
+                    <label class="form-label">
+                      <input type="radio" formControlName="locationFetching" [value]="true" />
+                      Yes
+                    </label>
+
+                    <label class="form-label" style="margin-left: 10px;">
+                      <input type="radio" formControlName="locationFetching" [value]="false" />
+                      No
+                    </label>
+                  </div>
+                </div>
+
+
+
+
+              </div>
+            </fieldset>
+            <!-- {{registrationForm.value | json}} -->
+            <fieldset class="scheduler-border">
+              <legend class="scheduler-border">{{"Documents" |
+                translate}}</legend>
+              <app-emp-document (documentEvent)="addOrRemoveDocumentList($event)"
+                [documentList]="employeeDocuments"></app-emp-document>
+            </fieldset>
+
+            <div>
+            </div>
+
+            <!-- Allowance and  Deduction Tables -->
+            <div class="row">
+              <div class="col-md-12">
+                <fieldset class="scheduler-border">
+                  <legend class="scheduler-border">Leave Details</legend>
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>leave Name</th>
+                        <th>leave Days </th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let leave of staffLeaveArray.controls; let i = index" [formGroup]="leave">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ leave.get('leaveName').value }}</td>
+                        <td>
+                          <input type="number" formControlName="leaveDays" class="form-control" />
+                        </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+
+                </fieldset>
+              </div>
+              <div class="col-md-12">
+                <fieldset class="scheduler-border">
+                  <legend class="scheduler-border">Allowance</legend>
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Allowance Name</th>
+                        <th>Post Name</th>
+                        <th>Percentage </th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let allowance of allowances">
+                        <td>{{ allowance.miscAllowanceName}}</td>
+                        <td>{{ allowance.staffPostName}}</td>
+                        <td>
+                          <input type="text" [(ngModel)]="allowance.inPercent" [ngModelOptions]="{ standalone: true }"
+                            (ngModelChange)="updateApproximateAmount(allowance)" class="form-control" />
+                        </td>
+                        <td>
+                          <input type="text" [(ngModel)]="allowance.approximateAmount" [readOnly]="true"
+                            [ngModelOptions]="{ standalone: true }" class="form-control" />
+                        </td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </fieldset>
+              </div>
+
+              <div class="col-md-12">
+                <fieldset class="scheduler-border">
+                  <legend class="scheduler-border">Deduction</legend>
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Deduction Name</th>
+                        <th>Post Name</th>
+                        <th>Percentage </th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let deduction of deductions">
+                        <td>{{ deduction.miscDeductionName}}</td>
+                        <td>{{ deduction.staffPostName}}</td>
+                        <td> <input type="text" [(ngModel)]="deduction.inPercent"
+                            (ngModelChange)="updateApproximateAmounts(deduction)"
+                            [ngModelOptions]="{ standalone: true }" class="form-control" /></td>
+                        <td><input type="text" [(ngModel)]="deduction.approximateAmount" [readOnly]="true"
+                            [ngModelOptions]="{ standalone: true }" class="form-control" /></td>
+                      </tr>
+                    </tbody>
+
+                  </table>
+                  <!-- {{deductions | json}} -->
+                </fieldset>
+
+              </div>
+            </div>
+            <div class="col-4">
+              <app-footer-buttons [buttonText]="buttonText" [isValid]="!registrationForm.valid" (resetForm)="cancel()">
+              </app-footer-buttons>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+    <div id="panel-2" class="panel">
+      <app-entry-panel-header [title]="'Employee Photos'">
+      </app-entry-panel-header>
+      <div class="panel-container  show">
+        <div class="panel-content">
+          <div class="container">
+            <app-image-upload [itemAlias]="'file'" [fileName]="'Employee Photo'" [label]="'Upload Employee Image'"
+              [imageUrl]="employeeProfilePhoto" (uploadResponse)="employeePhotoUploadResponse($event)">
+            </app-image-upload>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

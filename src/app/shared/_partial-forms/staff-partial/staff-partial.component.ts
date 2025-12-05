@@ -35,7 +35,7 @@ export class StaffPartialComponent implements OnInit, OnChanges {
   file_url: string = environment.Base_File_Path;
   registrationForm: FormGroup;
   employee = {} as IEmployee;
- 
+  sessionId = localStorage.getItem('smart_Sessionid');
   checked: boolean = false;
   fileUrl = environment.Base_File_Path;
   miscCategory: ICategoryLabels = CategoryLabelData;
@@ -53,8 +53,8 @@ export class StaffPartialComponent implements OnInit, OnChanges {
     if (this.employeeData) {
       this.employee = changes['employeeData'].currentValue;
       this.employee = this.employeeData;
-      this.employeeProfilePhoto = this.fileUrl + this.employee.photoUrl;
-      this.employeeDocuments = this.employee.employeeDoc;
+      // this.employeeProfilePhoto = this.fileUrl + this.employee.photoUrl;
+      // this.employeeDocuments = this.employee.employeeDoc;
       this.registrationForm.patchValue(this.employee);
       // this.userName = this.employee.name.replace(/ /g, '').toLowerCase();
       // this.registrationForm.controls["userName"].patchValue(this.userName);
@@ -94,10 +94,10 @@ export class StaffPartialComponent implements OnInit, OnChanges {
       this.employee = this.registrationForm.value;
       // this.employee.dob = this.changeDateformat.transform(this.employee.dob);
       // this.employee.joiningDate = this.changeDateformat.transform(this.employee.joiningDate);
-      this.employee.employeeDoc = this.employeeDocuments.map(document => <IEmployeeDoc>{
-        documentId: document.documentId,
-        fileUrl: document.fileUrl
-      });
+      // this.employee.employeeDoc = this.employeeDocuments.map(document => <IEmployeeDoc>{
+      //   documentId: document.documentId,
+      //   fileUrl: document.fileUrl
+      // });
 
       this.staffEvent.emit(this.employee);
       this.resetDocumentList.emit();

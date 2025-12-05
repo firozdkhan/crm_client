@@ -1,0 +1,21 @@
+<div class="col-xl-12">
+  <div id="panel-1" class="panel">
+    <div class="panel-hdr bg-primary-600 bg-info-gradient">
+      <h2>
+        {{"Allowance List"| translate}}<span class="fw-300"><i></i></span>
+      </h2>
+    </div>
+    <div class="panel-container show">
+      <div class="panel-content">
+        <commongrid *ngIf="AllownaceMasterList.length > 0" [totalitems]="totalRecords" [records]="AllownaceMasterList"
+          [gridfilter]="gridFilter" [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)"
+          [ShowSorting]="true" [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false"
+          [ShowSNo]="true" [ShowSum]="true" (ActionRow)="actionRow($event)">
+        </commongrid>
+        <app-no-data-found *ngIf="AllownaceMasterList?.length == 0">
+        </app-no-data-found>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,132 +1,171 @@
 <div class="row ">
 
-  <div class="col-md-9 col-lg-9 col-sm-12 col-xs-12">
-    <div id="panel-1" class="panel">
-      <app-entry-panel-header [title]="'Staff Registration'"> </app-entry-panel-header>
+    <div class="col-md-9 col-lg-9 col-sm-12 col-xs-12">
+        <div id="panel-1" class="panel">
+            <app-entry-panel-header [title]="'Staff Registration'"> </app-entry-panel-header>
 
-      <div class="panel-container  show">
-        <div class="panel-content">
-          <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-            <fieldset class="scheduler-border">
-              <legend class="scheduler-border">{{"Required Information" | translate}}</legend>
-              <div class="form-row">
+            <div class="panel-container  show">
+                <div class="panel-content">
+                    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+                        <fieldset class="scheduler-border">
+                            <legend class="scheduler-border">{{"Required Information" | translate}}</legend>
+                            <div class="form-row">
 
-                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
-                  <app-text-input formControlName="name" (TextChange)="addUserName($event)"
-                    [label]="'Name'"></app-text-input>
+
+                                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                                    <app-text-input formControlName="name" [label]="'Employee Code'"></app-text-input>
+                                </div>
+
+
+                                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                                    <app-text-input formControlName="name" (TextChange)="addUserName($event)"
+                                        [label]="'Name'"></app-text-input>
+                                </div>
+
+                                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                                    <app-category-dropdown [catId]="19" formControlName="departmentId"
+                                        [label]="'Company Name'">
+                                    </app-category-dropdown>
+                                </div>
+
+                                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                                    <app-category-dropdown [catId]="19" formControlName="departmentId"
+                                        [label]="'Department'">
+                                    </app-category-dropdown>
+                                </div>
+
+                                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                                    <app-category-dropdown [catId]="20" formControlName="designationId"
+                                        [label]="'Designation'">
+                                    </app-category-dropdown>
+                                </div>
+
+                                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                                    <app-category-dropdown [catId]="19" formControlName="departmentId"
+                                        [label]="'Category'">
+                                    </app-category-dropdown>
+                                </div>
+
+                                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                                    <app-category-dropdown [catId]="19" formControlName="departmentId"
+                                        [label]="'Punch Entry Required'">
+                                    </app-category-dropdown>
+                                </div>
+
+                                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                                    <app-category-dropdown [catId]="19" formControlName="departmentId"
+                                        [label]="'Emp Status'">
+                                    </app-category-dropdown>
+                                </div>
+
+                                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                                    <app-text-input formControlName="fatherName" [label]="'Father / Husband Name'">
+                                    </app-text-input>
+                                </div>
+
+                                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                                    <app-text-input formControlName="motherName" [label]="'Mother Name'">
+                                    </app-text-input>
+                                </div>
+
+                                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                                    <app-text-input formControlName="mobileNo" [OnlyNumber]="true"
+                                        [label]="'Mobile No.'"></app-text-input>
+                                </div>
+
+                                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                                    <app-text-input formControlName="emergencyNo" [OnlyNumber]="true"
+                                        [label]="'Enroll ID No'">
+                                    </app-text-input>
+                                </div>
+
+
+                                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                                    <app-date-picker [value]="today" formControlName="joiningDate"
+                                        [label]="'Joining Date'">
+                                    </app-date-picker>
+                                </div>
+
+                                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                                    <app-date-picker [value]="today" formControlName="dob"
+                                        [label]="'Date of Birth'"></app-date-picker>
+                                </div>
+
+                                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                                    <app-gender-dropdown formControlName="gender" [label]="'Gender'">
+                                    </app-gender-dropdown>
+                                </div>
+                                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                                    <app-text-input formControlName="currentAddress" [label]="'Address'">
+                                    </app-text-input>
+                                </div>
+
+
+
+
+                                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                                    <app-text-input formControlName="emailId" [label]="'Email'">
+                                    </app-text-input>
+                                </div>
+                                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                                    <app-city-dropdown formControlName="currentCityId" [label]="'City'">
+                                    </app-city-dropdown>
+                                </div>
+                                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                                    <app-text-input formControlName="userName" [isDisabled]="true"
+                                        [inputValue]="userName" [label]="'User Name'">
+                                    </app-text-input>
+                                </div>
+
+                                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+                                    <app-custom-switch (ChangeSwitch)="changeSwitch($event)"
+                                        formControlName="maritalStatus" [label]="'Marital Status'" [checked]="checked"
+                                        [checkString]="checked ? 'Yes' : 'No'" [formControlId]="'maritalStatus'">
+                                    </app-custom-switch>
+                                </div>
+
+                            </div>
+                        </fieldset>
+
+
+
+                        <fieldset class="scheduler-border">
+                            <legend class="scheduler-border">{{"Documents" | translate}}</legend>
+                            <app-emp-document (documentEvent)="addOrRemoveDocumentList($event)"
+                                [documentList]="employeeDocuments"></app-emp-document>
+                        </fieldset>
+
+                        <app-footer-buttons [buttonText]="'Submit'" [isValid]="!registrationForm.valid"
+                            (resetForm)="cancel()">
+                        </app-footer-buttons>
+
+                        <div>
+                        </div>
+
+
+                    </form>
+
+                    <!-- {{registrationForm.value | json}} -->
+
+
                 </div>
-
-                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
-                  <app-category-dropdown [catId]="19" formControlName="departmentId" [label]="'Department'">
-                  </app-category-dropdown>
-                </div>
-
-                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
-                  <app-category-dropdown [catId]="20" formControlName="designationId" [label]="'Designation'">
-                  </app-category-dropdown>
-                </div>
-
-
-
-                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
-                  <app-text-input formControlName="fatherName" [label]="'Father / Husband Name'">
-                  </app-text-input>
-                </div>
-
-                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
-                  <app-text-input formControlName="motherName" [label]="'Mother Name'">
-                  </app-text-input>
-                </div>
-
-                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
-                  <app-text-input formControlName="mobileNo" [OnlyNumber]="true"
-                    [label]="'Mobile No.'"></app-text-input>
-                </div>
-
-                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
-                  <app-text-input formControlName="emergencyNo" [OnlyNumber]="true" [label]="'Emergency Contact No.'">
-                  </app-text-input>
-                </div>
-
-
-                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
-                  <app-date-picker [value]="today" formControlName="joiningDate" [label]="'Joining Date'">
-                  </app-date-picker>
-                </div>
-
-                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
-                  <app-date-picker [value]="today" formControlName="dob" [label]="'Date of Birth'"></app-date-picker>
-                </div>
-
-                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
-                  <app-gender-dropdown formControlName="gender" [label]="'Gender'">
-                  </app-gender-dropdown>
-                </div>
-                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
-                  <app-text-input formControlName="currentAddress" [label]="'Address'">
-                  </app-text-input>
-                </div>
-
-
-                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
-                  <app-custom-switch (ChangeSwitch)="changeSwitch($event)" formControlName="maritalStatus"
-                    [label]="'Marital Status'" [checked]="checked" [checkString]="checked ? 'Yes' : 'No'"
-                    [formControlId]="'maritalStatus'">
-                  </app-custom-switch>
-                </div>
-
-                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
-                  <app-text-input formControlName="emailId" [label]="'Email'">
-                  </app-text-input>
-                </div>
-                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
-                  <app-city-dropdown formControlName="currentCityId" [label]="'City'">
-                  </app-city-dropdown>
-                </div>
-                <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
-                  <app-text-input formControlName="userName" [isDisabled]="true" [inputValue]="userName"
-                    [label]="'User Name'">
-                  </app-text-input>
-                </div>
-
-              </div>
-            </fieldset>
-
-
-
-            <fieldset class="scheduler-border">
-              <legend class="scheduler-border">{{"Documents" | translate}}</legend>
-              <app-emp-document (documentEvent)="addOrRemoveDocumentList($event)"
-                [documentList]="employeeDocuments"></app-emp-document>
-            </fieldset>
-
-            <app-footer-buttons [buttonText]="'Submit'" [isValid]="!registrationForm.valid" (resetForm)="cancel()">
-            </app-footer-buttons>
-
-            <div>
             </div>
-
-
-          </form>
-          <!-- {{registrationForm.value | json}} -->
         </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
-    <div id="panel-2" class="panel">
-      <app-entry-panel-header [title]="'Staff Photos'"> </app-entry-panel-header>
-      <div class="panel-container  show">
-        <div class="panel-content">
-          <div class="container">
-            <app-image-upload [serviceUrl]="'Core/UploadFile'" [id]="'Employee Photo'" [itemAlias]="'file'"
-              [fileName]="'Employee Photo'" [label]="'Upload Employee Image'" [imageUrl]="employeeProfilePhoto"
-              (uploadResponse)="employeePhotoUploadResponse($event)">
-            </app-image-upload>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
+    <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+        <div id="panel-2" class="panel">
+            <app-entry-panel-header [title]="'Staff Photos'"> </app-entry-panel-header>
+            <div class="panel-container  show">
+                <div class="panel-content">
+                    <div class="container">
+                        <app-image-upload [serviceUrl]="'Core/UploadFile'" [id]="'Employee Photo'" [itemAlias]="'file'"
+                            [fileName]="'Employee Photo'" [label]="'Upload Employee Image'"
+                            [imageUrl]="employeeProfilePhoto" (uploadResponse)="employeePhotoUploadResponse($event)">
+                        </app-image-upload>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

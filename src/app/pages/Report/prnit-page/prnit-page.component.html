@@ -1,0 +1,136 @@
+<div id="print-section" *ngIf="salaryDetails">
+  <div class="container" style="border: 1px solid black;">
+    <div class="row">
+      <div class="col-md-12" style="display: flex;justify-content: space-between;" *ngIf="salaryDetails">
+        <div style="text-align: center; margin-left: 29%;">
+          <p> <strong> <span style="color: green;">{{ salaryDetails[0].companyName}} </span></strong></p>
+          <p>Salary slip for the month of <strong> ( {{ monthsList[salaryDetails[0].salaryMonth - 1] }}</strong> - {{
+            currentYear}} )</p>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div style="display: flex; flex-wrap: wrap; margin-left: 15px;" *ngIf="salaryDetails">
+
+      <div style="width: 50%; float: left;  box-sizing: border-box; padding: 0 10px;" style="font-size: 14px;">
+        <p>{{"Employee Name" | translate}} <span style="color: green;"> : {{ salaryDetails[0].staffName }}</span></p>
+        <p> {{"Designation " |translate }}<span style="color: green;"> : {{ salaryDetails[0].designationName }}</span>
+        </p>
+        <p>{{"Payment Mode" | translate}} <span style="color: green;"> : {{ salaryDetails[0].paymentMode }}</span>
+        </p>
+      </div>
+      <div class="conatiner" style="margin-left: 200px; ">
+
+        <div style="width: 50%; float: left; box-sizing: border-box; padding: 0 15px;" style="font-size: 14px;">
+          <p>{{"Father Name" | translate}} <span style="color: green;"> : {{ salaryDetails[0].fatherName }}</span></p>
+          <p>{{"Department" | translate}} <span style="color: green;"> : {{ salaryDetails[0].departmentName }}</span>
+          </p>
+          <p>{{"Issue Date" | translate}} <span style="color: green;"> : {{ salaryDetails[0].issueDate | date:'dd-MM-yy'
+              }}</span></p>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12" style="font-size: 14px;" *ngIf="salaryDetails">
+          <table style="width: 100%; border: 1px solid black; border-collapse: collapse;">
+            <tr>
+              <th style="border: 1px solid black;">{{"Details"| translate}}</th>
+              <th style="border: 1px solid black;">{{"Amount" | translate }}</th>
+            </tr>
+            <tr>
+              <td style="border: 1px solid black;">{{"Basic Salary" | translate}}</td>
+              <td style="border: 1px solid black;">{{ salaryDetails[0].basicSalary | number: '1.2-2' }}</td>
+
+            </tr>
+            <tr>
+              <td style="border: 1px solid black;">{{"Total Present Days " | translate}}</td>
+              <td style="border: 1px solid black;">{{ salaryDetails[0].totalAttendance}}</td>
+
+            </tr>
+            <tr>
+              <td style="border: 1px solid black;">{{"Total Working Days"| translate}}</td>
+              <td style="border: 1px solid black;">{{ salaryDetails[0].totalWorkingDays}}</td>
+
+            </tr>
+            <tr>
+              <td style="border: 1px solid black;">{{" Total Absent Days" | translate}}</td>
+              <td style="border: 1px solid black;">{{ salaryDetails[0].absentDays}}</td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid black;">{{"Allowance" | translate}}</td>
+              <td *ngIf="salaryDetails[0]?.updateAllowances">
+                <ul>
+                  <li *ngFor="let updateAllowances of salaryDetails[0].updateAllowances">
+                    {{ updateAllowances.allowanceName }} : {{ updateAllowances.allowanceAmount }}
+                  </li>
+                </ul>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: 1px solid black;">{{"Deductions" | translate}}</td>
+              <td style="border: 1px solid black" *ngIf="salaryDetails[0]?.updateDeductions">
+                <ul>
+                  <li *ngFor="let deduction of salaryDetails[0].updateDeductions">
+                    {{ deduction.deductionName }} : {{ deduction.deductionAmount }}
+                  </li>
+                </ul>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="border: 1px solid black;">{{"Net Salary" | translate}}</td>
+              <td style="border: 1px solid black;">{{ salaryDetails[0].netSalary | number: '1.2-2' }}</td>
+            </tr>
+
+            <tr>
+              <td style="border: 1px solid black;">{{"Advance Salary" | translate}}</td>
+              <td style="border: 1px solid black;">{{ salaryDetails[0].advance | number: '1.2-2' }}</td>
+            </tr>
+
+
+            <tr>
+              <td style="border: 1px solid black;">{{"Remaining Salary" | translate}}</td>
+              <td style="border: 1px solid black;">{{ salaryDetails[0].remaning | number: '1.2-2' }}</td>
+            </tr>
+
+            <tr>
+              <td style="border: 1px solid black;">{{ "In Words" | translate }}</td>
+              <td style="border: 1px solid black;">{{ salaryDetails[0].remaning | amountInWords }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+
+      <div class="container py-6">
+        <div class="row">
+          <div class="col-md-12" style="display: flex;justify-content: space-between;">
+            <p> {{"Net Pay" | translate}} <span style="color: green;">{{ salaryDetails[0].remaning | number:
+                '1.2-2' }}</span></p>
+            <p style="margin-right: 10px;">{{"Employee Signature : _________________" | translate}} <span
+                style="border-bottom: 1px solid black; color: green;">{{"" | translate}}</span>
+            </p>
+            <p style="margin-right: 10px;">{{"Authorized Signature : _______________" | translate}} <span
+                style="border-bottom: 1px solid black; color: green;">{{"" | translate}}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Print Button -->
+<button class="mt-2" ngxPrint printSectionId="print-section"
+  style="padding: 10px 50px; background-color: #8869c2; color: #fff; border: none; border-radius: 5px; cursor: pointer; margin: 0% 45%;"
+  styleSheetFile="./prnit-page.component.css">
+  {{"Print" | translate}}
+</button>

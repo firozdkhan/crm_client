@@ -45,8 +45,9 @@ export class PrintpaymentvoucherComponent {
     );
 
     if (res) {
-      this.countryid = res.regionId;
+      this.countryid = res.countryId;
       this.companyprofile = res;
+      console.log(this.countryid);
       this.getCountryById(this.countryid);
     }
   }

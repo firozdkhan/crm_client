@@ -28,7 +28,7 @@ export class EmpDocumentComponent implements OnInit {
   ngOnInit(): void {
   } setValue() {
 
-    if (this.misc && this.document.fileUrl) {
+    if (this.misc && this.document.filePath) {
 
       for (let i = 0; this.documentList.length > i; i++) {
         if (this.documentList[i].documentId === this.document.documentId) {
@@ -38,7 +38,7 @@ export class EmpDocumentComponent implements OnInit {
       }
     }
 
-    if (this.document.documentName && this.document.fileUrl) {
+    if (this.document.documentName && this.document.filePath) {
       this.documentList.push(this.document);
       this.documentEvent.emit(this.documentList);
       this.document = {} as IEmployeeDoc;
@@ -60,7 +60,7 @@ export class EmpDocumentComponent implements OnInit {
   }
 
   studentDocumentUploadResponse($event: string) {
-    this.document.fileUrl = $event;
+    this.document.filePath = $event;
     this.resetValue = false;
   }
   selectDocumentText($event: string) {

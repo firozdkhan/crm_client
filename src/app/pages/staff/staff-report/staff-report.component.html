@@ -1,24 +1,50 @@
-<div class="row" *ngIf="staffReport">
-
+<div class="row">
   <div class="col-xl-12">
     <div id="panel-1" class="panel">
-      <app-entry-panel-header [title]="'Staff Report'"> </app-entry-panel-header>
-
+      <app-entry-panel-header [title]="'Employee Report'"> </app-entry-panel-header>
       <div class="panel-container show">
-        <div class="panel-content" *ngIf="staffReport">
-
-          <commongrid *ngIf="staffReport.length > 0" [totalitems]="totalRecords" [records]="staffReport"
-            [gridfilter]="gridFilter" [pagesize]="10" (change)="pageChanged($event)" [ShowSorting]="true"
-            [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false" [ShowSNo]="true">
-          </commongrid>
-
-          <app-no-data-found *ngIf="staffReport.length == 0">
-
-          </app-no-data-found>
-
+        <div class="panel-content">
+          <form [formGroup]="registrationForm" (ngSubmit)="loadStaff()">
+            <div class="row">
+              <div class="col-md-3 col-lg-3 col-sm-3 col-xs-6">
+                <app-category-dropdown [catId]="3" formControlName="departmentId" [label]="'Department'">
+                </app-category-dropdown>
+              </div>
+              <div class="col-md-3 col-lg-3 col-sm-3 col-xs-6">
+                <app-category-dropdown [catId]="20" formControlName="designationId" [label]="'Designation'">
+                </app-category-dropdown>
+              </div>
+              <div
+                class="col-md-3 col-lg-3 col-sm-3 col-xs-6 d-flex justify-content-around align-content-end flex-wrap">
+                <button type="submit" class="btn btn-primary waves-themed" [disabled]="!registrationForm.valid">
+                  {{"Show" | translate}}
+                </button>
+                <button type="reset" class="btn btn-default waves-themed" (click)="reset()"> {{"Reset" | translate}}
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
+<div class="row" *ngIf="staffReport.length > 0">
+  <div class="col-xl-12">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Employee List'"> </app-entry-panel-header>
+      <div class="panel-container show" style="overflow-x: auto;">
+        <div class="panel-content">
+          <commongrid *ngIf="staffReport.length > 0" [totalitems]="totalRecords" [records]="staffReport"
+            [gridfilter]="gridFilter" [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)"
+            [ShowSorting]="true" [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false"
+            [ShowSNo]="true" (ActionRow)="actionRow($event)">
+          </commongrid>
+
+          <app-no-data-found *ngIf="staffReport.length === 0"></app-no-data-found>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

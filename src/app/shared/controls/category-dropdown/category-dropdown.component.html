@@ -8,7 +8,7 @@
     (input)="onChange($any($event.target).value)" (blur)="onTouched()" #input appPrefixFocusAndSelect
     (ngModelChange)="onValueChange($event)" bindValue="id" [(ngModel)]="selectedValue"
     [placeholder]="isLabelShow ? ('Select ' + label | translate) : ('Select' | translate)" #select
-    [addTagText]="tagName" [addTag]="CreateNew">
+    [addTagText]="tagName" [addTag]="CreateNew"  [disabled]="isDisabled">
   </ng-select>
 
 

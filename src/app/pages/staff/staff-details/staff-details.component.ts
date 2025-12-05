@@ -38,7 +38,7 @@ export class StaffDetailsComponent implements OnInit {
     let res = await this.genericService.ExecuteAPI_Get<IResponse>("Staff/GetOneEmployee", params);
     if (res.isSuccess) {
       this.employee = res.data;
-      this.bcService.set('@staffName', this.employee.name);
+      // this.bcService.set('@staffName', this.employee.name);
 
     }
 

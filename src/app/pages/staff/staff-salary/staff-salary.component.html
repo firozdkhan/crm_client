@@ -1,0 +1,337 @@
+<div class="row">
+  <div class="col-xl-12">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Salary Report'">
+      </app-entry-panel-header>
+      <div class="panel-container show">
+        <div class="panel-content">
+          <form [formGroup]="attendanceForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-md-3">
+                <app-employee-dropdown formControlName="staffId" [label]="'Name'"></app-employee-dropdown>
+              </div>
+
+              <!-- <div class="col-md-2">
+                <app-text-input [label]="'Total Working days'" [type]="'number'" [placeHolder]="'Enter Working Days'"
+                  formControlName="TotalDays">
+                </app-text-input>
+              </div> -->
+
+              <div class="col-md-2 " style=" margin-top: 1rem !important;">
+                <label for="year"> Year</label>
+                <select formControlName="selectedYear" id="selectedYear" class="form-control">
+                  <option value>Select Year</option>
+                  <option *ngFor="let year of [2021,2022,2023,2024,2025,2026]" [value]="year">{{year}}</option>
+                </select>
+              </div>
+
+              <div class="col-md-2" style="margin-top: 1rem !important;">
+                <label for="month">Month</label>
+                <select formControlName="selectedMonth" id="selectedMonth" class="form-control">
+                  <option value>Select Month</option>
+                  <option *ngFor="let selectedMonth of monthsList; let i = index" [value]="i + 1">{{selectedMonth}}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-md-3 d-flex align-items-center mt-5 justify-content-around">
+                <button type="submit" class="btn btn-primary waves-themed me-2" [disabled]="!attendanceForm.valid">
+                  {{"Show" | translate}}
+                </button>
+                <button type="reset" class="btn btn-default waves-themed" (click)="reset()">
+                  {{"Reset" | translate}}
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="row">
+  <div class="col-xl-12">
+    <div *ngIf="attendance" class="container-fluid mt-4 mx-0 px-0">
+      <div class="card shadow-sm border-primary">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">Salary Details - {{ attendance.staffName }}</h4>
+          <small>{{ attendance.department }} | {{ attendance.designation }} | {{
+            attendance.shift }}</small>
+        </div>
+
+        <div class="card-body">
+
+          <div class="row mb-3">
+            <div class="col-md-4"><strong>Name:</strong> <span class="badge bg-info text-dark">{{ attendance.staffName
+                }}</span></div>
+            <div class="col-md-4"><strong>Department:</strong> <span class="badge bg-info text-dark">{{
+                attendance.department
+                }}</span></div>
+            <div class="col-md-4"><strong>Designation:</strong> <span class="badge bg-info text-dark">{{
+                attendance.designation
+                }}</span></div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-3"><strong>Basic Salary:</strong> ₹{{
+              attendance.basicSalary | number:'1.2-2' }}</div>
+            <div class="col-md-3"><strong>Effective Days:</strong> {{
+              attendance.effectiveWorkingDays }}</div>
+            <div class="col-md-3"><strong>Present Days:</strong> {{
+              attendance.presentDays }}</div>
+            <div class="col-md-3"><strong>Absent Days:</strong> {{
+              attendance.absentDays }}</div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-3"><strong>Absent Amount:</strong>{{ attendance.absentAmount | number:'1.2-2' }}</div>
+            <div class="col-md-3"><strong>Approved Leaves:</strong> {{
+              attendance.approvedLeaveDays }}</div>
+            <div class="col-md-3"><strong>Paid Leave Used:</strong> {{
+              attendance.paidLeaveUsed }}</div>
+            <div class="col-md-3"><strong>Remaining PL:</strong> {{
+              attendance.remainingPL }}</div>
+          </div>
+
+
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <h6 class="text-success">Allowances</h6>
+              <ul class="list-group">
+                <li *ngFor="let allowance of attendance.updateAllowances"
+                  class="list-group-item d-flex justify-content-between align-items-center">
+                  {{ allowance.miscAllowanceName }}
+                  <input type="number" class="form-control ms-2" style="width: 100px;"
+                    [(ngModel)]="allowance.allowanceAmount" (ngModelChange)="updateSalary()" />
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center fw-bold bg-light">
+                  Total
+                  <span>₹{{ attendance.totalAllowances | number:'1.2-2'
+                    }}</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-md-6">
+              <h6 class="text-danger">Deductions</h6>
+              <ul class="list-group">
+                <li *ngFor="let deduction of attendance.updateDeductions"
+                  class="list-group-item d-flex justify-content-between align-items-center">
+                  {{ deduction.miscDeductionName }}
+                  <input type="number" class="form-control ms-2" style="width: 100px;"
+                    [(ngModel)]="deduction.deductionAmount" (ngModelChange)="calculatenetSalary(attendance)" />
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center fw-bold bg-light">
+                  Total
+                  <span>₹{{ attendance.totalDeductions | number:'1.2-2'
+                    }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <div class="p-3 bg-light border rounded">
+                <h6 class="text-primary">Prorated Basic Salary</h6>
+                <p class="fs-5 fw-bold">₹{{ attendance.proratedBasicSalary |
+                  number:'1.2-2' }}</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="p-3 bg-light border rounded">
+                <h6 class="text-primary">Net Salary</h6>
+                <p class="fs-5 fw-bold">₹{{ calculatenetSalary(attendance) |
+                  number:'1.2-2' }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label class="form-label"><strong>Pay:</strong></label>
+              <input type="number" class="form-control w-50" [(ngModel)]="attendance.advance"
+                [readonly]="isAdvanceReadonly" (blur)="calculatenetSalary(attendance)" />
+            </div>
+
+
+            <div class="col-md-6">
+              <label class="form-label"><strong>Payment Mode:</strong></label>
+              <app-select-dropdown [data]="payMode" [(ngModel)]="attendance.paymentMode"
+                (SelectChange)="OnPaymentChange($event)"></app-select-dropdown>
+            </div>
+          </div>
+
+          <div class="row mb-1 align-items-center">
+            <div class="col-md-6">
+              <div class="p-3 bg-success text-white rounded fs-5 fw-bold">
+                Final Salary: ₹{{ attendance.remaning |
+                number:'1.2-2' }}
+              </div>
+            </div>
+            <div class="col-md-6 text-end">
+              <button type="button" class="btn btn-primary btn-lg" (click)="Submit()"
+                [disabled]="!attendance || isSalaryPaid">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+
+<div class="row">
+  <div class="col-xl-12">
+    <div *ngIf="attendance && attendance.staffName" class="container-fluid mt-4 mx-0 px-0">
+      <div class="card shadow-sm border-primary">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">Salary Details - {{ attendance.staffName }}</h4>
+          <small>{{ attendance.department }} | {{ attendance.designation }} | {{
+            attendance.shift }}</small>
+        </div>
+
+        <div class="card-body">
+
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <label class="form-label"><strong>Salary Calculation Type:</strong></label>
+              <select class="form-control" [(ngModel)]="calculationType" (change)="onCalculationTypeChange()">
+                <option value="hours">Working Hours Based</option>
+                <option value="days">Days Based</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div class="row mb-3">
+            <div class="col-md-4"><strong>Name:</strong> <span class="badge bg-info text-dark">{{ attendance.staffName
+                }}</span></div>
+            <div class="col-md-4"><strong>Department:</strong> <span class="badge bg-info text-dark">{{
+                attendance.department
+                }}</span></div>
+            <div class="col-md-4"><strong>Designation:</strong> <span class="badge bg-info text-dark">{{
+                attendance.designation
+                }}</span></div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-3"><strong>Basic Salary:</strong> ₹{{
+              attendance.basicSalary | number:'1.2-2' }}</div>
+            <div class="col-md-3">
+              <strong>
+                {{ calculationType === 'hours' ? 'Effective Hours:' : 'Effective Days:' }}
+              </strong>
+              {{ attendance.effectiveWorkingDays }}
+            </div>
+            <div class="col-md-3">
+              <strong>{{ calculationType === 'hours' ? 'Present Hours:' : 'Present Days:' }}</strong>
+              {{ attendance.presentDays }}
+            </div>
+            <div class="col-md-3">
+              <strong>{{ calculationType === 'hours' ? 'Absent Hours:' : 'Absent Days:' }}</strong>
+              {{ attendance.absentDays }}
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-3"><strong>Absent Amount:</strong>{{ attendance.absentAmount | number:'1.2-2' }}</div>
+            <div class="col-md-3"><strong>Approved Leaves:</strong> {{
+              attendance.approvedLeaveDays }}</div>
+            <div class="col-md-3"><strong>Leave Used:</strong> {{
+              attendance.paidLeaveUsed }}</div>
+            <div class="col-md-3"><strong>Remaining Leave:</strong> {{
+              attendance.remainingPL }}</div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <h6 class="text-success">Allowances</h6>
+              <ul class="list-group">
+                <li *ngFor="let allowance of attendance.updateAllowances"
+                  class="list-group-item d-flex justify-content-between align-items-center">
+                  {{ allowance.miscAllowanceName }}
+                  <input type="number" class="form-control ms-2" style="width: 100px;"
+                    [(ngModel)]="allowance.allowanceAmount" (ngModelChange)="updateSalary()" />
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center fw-bold bg-light">
+                  Total
+                  <span>₹{{ attendance.totalAllowances | number:'1.2-2'
+                    }}</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-md-6">
+              <h6 class="text-danger">Deductions</h6>
+              <ul class="list-group">
+                <li *ngFor="let deduction of attendance.updateDeductions"
+                  class="list-group-item d-flex justify-content-between align-items-center">
+                  {{ deduction.miscDeductionName }}
+                  <input type="number" class="form-control ms-2" style="width: 100px;"
+                    [(ngModel)]="deduction.deductionAmount" (ngModelChange)="calculatenetSalary(attendance)" />
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center fw-bold bg-light">
+                  Total
+                  <span>₹{{ attendance.totalDeductions | number:'1.2-2'
+                    }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <div class="p-3 bg-light border rounded">
+                <h6 class="text-primary">Prorated Basic Salary</h6>
+                <p class="fs-5 fw-bold">₹{{ attendance.proratedBasicSalary |
+                  number:'1.2-2' }}</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="p-3 bg-light border rounded">
+                <h6 class="text-primary">Net Salary</h6>
+                <p class="fs-5 fw-bold">₹{{ calculatenetSalary(attendance) |
+                  number:'1.2-2' }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label class="form-label"><strong>Pay:</strong></label>
+              <input type="number" class="form-control w-50" [(ngModel)]="attendance.advance"
+                [readonly]="isAdvanceReadonly" (blur)="calculatenetSalary(attendance)" />
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label"><strong>Payment Mode:</strong></label>
+              <app-select-dropdown [data]="payMode" [(ngModel)]="attendance.paymentMode"
+                (SelectChange)="OnPaymentChange($event)"></app-select-dropdown>
+            </div>
+          </div>
+
+          <div class="row mb-1 align-items-center">
+            <div class="col-md-6">
+              <div class="p-3 bg-success text-white rounded fs-5 fw-bold">
+                Final Salary: ₹{{ attendance.remaning |
+                number:'1.2-2' }}
+              </div>
+            </div>
+            <div class="col-md-6 text-end">
+              <button type="button" class="btn btn-primary btn-lg" (click)="Submit()"
+                [disabled]="!attendance || isSalaryPaid">Submit</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

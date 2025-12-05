@@ -82,6 +82,7 @@ import { LabelsComponent } from './controls/labels/labels.component';
 
 import { NgxPrintModule } from 'ngx-print';
 import { AmountInWordsPipe } from '../pipes/amount-in-words.pipe';
+import { UserDropdownComponent } from './controls/user-dropdown/user-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +101,6 @@ import { AmountInWordsPipe } from '../pipes/amount-in-words.pipe';
     ShortCutModelComponent,
     PageFooterComponent,
     SidebarMenuComponent,
-
     MarkAsteriskDirective,
     FocusOnShowDirective,
     TextInputComponent,
@@ -148,6 +148,7 @@ import { AmountInWordsPipe } from '../pipes/amount-in-words.pipe';
     LabelsComponent,
 
     AmountInWordsPipe,
+      UserDropdownComponent,
   ],
   imports: [
     CommonModule,
@@ -223,6 +224,7 @@ import { AmountInWordsPipe } from '../pipes/amount-in-words.pipe';
     AddNewCityComponent,
     PasswordInputComponent,
     LabelsComponent,
+     UserDropdownComponent,
   ],
   providers: [
     BsDatepickerConfig,

@@ -13,11 +13,37 @@ import { SalegstreportComponent } from './salegstreport/salegstreport.component'
 import { PurchasegstreportComponent } from './purchasegstreport/purchasegstreport.component';
 import { ExpensesreportComponent } from './expensesreport/expensesreport.component';
 import { ExpensesreportprintComponent } from './expensesreportprint/expensesreportprint.component';
+import { DatewiseReportComponent } from './datewise-report/datewise-report.component';
+ 
+import { AttedetailreportComponent } from './attedetailreport/attedetailreport.component';
+import { AttendancestatusComponent } from './attendancestatus/attendancestatus.component';
+import { AttendancesummeryComponent } from './attendancesummery/attendancesummery.component';
+import { LocationfetchingComponent } from './locationfetching/locationfetching.component';
+import { MonthwiseReportComponent } from './monthwise-report/monthwise-report.component';
+import { PrnitPageComponent } from './prnit-page/prnit-page.component';
+import { SalaryslipComponent } from './salaryslip/salaryslip.component';
+import { StaffattendancereportComponent } from './staffattendancereport/staffattendancereport.component';
 
 
 
 @NgModule({
-  declarations: [ItemstockComponent, PeritemstockComponent, PrintperitemstockComponent, SaleperitemstockComponent, StockpostingComponent, SalegstreportComponent, PurchasegstreportComponent, ExpensesreportComponent, ExpensesreportprintComponent],
+  declarations: [
+    ItemstockComponent, PeritemstockComponent, PrintperitemstockComponent, SaleperitemstockComponent, StockpostingComponent, SalegstreportComponent, 
+    PurchasegstreportComponent, ExpensesreportComponent, ExpensesreportprintComponent,
+      DatewiseReportComponent,
+    MonthwiseReportComponent,
+    PrnitPageComponent,
+  
+    AttendancestatusComponent,
+    AttendancesummeryComponent,
+    AttedetailreportComponent,
+    StaffattendancereportComponent,
+    SalaryslipComponent,
+    LocationfetchingComponent,
+   
+  
+  
+  ],
   imports: [
     CommonModule,
     ReportRoutingModule,

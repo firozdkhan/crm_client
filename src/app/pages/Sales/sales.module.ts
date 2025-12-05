@@ -11,6 +11,7 @@ import { SaleinvoiceviewComponent } from './saleinvoiceview/saleinvoiceview.comp
 import { SalepaymentdueComponent } from './salepaymentdue/salepaymentdue.component';
 import { CollectionReportComponent } from './collection-report/collection-report.component';
 
+
 @NgModule({
   declarations: [
     SalemasterComponent,
@@ -18,14 +19,15 @@ import { CollectionReportComponent } from './collection-report/collection-report
     PrintsaleinvoiceComponent,
     SaleinvoiceviewComponent,
     SalepaymentdueComponent,
-    CollectionReportComponent
+    CollectionReportComponent,
+     
   ],
   imports: [
     CommonModule,
     SalesRoutingModule,
     SharedModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
 })
 export class SalesModule {}

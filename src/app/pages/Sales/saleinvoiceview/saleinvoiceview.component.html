@@ -11,7 +11,7 @@
       <div class="panel-content" style="overflow-x: auto;">
 
         <commongrid *ngIf="sales.length > 0" [totalitems]="totalRecords" [records]="sales" [gridfilter]="gridFilter"
-          [SearchText]="txtSearch" [pagesize]="10" (change)="pageChanged($event)" [ShowSorting]="true"
+          [SearchText]="txtSearch" [pagesize]="25" (change)="pageChanged($event)" [ShowSorting]="true"
           [PagingType]="'nextprevnumberadvanced'" [ShowPagesize]="true" [ShowFilter]="false" [ShowSNo]="true"[ShowSum] = "true"
           (ActionRow)="actionRow($event)">
 

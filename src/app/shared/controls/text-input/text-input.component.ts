@@ -14,6 +14,7 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
   @Input() placeHolder: string;
   @Input() isDisabled: boolean = false;
   @Input() inputValue: string = null;
+  @Input() readOnly: boolean = false;
 
   @Input() maxLength: number = 50;
 

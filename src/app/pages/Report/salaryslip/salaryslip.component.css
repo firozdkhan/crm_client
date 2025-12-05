@@ -1,0 +1,31 @@
+.salary-slip {
+  max-width: 800px;
+  margin: auto;
+  background: #fff;
+  border: 1px solid #ddd;
+}
+
+.salary-slip .company-name {
+  font-size: 22px;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.salary-slip .slip-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #16a085;
+}
+
+.salary-table table {
+  border-collapse: collapse;
+}
+
+.salary-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+}
+
+.net-salary h4 {
+  font-size: 20px;
+}

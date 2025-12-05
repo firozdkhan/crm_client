@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 import { ToastrService } from 'ngx-toastr';
 import { IBankDetails } from 'src/app/interfaces/accounting/bankdetails';
 import { IInvoiceSetting } from 'src/app/interfaces/configuration/invoicesetting';
@@ -10,7 +11,9 @@ import { ICommonValue } from 'src/app/interfaces/dashboard/common';
 import { IProduct } from 'src/app/interfaces/inventory/product';
 import { IResponse } from 'src/app/interfaces/response';
 import { ISaleMaster, ISalesDetail } from 'src/app/interfaces/sales/saleMaster';
+import { ChangeDatePipe } from 'src/app/pipes/change-date.pipe';
 import { GenericService } from 'src/app/services/generic.service.service';
+import { IJWTTokan } from 'src/app/shared/interfaces/jwt.tokan';
 import { TranslatePipe } from 'src/app/translate/translate.pipe';
 
 @Component({
@@ -24,12 +27,15 @@ export class SalemasterComponent {
   customes: any[] = [];
   taxs: ITax[] = [];
   bankList: IBankDetails[] = [];
+  selectedUser:string;
+  userDisabled:boolean = false;
   selectedBankId!: number;
   isUpdateDisabled: boolean = true;
   isSubmitDisabled: boolean = false;
   saleData: any;
   productData: ICommonValue[];
   bankData: ICommonValue[];
+  
 
   //  Invoice Setting//
   invoicesettings: IInvoiceSetting[] = [];
@@ -41,6 +47,7 @@ export class SalemasterComponent {
   saledetails: ISalesDetail[] = [];
   addNewProduct: FormGroup;
   today: Date = new Date();
+   
   showAddProductForm = false; //AddProduct
 
   constructor(
@@ -51,9 +58,22 @@ export class SalemasterComponent {
     private router: Router,
     private route: ActivatedRoute,
     private datepipe :DatePipe
+    
   ) {}
 
   ngOnInit() {
+
+      const token = localStorage.getItem('smart_token');
+    const decoded = jwtDecode<IJWTTokan>(token);
+    this.selectedUser = decoded.nameid;
+    if(decoded.nameid != "2") {
+   
+this.userDisabled = true;
+    }
+    
+    
+   console.log(this.userDisabled);
+     
     this.getNextInvoiceNo();
     this.GetCustomerDroupdown();
     this.loadCompanyProfile();
@@ -61,6 +81,7 @@ export class SalemasterComponent {
       id: [0],
       invoiceNo: ['', Validators.required],
       customerId: ['', Validators.required],
+      userId:[null, Validators.required],
       customerName: [''],
       purchaseDate: ['', Validators.required],
       modifyDate: [''],
@@ -75,8 +96,9 @@ export class SalemasterComponent {
       balanceDue: [0],
       grandtotal: [0],
       status: ['Pending'],
-      bankId: [null],
+      bankId: [null, Validators.required],
       billDescription: [null],
+      salesById:[null, Validators.required],
       saleDetails: this.fb.array([]),
     });
 
@@ -504,8 +526,10 @@ export class SalemasterComponent {
       this.toastr.error('Please fill required fields');
       return;
     }
-
-    const payload: ISaleMaster = this.saleForm.value;
+let changeDate = new ChangeDatePipe(this.datepipe) ;
+    let payload: ISaleMaster = this.saleForm.value;
+    payload.purchaseDate = changeDate.transform(payload.purchaseDate);
+    console.log(payload.purchaseDate);
     // payload.purchaseDate = new Date();
     payload.modifyDate = new Date();
 
@@ -517,7 +541,7 @@ export class SalemasterComponent {
       taxNumberId: +item.taxNumberId,
     }));
 
-    console.log(payload);
+     
 
     if (
       payload.payAmount > 0 &&
@@ -578,10 +602,12 @@ export class SalemasterComponent {
           });
 
           this.saleDetails.clear();
-
-          this.router.navigate(['/sales/printsaleinvoice'], {
+  this.router.navigate(['/sales/saleinvoiceview'], {
             queryParams: { invoiceNo: payload.invoiceNo },
           });
+          // this.router.navigate(['/sales/printsaleinvoice'], {
+          //   queryParams: { invoiceNo: payload.invoiceNo },
+          // });
         }
       }
     } catch (error) {
@@ -637,6 +663,7 @@ export class SalemasterComponent {
     this.saleForm.patchValue({
       id: sale.id,
       invoiceNo: sale.invoiceNo,
+      userId:sale.userId,
       customerId: sale.customerId,
       customerName: sale.customerName,
       purchaseDate: sale.purchaseDate ? this.datepipe.transform(sale.purchaseDate , 'dd MMM yyyy') :null,
@@ -650,11 +677,17 @@ export class SalemasterComponent {
       netAmount: sale.netAmount,
       payAmount: sale.payAmount,
       balanceDue: sale.balanceDue,
+      salesById:sale.salesById,
       grandtotal: sale.grandtotal,
       status: sale.status,
       bankId: sale.bankId ? sale.bankId.toString() : '',
       billDescription: sale.billDescription,
     });
+    if(sale.userId) {
+  this.selectedUser = sale.userId.toString();
+    }
+     
+  
 
     this.setPurchaseDetails(sale.saleDetails);
   }
@@ -671,6 +704,7 @@ export class SalemasterComponent {
         this.fb.group({
           id: [d.id],
           saleMasterId: [d.saleMasterId],
+          
           saleMasterName: [d.saleMasterName],
           productId: [d.productId ? d.productId.toString() : ''],
           productName: [d.productName],
@@ -732,6 +766,7 @@ export class SalemasterComponent {
     this.saleForm.patchValue({
       id: sale.id,
       invoiceNo: sale.invoiceNo,
+      userId:sale.userId,
       customerId: sale.customerId,
       customerName: sale.customerName,
       purchaseDate: sale.purchaseDate,
@@ -745,6 +780,7 @@ export class SalemasterComponent {
       netAmount: sale.netAmount,
       payAmount: sale.payAmount,
       balanceDue: sale.balanceDue,
+       salesById:sale.salesById,
       grandtotal: sale.grandtotal,
       status: sale.status,
       bankId: sale.bankId ? sale.bankId.toString() : '',
@@ -867,7 +903,7 @@ export class SalemasterComponent {
     );
 
     if (res) {
-      this.countryid = res.regionId;
+      this.countryid = res.countryId;
 
       this.getCountryById(this.countryid);
     }

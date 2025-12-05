@@ -6,7 +6,7 @@
     (ngModelChange)="valuechange($event)" (focusout)="focusOutFunction($any($event.target).value)" #input
     class="form-control"
     [attr.placeholder]="(placeHolder | translate)? (placeHolder | translate) : ('Insert ' | translate)+ label | translate"
-    [disabled]="isDisabled">
+    [disabled]="isDisabled" [readonly]="readOnly">
 
 
 

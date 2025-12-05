@@ -17,6 +17,10 @@ export interface ISaleMaster {
   payAmount: number;
   balanceDue: number;
   grandtotal: number;
+  salesById:number;
+  salesBy:string;
+    
+  userId:number;
   status: string;
   sgst: string;
   cgst: string;
