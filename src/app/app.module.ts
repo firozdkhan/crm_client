@@ -25,6 +25,7 @@ import { ReportModule } from './pages/Report/report.module';
 import { SalesModule } from './pages/Sales/sales.module';
 import { PrintsaleinvoiceComponent } from './printsaleinvoice/printsaleinvoice.component';
 import { PendingpaymentModule } from './pages/Pendingpayment/pendingpayment.module';
+import { MisModule } from './pages/mis/mis.module';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { PendingpaymentModule } from './pages/Pendingpayment/pendingpayment.modu
     PurchaseModule,
     ReportModule,
     SalesModule,
-    PendingpaymentModule
+    PendingpaymentModule,
+    MisModule
   ],
   providers: [
     DatePipe,

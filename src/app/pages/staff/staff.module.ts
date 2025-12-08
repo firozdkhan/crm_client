@@ -25,7 +25,7 @@ import { StaffAttendancetimeComponent } from './staff-attendancetime/staff-atten
 import { TimewiseAttendanceComponent } from './timewise-attendance/timewise-attendance.component';
 import { StaffSalaryComponent } from './staff-salary/staff-salary.component';
 import { StaffsalaryreportComponent } from './staffsalaryreport/staffsalaryreport.component';
-import { PincodeComponent } from './pincode/pincode.component';
+ 
 import { AutofillTestComponent } from './autofill-test/autofill-test.component';
 
 @NgModule({
@@ -50,7 +50,7 @@ import { AutofillTestComponent } from './autofill-test/autofill-test.component';
     TimewiseAttendanceComponent,
     StaffSalaryComponent,
     StaffsalaryreportComponent,
-    PincodeComponent,
+   
     AutofillTestComponent,
 
   ],

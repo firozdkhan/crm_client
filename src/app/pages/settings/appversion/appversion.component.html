@@ -1,0 +1,32 @@
+<div class="row ">
+
+  <div class="col-lg-4">
+    <div id="panel-1" class="panel">
+      <app-entry-panel-header [title]="'Update App Version'"> </app-entry-panel-header>
+
+
+      <div class="panel-container  show">
+        <div class="panel-content">
+          <form [formGroup]="appversionform" (ngSubmit)="onSubmit()">
+
+            <div class="col-12">
+              <div class="row">
+
+                <div class="col-md-6 mb-3">
+                  <app-text-input formControlName="versionType" [label]="'App Version'"></app-text-input>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <app-footer-buttons [buttonText]="'Submit'" [isValid]="!appversionform.valid"
+                  (resetForm)="cancel()"></app-footer-buttons>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

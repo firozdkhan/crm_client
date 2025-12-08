@@ -59,8 +59,8 @@ export class AllstaffReportComponent implements OnInit {
   createForm() {
     this.attendanceForm = this.fb.group({
       id: [0, Validators.required],
-      departmentId: [null, [Validators.required]],
-      designationId: [null, [Validators.required]],
+      departmentId: [0, [Validators.required]],
+      designationId: [0, [Validators.required]],
       fromDate: [this.today, [Validators.required]],
       toDate: [this.today, [Validators.required]],
     });

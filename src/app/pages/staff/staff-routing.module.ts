@@ -21,7 +21,7 @@ import { StaffAttendancetimeComponent } from './staff-attendancetime/staff-atten
 import { TimewiseAttendanceComponent } from './timewise-attendance/timewise-attendance.component';
 import { StaffSalaryComponent } from './staff-salary/staff-salary.component';
 import { StaffsalaryreportComponent } from './staffsalaryreport/staffsalaryreport.component';
-import { PincodeComponent } from './pincode/pincode.component';
+ 
 import { AutofillTestComponent } from './autofill-test/autofill-test.component';
 
 const routes: Routes = [
@@ -45,7 +45,7 @@ const routes: Routes = [
   { path: 'timewise-attendance', component: TimewiseAttendanceComponent, data: { breadcrumb: ' Attendance Time wise Report', icon: "fal fa-school" } },
   { path: 'staff-salary', component: StaffSalaryComponent, data: { breadcrumb: '  Salary Report', icon: "fal fa-school" } },
   { path: 'staffsalaryreport', component: StaffsalaryreportComponent, data: { breadcrumb: ' Payed Salary List', icon: "fal fa-school" } },
-  { path: 'pincode', component: PincodeComponent, data: { breadcrumb: 'Pincode', icon: "fal fa-school" } },
+ 
   { path: 'autofill-test', component: AutofillTestComponent, data: { breadcrumb: 'Pincode', icon: "fal fa-school" } },
 ];
 

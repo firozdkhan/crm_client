@@ -49,7 +49,7 @@ export class StateComponent implements OnInit, OnDestroy {
     private genericService: GenericService
   ) {
 
-    this.gridFilter.push(<GridFilter>{ DisplayText: "Country Name", ColumnName: "country", Type: "string", Is_Visible: true });
+    this.gridFilter.push(<GridFilter>{ DisplayText: "Country Name", ColumnName: "countryName", Type: "string", Is_Visible: true });
 
     this.gridFilter.push(<GridFilter>{ DisplayText: "State Name", ColumnName: "name", Type: "string", Is_Visible: true });
 
@@ -67,7 +67,7 @@ export class StateComponent implements OnInit, OnDestroy {
 
   async getCountry() {
     let res = await this.genericService.ExecuteAPI_Get<IResponse>(
-      'Location/GetCountries'
+      'CountryApi/GetCountries'
     );
     if (res.isSuccess) {
       this.dropdownData = res.data;
@@ -75,7 +75,7 @@ export class StateComponent implements OnInit, OnDestroy {
   }
 
   async bindData() {
-    let res = await this.genericService.ExecuteAPI_Get<IResponse>("Location/GetAllStates");
+    let res = await this.genericService.ExecuteAPI_Get<IResponse>("CountryApi/GetAllStates");
     if (res.isSuccess) {
       this.categories = res.data;
     }
@@ -109,7 +109,7 @@ export class StateComponent implements OnInit, OnDestroy {
 
   async editCategory() {
     this.category = this.categoryForm.value;
-    let res = await this.genericService.ExecuteAPI_Put<IResponse>("Location/UpdateState", this.category);
+    let res = await this.genericService.ExecuteAPI_Put<IResponse>("CountryApi/UpdateState", this.category);
     if (res.isSuccess) {
       this.bindData();
       this.toastrService.success('Success', 'State updated successfully');
@@ -119,7 +119,7 @@ export class StateComponent implements OnInit, OnDestroy {
 
   async saveCategory() {
     this.category = this.categoryForm.value;
-    let res = await this.genericService.ExecuteAPI_Post<IResponse>("Location/SaveState", this.category);
+    let res = await this.genericService.ExecuteAPI_Post<IResponse>("CountryApi/SaveState", this.category);
     if (res.isSuccess) {
       this.ngZone.run(() => {
         this.bindData();
@@ -140,7 +140,7 @@ export class StateComponent implements OnInit, OnDestroy {
     }).then(async (result) => {
       if (result.isConfirmed) {
         let params = new HttpParams().set("id", stateId.toString());
-        let res = await this.genericService.ExecuteAPI_Delete("Location/DeleteState", params);
+        let res = await this.genericService.ExecuteAPI_Delete("CountryApi/DeleteState", params);
         if (res) {
           this.categories = this.categories.filter(category => category.id !== stateId);
           Swal.fire('Deleted!', 'The record has been deleted.', 'success');

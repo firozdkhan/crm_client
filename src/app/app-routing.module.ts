@@ -104,6 +104,15 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
 
+
+   {
+    path: 'mis',
+    component: LayoutComponent,
+    loadChildren: () =>
+      import('./pages/mis/mis.module').then((mod) => mod.MisModule),
+    canActivate: [AuthGuard],
+  },
+
 ];
 
 @NgModule({

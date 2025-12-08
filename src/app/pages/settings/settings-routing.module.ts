@@ -21,6 +21,7 @@ import { SkuComponent } from './sku/sku.component';
 import { HelpPageComponent } from './help-page/help-page.component';
 import { HelpReportComponent } from './help-report/help-report.component';
 import { SchoolProfileComponent } from './school-profile/school-profile.component';
+import { AppversionComponent } from './appversion/appversion.component';
 
 const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent },
@@ -94,6 +95,11 @@ const routes: Routes = [
     data: { breadcrumb: 'Help Report', icon: 'fal fa-school' },
   },
   { path: 'school-profile', component: SchoolProfileComponent, data: { breadcrumb: 'School Profile', icon: "fal fa-school" } },
+  {
+    path: 'appversion',
+    component: AppversionComponent,
+    data: { breadcrumb: 'Update App Version', icon: 'fal fa-school' },
+  },
 
 ];
 

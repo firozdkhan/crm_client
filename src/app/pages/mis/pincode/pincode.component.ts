@@ -6,6 +6,7 @@ import { TranslatePipe } from 'src/app/translate/translate.pipe';
 import { GenericService } from 'src/app/services/generic.service.service';
 import { IResponse } from 'src/app/interfaces/response';
 import * as maplibregl from 'maplibre-gl';
+ 
 
 @Component({
   selector: 'app-pincode',
@@ -24,7 +25,11 @@ export class PincodeComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
-    this.pincodeForm = this.fb.group({
+   this.createRegistrationForm();
+  }
+
+  createRegistrationForm(){
+ this.pincodeForm = this.fb.group({
       pincode: ['', [Validators.required, Validators.pattern('^[0-9]{6}$')]]
     });
   }
@@ -32,6 +37,14 @@ export class PincodeComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.initMap();
   }
+
+  
+    cancel(): void {
+     
+      this.createRegistrationForm();
+      
+  
+    }
 
   initMap(): void {
     this.map = new maplibregl.Map({
@@ -81,6 +94,8 @@ export class PincodeComponent implements OnInit, AfterViewInit {
       .then((res: IResponse) => {
         if (res.isSuccess && res.data) {
           this.resultData = res.data;
+
+          
           this.toastr.success('Pincode data loaded');
           this.showPincodeArea(res.data.coordinates);
 
@@ -100,6 +115,7 @@ export class PincodeComponent implements OnInit, AfterViewInit {
   }
 
   showSchoolPins(schools: any[]): void {
+    
     if (!this.map || !schools?.length) return;
 
     schools.forEach(school => {
@@ -110,21 +126,21 @@ export class PincodeComponent implements OnInit, AfterViewInit {
 
       const el = document.createElement('div');
       el.className = 'school-marker';
-      el.style.width = '18px';
-      el.style.height = '18px';
+      el.style.width = '6px';
+      el.style.height = '6px';
       el.style.backgroundColor = '#28a745';
       el.style.borderRadius = '50%';
       el.style.border = '2px solid white';
       el.style.boxShadow = '0 0 6px rgba(0,0,0,0.5)';
       el.style.cursor = 'pointer';
-
-
       const popup = new maplibregl.Popup({ offset: 15 }).setHTML(`
       <b>${school.schoolName}</b><br>
-      <small>${school.category}</small><br>
-      <small>${school.villageAndCity}</small><br>
+      <small>${school.address}</small><br>
+      <small>${school.contactPerson}</small><br>
       <hr style="margin:4px 0;">
       📍 <small><b>Lat:</b> ${lat.toFixed(6)}, <b>Lng:</b> ${lng.toFixed(6)}</small>
+       <button type="button" class="btn btn-primary ml-auto waves-themed"> Visited </button>
+
     `);
 
       new maplibregl.Marker(el)

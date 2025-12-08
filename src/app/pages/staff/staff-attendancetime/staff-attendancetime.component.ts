@@ -47,8 +47,8 @@ export class StaffAttendancetimeComponent implements OnInit {
   createForm() {
     this.applyForm = this.fb.group({
       id: [0],
-      departmentId: [null, [Validators.required]],
-      designationId: [null, [Validators.required]],
+      departmentId: [0, [Validators.required]],
+      designationId: [0, [Validators.required]],
       date: [this.today, [Validators.required]],
     });
   }

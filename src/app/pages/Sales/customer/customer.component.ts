@@ -218,6 +218,10 @@ export class CustomerComponent {
     }
   }
 
+   pageChanged(event) {
+
+  }
+
   async onSubmit() {
      
     if (this.CustomerForm.invalid) {

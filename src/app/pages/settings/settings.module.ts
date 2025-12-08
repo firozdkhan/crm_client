@@ -23,6 +23,7 @@ import { TranslatePipe } from 'src/app/translate/translate.pipe';
 import { HelpPageComponent } from './help-page/help-page.component';
 import { HelpReportComponent } from './help-report/help-report.component';
 import { SchoolProfileComponent } from './school-profile/school-profile.component';
+import { AppversionComponent } from './appversion/appversion.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { SchoolProfileComponent } from './school-profile/school-profile.componen
     SkuComponent,
     HelpPageComponent,
     HelpReportComponent,
+    AppversionComponent
   ],
   imports: [
     CommonModule,

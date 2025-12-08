@@ -50,7 +50,7 @@ export class CityComponent implements OnInit, OnDestroy {
     private genericService: GenericService
   ) {
 
-    this.gridFilter.push(<GridFilter>{ DisplayText: "State Name", ColumnName: "state", Type: "string", Is_Visible: true });
+    this.gridFilter.push(<GridFilter>{ DisplayText: "State Name", ColumnName: "stateName", Type: "string", Is_Visible: true });
     this.gridFilter.push(<GridFilter>{ DisplayText: "City Name", ColumnName: "name", Type: "string", Is_Visible: true });
     this.gridFilter.push(<GridFilter>{ DisplayText: "Edit", ColumnName: "Action", Type: "string", Actions: this.actions, Is_Visible: true });
     this.categories = []
@@ -67,14 +67,14 @@ export class CityComponent implements OnInit, OnDestroy {
 
 
   async bindData() {
-    let res = await this.genericService.ExecuteAPI_Get<IResponse>("Location/GetAllStates");
+    let res = await this.genericService.ExecuteAPI_Get<IResponse>("CountryApi/GetAllStates");
     if (res.isSuccess) {
       this.state = res.data;
     }
   }
 
   async citydata() {
-    let ress = await this.genericService.ExecuteAPI_Get<IResponse>("Location/GetCities");
+    let ress = await this.genericService.ExecuteAPI_Get<IResponse>("CountryApi/GetCities");
     if (
       ress.isSuccess
     ) {
@@ -112,7 +112,7 @@ export class CityComponent implements OnInit, OnDestroy {
 
   async editCategory() {
     this.category = this.cityForm.value;
-    let res = await this.genericService.ExecuteAPI_Put<IResponse>("Location/UpdateCity", this.category);
+    let res = await this.genericService.ExecuteAPI_Put<IResponse>("CountryApi/UpdateCity", this.category);
     if (res.isSuccess) {
       this.bindData();
       this.ngOnInit();
@@ -123,7 +123,7 @@ export class CityComponent implements OnInit, OnDestroy {
 
   async saveCategory() {
     this.category = this.cityForm.value;
-    let res = await this.genericService.ExecuteAPI_Post<IResponse>("Location/SaveCity", this.category);
+    let res = await this.genericService.ExecuteAPI_Post<IResponse>("CountryApi/SaveCity", this.category);
     if (res.isSuccess) {
       this.ngZone.run(() => {
         this.bindData();
@@ -145,7 +145,7 @@ export class CityComponent implements OnInit, OnDestroy {
     }).then(async (result) => {
       if (result.isConfirmed) {
         let params = new HttpParams().set("id", stateId.toString());
-        let res = await this.genericService.ExecuteAPI_Delete("Location/DeleteCity", params);
+        let res = await this.genericService.ExecuteAPI_Delete("CountryApi/DeleteCity", params);
         if (res) {
           this.categories = this.categories.filter(category => category.id !== stateId);
           Swal.fire('Deleted!', 'The record has been deleted.', 'success');
