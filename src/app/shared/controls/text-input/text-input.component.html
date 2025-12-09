@@ -2,7 +2,7 @@
   <label class="form-label" for="{{label}}">{{label | translate}} <span class="required-asterisk"
       *appMarkAsterisk='validator'> * </span> </label>
   <input [ngClass]="(controlDir?.control?.touched)  ? !controlDir.control.valid ? 'is-invalid' : 'is-valid' : null"
-    [type]="type" (input)="onChange($event.target.value)" (blur)="onTouched()" [(ngModel)]="inputValue"
+    [type]="type" (input)="onChange($event.target.value)" (blur)="onTouched()"  
     (ngModelChange)="valuechange($event)" (focusout)="focusOutFunction($any($event.target).value)" #input
     class="form-control"
     [attr.placeholder]="(placeHolder | translate)? (placeHolder | translate) : ('Insert ' | translate)+ label | translate"

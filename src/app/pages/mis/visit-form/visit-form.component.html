@@ -1,14 +1,4 @@
-<div class="row">
-  <div class="col-xl-12" style="margin: 0px; padding: 0px;">
-    <div id="panel-1" class="panel" >
-      <div class="panel-hdr bg-info-600 bg-primary-gradient">
-        <h2>
-          {{ "Customer" | translate }} <span class="fw-300"><i></i></span>
-        </h2>
-      </div>
-
-      <div class="panel-container show"  >
-        <div class="panel-content">
+ 
           <form [formGroup]="visitForm" (ngSubmit)="onSubmit()">
             <div class="row">
 
@@ -19,35 +9,45 @@
 
               
       
-        <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
-                <app-text-input formControlName="pincode" [label]="'Pincode'" [OnlyNumber]="true"></app-text-input>
+        <div class="col-md-2 col-lg-2 col-sm-6 col-xs-12">
+           
+                <app-text-input formControlName="pincode" [label]="'Pincode'" [inputValue]="36522" [OnlyNumber]="true"></app-text-input>
         </div>
       
        
-      <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
-                <app-date-picker formControlName="date" [label]="'Date'"></app-date-picker>
-              </div>  
-              <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
+      
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
                 <app-text-input formControlName="name" [label]="'Name'"></app-text-input>
               </div>
-
-
-
-              <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
-                <app-text-input formControlName="phoneNo" [label]="'Phone No'"></app-text-input>
-              </div>
-
-              <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
+<div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
+                <app-date-input formControlName="date"  type="'date'" [label]="'Date'"></app-date-input>
+              </div>  
+ <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
                  <app-text-input formControlName="address" [label]="'Address'"></app-text-input>
                 
               </div>
 
-              <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
-                <app-text-area formControlName="remarks" [label]="'Remarks'" />
+              <div class="col-md-2 col-lg-2 col-sm-6 col-xs-12">
+                <app-text-input formControlName="phoneNo" [label]="'Phone No'"></app-text-input>
               </div>
 
-                <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
-                <app-date-picker formControlName="followUpDate" [label]="'FollowUp Date'"></app-date-picker>
+             
+
+              <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                <app-text-area formControlName="remarks" [label]="'Remarks'" />
+              </div>
+               
+                                                    
+               
+ 
+              
+
+                <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12"> 
+                    
+              
+      
+  
+                <app-date-input formControlName="followUpDate" [label]="'FollowUp Date'"></app-date-input>
               </div> 
 
                
@@ -58,9 +58,12 @@
               [isValid]="!visitForm.valid"
               (resetForm)="cancel()">
             </app-footer-buttons>
+
+          
           </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+    {{visitForm.valid | json}}
+
+
+
+
+ 

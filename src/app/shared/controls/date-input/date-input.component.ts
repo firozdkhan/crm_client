@@ -1,15 +1,14 @@
-import { KeyValue } from './../../models/common_model';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Optional, Output, Self, ViewChild } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, FormControl, NgControl, Validators } from '@angular/forms';
+import { ControlValueAccessor, NgControl, Validators, FormControl, AbstractControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-text-input',
-  templateUrl: './text-input.component.html',
-  styleUrls: ['./text-input.component.scss']
+  selector: 'app-date-input',
+  templateUrl: './date-input.component.html',
+  styleUrl: './date-input.component.css'
 })
-export class TextInputComponent implements OnInit, ControlValueAccessor {
+export class DateInputComponent implements OnInit, ControlValueAccessor {
   @ViewChild('input', { static: true }) input: ElementRef;
-  @Input() type = 'text';
+ 
   @Input() label = 'string';
   @Input() placeHolder: string;
   @Input() isDisabled: boolean = false;
@@ -34,7 +33,6 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
     control.setAsyncValidators(asyncValidators);
     control.updateValueAndValidity();
     control.addValidators([Validators.minLength(1), Validators.maxLength(this.maxLength)]);
- 
 
 
   }
@@ -58,9 +56,7 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
   writeValue(obj: any): void {
 
     this.input.nativeElement.value = obj || "";
-    
-      this.inputValue=obj;
-    
+
 
 
 
@@ -116,16 +112,6 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
 
   }
 
-  toggleVisibility() {
-
-    if (this.type == 'password') {
-      this.type = "text";
-    }
-    else { this.type = "password"; }
-
-
-
-
-  }
+   
 
 }

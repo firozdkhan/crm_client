@@ -2,7 +2,7 @@
   <label class="form-label" for="{{label}}">{{label | translate}}</label>
 
   <div class="custom-control custom-switch">
-    <input type="checkbox"
+    <input type="checkbox"  [ngModelOptions]="{standalone: true}"
     (input)="onChange($event.target)" (blur)="onTouched()" #input [(ngModel)]="value"
     (ngModelChange)="onValueChange($event)"
     class="custom-control-input" [(ngModel)]="checked"  id="{{formControlId}}">

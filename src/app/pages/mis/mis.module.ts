@@ -8,21 +8,29 @@ import { TranslatePipe } from 'src/app/translate/translate.pipe';
 import { MisRoutingModule } from './mis-routing.module';
 import { PincodeComponent } from './pincode/pincode.component';
 import { VisitFormComponent } from './visit-form/visit-form.component';
+import { BsDatepickerConfig, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { ClientVisitComponent } from './client-visit/client-visit.component';
+import { VisitReportsComponent } from './visit-reports/visit-reports.component';
 
 
 
 @NgModule({
   declarations: [
-    DataDirectoryComponent, PincodeComponent, VisitFormComponent
+    DataDirectoryComponent, PincodeComponent, VisitFormComponent, ClientVisitComponent, VisitReportsComponent
   ],
   imports: [
     CommonModule,
         MisRoutingModule,
         SharedModule,
-        FormsModule, ReactiveFormsModule,
+        FormsModule, 
+        ReactiveFormsModule,
+        BsDatepickerModule.forRoot(),
   ],
     providers: [
-      TranslatePipe
+      TranslatePipe,
+      BsDatepickerConfig,
+          BsModalService,
     ]
 })
 export class MisModule { }

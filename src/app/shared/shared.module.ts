@@ -83,6 +83,7 @@ import { LabelsComponent } from './controls/labels/labels.component';
 import { NgxPrintModule } from 'ngx-print';
 import { AmountInWordsPipe } from '../pipes/amount-in-words.pipe';
 import { UserDropdownComponent } from './controls/user-dropdown/user-dropdown.component';
+import { DateInputComponent } from './controls/date-input/date-input.component';
 
 @NgModule({
   declarations: [
@@ -149,6 +150,7 @@ import { UserDropdownComponent } from './controls/user-dropdown/user-dropdown.co
 
     AmountInWordsPipe,
       UserDropdownComponent,
+      DateInputComponent,
   ],
   imports: [
     CommonModule,
@@ -225,6 +227,7 @@ import { UserDropdownComponent } from './controls/user-dropdown/user-dropdown.co
     PasswordInputComponent,
     LabelsComponent,
      UserDropdownComponent,
+     DateInputComponent,
   ],
   providers: [
     BsDatepickerConfig,

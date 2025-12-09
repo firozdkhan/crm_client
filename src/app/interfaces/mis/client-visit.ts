@@ -3,7 +3,7 @@ export interface IClientVisit {
   typeId: number
   followType: string
   dataId: number
-  pincode:number
+  pincode:string
   name: string
   address: string
   phoneNo: string
@@ -12,4 +12,5 @@ export interface IClientVisit {
   followUpDate: string
   userId: number
   userName: string
+  visitCount:number
 }

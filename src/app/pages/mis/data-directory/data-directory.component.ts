@@ -1,8 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { HttpParams } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BsModalRef, BsModalService, ModalOptions  } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import { IClientVisit } from 'src/app/interfaces/mis/client-visit';
 import { IDataDirectory } from 'src/app/interfaces/mis/datadirectory';
 import { IStockPosting } from 'src/app/interfaces/Report/stockposting';
 import { IResponse } from 'src/app/interfaces/response';
@@ -63,10 +65,21 @@ export class DataDirectoryComponent {
   gridFilter: Array<GridFilter> = [];
   trans: any;
 
+
+
+     visit =  {} as IClientVisit;  
+  modalRef?: BsModalRef;
+ @ViewChild('addVisit') mymodal: any;
+label:string=" Visit"
+  config: ModalOptions = { class: 'modal-xl' };
+   
+
+
+
   constructor(
     private datePipe: DatePipe,
     private router:Router,
-     
+       private modalService: BsModalService,
     private toastr: ToastrService,
     private genericService: GenericService,
      
@@ -144,6 +157,14 @@ export class DataDirectoryComponent {
 
    actionRow(RowItem: any) {
     this.directory = RowItem.item
+    this.visit.dataId = this.directory.id;
+    this.visit.address = this.directory.address;
+    this.visit.name = this.directory.name;
+    this.visit.phoneNo = this.directory.contactNo;
+    this.visit.pincode = this.directory.pincode;
+    this.visit.typeId = this.directory.typeId;
+    this.visit.id = 0;
+
 
     if (RowItem.action === 'map') {
        
@@ -155,14 +176,12 @@ export class DataDirectoryComponent {
      if (RowItem.action === "delete") {
       this.deleteData(this.directory.id);
     }
+    if (RowItem.action === 'visit') {
+    
+      this.openModal(this.mymodal);
+    }
 
-
-    // if (RowItem.action === "website") {
-    //   window.open(this.purchase.marketUrl, "_blank");
-    // }
-    // if (RowItem.action === "coin") {
-    //   window.open("https://coinmarketcap.com/currencies/" + this.purchase.slug, "_blank");
-    // }
+    
   }
 
   async filterByDate() {
@@ -209,4 +228,13 @@ export class DataDirectoryComponent {
   
 
   pageChanged(obj: any) {}
+
+
+  openModal(template: TemplateRef<any>) {
+      this.modalRef = this.modalService.show(template, this.config);
+    }
+
+     closeModal() {
+    this.modalRef.hide();
+  }
 }

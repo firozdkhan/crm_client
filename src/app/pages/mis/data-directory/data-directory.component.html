@@ -67,3 +67,45 @@
   </div>
 
 </div>
+
+ <button type="button" class="btn btn-default waves-effect waves-themed" data-toggle="modal" data-target="#default-example-modal-lg">Default Modal Large</button>
+ <!-- Modal Large -->
+                                            <!-- <div class="modal fade" id="default-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true"  #addVisit>
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Modal title</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            ...
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <!-- Modal Small -->
+
+<ng-template #addVisit>
+  
+  <div class="modal-header modal-xl panel-hdr bg-primary-600 bg-info-gradient">
+    <h4 class="modal-title pull-left">{{ "Add New" + label | translate }}</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-visit-form [visit]="visit"> </app-visit-form>
+
+  </div>
+  <div class="modal-footer justify-content-between">
+    <button type="submit" (click)="closeModal()" class="btn btn-danger ml-auto waves-themed">
+      {{"Close" | translate}}
+    </button>
+  </div>
+</ng-template>

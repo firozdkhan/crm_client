@@ -6,10 +6,10 @@
     <input [ngClass]="(controlDir?.control?.touched)
         ? !controlDir.control.valid ? 'is-invalid' : 'is-valid' : null" [type]="type" #dp="bsDatepicker"
       (input)="onChange($any($event.target).value)" (blur)="onTouched()" #input [(ngModel)]="value"
-      [disabled]="isDisabled" (ngModelChange)="onValueChange($event)" bsDatepicker class="form-control"
+      [disabled]="isDisabled" (ngModelChange)="onValueChange($event)" bsDatepicker class="form-control bs-datepicker-container"
       placeholder="{{label | translate}}"
       [bsConfig]="{ isAnimated: true, dateInputFormat: dateFormat, showWeekNumbers: false }" [maxDate]="maxDate"
-      [disabled]="isDisabled">
+      [disabled]="isDisabled"  style=" z-index: 1600 !important;" >
 
     <div class="input-group-append">
       <span class="input-group-text fs-xl" (click)="dp.toggle()">

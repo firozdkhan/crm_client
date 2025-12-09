@@ -1,0 +1,26 @@
+<div class="form-group mt-3">
+  <label class="form-label" for="{{label}}">{{label | translate}} <span class="required-asterisk"
+      *appMarkAsterisk='validator'> * </span> </label>
+  <input [ngClass]="(controlDir?.control?.touched)  ? !controlDir.control.valid ? 'is-invalid' : 'is-valid' : null"
+    type="date" (input)="onChange($event.target.value)" (blur)="onTouched()"  
+    (ngModelChange)="valuechange($event)" (focusout)="focusOutFunction($any($event.target).value)" #input
+    class="form-control"
+    [attr.placeholder]="(placeHolder | translate)? (placeHolder | translate) : ('Insert ' | translate)+ label | translate"
+    [disabled]="isDisabled" [readonly]="readOnly">
+
+
+
+
+
+
+
+
+
+  <div class="help-block validation-message" *ngIf="(!controlDir?.control?.valid && controlDir?.control?.touched)">
+    <span *ngIf="controlDir.control.errors?.required">{{label | translate }} {{'is required' |translate}}</span>
+   
+
+  </div>
+
+   
+</div>
