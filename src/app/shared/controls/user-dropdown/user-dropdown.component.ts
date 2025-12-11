@@ -33,7 +33,7 @@ export class UserDropdownComponent implements  OnInit, AfterViewInit, ControlVal
 
   selectValues: ICommonValue[] = [];
   data: ICommonValue[];
-
+  decoded :IJWTTokan;
 
   private onTouchedCallback: () => {};
   private onChangeCallback: (_: any) => {};
@@ -68,9 +68,12 @@ export class UserDropdownComponent implements  OnInit, AfterViewInit, ControlVal
     control.updateValueAndValidity();
     this.getEmployeeDropDown();
     const token = localStorage.getItem('smart_token');
-    const decoded = jwtDecode<IJWTTokan>(token);
-    this.selectedValue = decoded.nameid;
-    console.log(this.isDisabled);
+      this.decoded = jwtDecode<IJWTTokan>(token);
+    this.selectedValue = this.decoded.nameid;
+    if(this.decoded.groupsid=="1") {
+      this.isDisabled = true;
+    }
+   
   
  
  
@@ -105,10 +108,26 @@ export class UserDropdownComponent implements  OnInit, AfterViewInit, ControlVal
     this.value = obj;
   }
 
+  propagateChange = (_: any) => {};
+
   registerOnChange(fn: any): void {
     this.onChange = fn;
     this.onChangeCallback = fn;
+
+     this.propagateChange = fn;
+     if (this.value == null) {
+      const token = localStorage.getItem('smart_token');
+      this.decoded = jwtDecode<IJWTTokan>(token);
+    this.propagateChange(this.decoded.nameid);
+     }
+
+     
+   
+
+    
   }
+
+
 
   registerOnTouched(fn: any): void {
     this.onTouched = fn;

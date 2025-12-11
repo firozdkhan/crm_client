@@ -150,8 +150,8 @@ export class CustomerComponent {
   CreateCustomerForm() {
     this.CustomerForm = this.fb.group({
       id: [0],
-      customerName: ["firoz khan", Validators.required],
-      name: ["firoz khan"],
+      customerName: [null, Validators.required],
+      name: [null],
       address: [null],
       gstNumber: [null],
       phoneNumber: [null],       

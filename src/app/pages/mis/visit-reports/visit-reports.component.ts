@@ -27,9 +27,9 @@ export class VisitReportsComponent {
   productId: number;
   stockposting: IClientVisit[] = [];
 
-  selectedProductId: string   = "0";
-  selectedCategoryId: number  = 0;
-  productdroupdown: any[] = [];
+  
+  selectedType: number  = 0;
+   
 
   action: string = 'new';
   buttonText: string = 'Submit';
@@ -55,6 +55,7 @@ export class VisitReportsComponent {
     },
   ];
   categories: any[];
+  pincode:string;
   gridFilter: Array<GridFilter> = [];
 
   constructor(
@@ -89,15 +90,15 @@ export class VisitReportsComponent {
     
     
     this.GetStockPosting(this.datePipe.transform(this.fromDate, 'yyyy-MM-dd') || '', this.datePipe.transform(this.toDate, 'yyyy-MM-dd') || '');
-    this.GetProductData();
+    
   }
 
   async GetStockPosting(fromDate?: string, toDate?: string) {
     let parems = new HttpParams()
     .set("fromDate",fromDate)
     .set("toDate",toDate)
-    .set("productId",this.selectedProductId)
-    .set("categoryId",this.selectedCategoryId);
+    .set("pincode",this.pincode)
+    .set("typeId",this.selectedType);
 
      
     
@@ -124,7 +125,7 @@ export class VisitReportsComponent {
 
   async clearFilter() {
     
-    this.selectedProductId = null;
+   
     await this.GetStockPosting();
   }
 
@@ -141,14 +142,6 @@ export class VisitReportsComponent {
       .padStart(2, '0')}-${d.getDate().toString().padStart(2, '0')}`;
   }
 
-  async GetProductData() {
-    let res = await this.genericService.ExecuteAPI_Get<IResponse>(
-      'ProductApi/GetProductDropdown'
-    );
-    if (res) {
-      this.productdroupdown = res.data;
-    }
-  }
-
+  
   pageChanged(obj: any) {}
 }

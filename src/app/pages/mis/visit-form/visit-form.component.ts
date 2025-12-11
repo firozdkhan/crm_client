@@ -59,7 +59,7 @@ export class VisitFormComponent implements  OnInit, OnChanges  {
       id: [0],
       typeId: [null, Validators.required], 
       pincode: [null, Validators.required], 
-      dataId: [0],
+      dataId: [null],
       name: [null, Validators.required],
       address: [null],
       date: [this.datePipe.transform(new Date(), 'yyyy-MM-dd')],
@@ -85,11 +85,13 @@ export class VisitFormComponent implements  OnInit, OnChanges  {
     this.visitForm.patchValue(this.visit);
     this.visitForm.controls['date'].patchValue(this.datePipe.transform(this.visit.date, 'yyyy-MM-dd'));
     if(this.visit.followUpDate){
- this.visitForm.controls['followUpDate'].patchValue(this.datePipe.transform(this.visit.followUpDate, 'yyyy-MM-dd'));
+      this.visitForm.controls['followUpDate'].patchValue(this.datePipe.transform(this.visit.followUpDate, 'yyyy-MM-dd'));
     }
      
       this.action = "edit";
       this.buttonText = "Update";
+
+      console.log(this.visit);
         
     }
      this.cdref.detectChanges();

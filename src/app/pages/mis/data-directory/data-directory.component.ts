@@ -212,7 +212,7 @@ label:string=" Visit"
           let params = new HttpParams().set("id", id.toString());
           let res:IResponse = await this.genericService.ExecuteAPI_Delete("Geo/DeleteDirectory", params);
           if (res) {
-   this.dataDirectory = this.dataDirectory.filter(data => data.id !== id);
+          this.dataDirectory = this.dataDirectory.filter(data => data.id !== id);
             // this.categories = this.categories.filter(category => category.id !== miscId);
             Swal.fire(
                'Deleted!',

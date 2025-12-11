@@ -17,13 +17,11 @@
             </div>
             <div class="col-md-3">
               
-              <app-select-dropdown [label]="'Product'" [data]="productdroupdown"  [addAll]="true" [(ngModel)]="selectedProductId"
-                optionValue="id" optionLabel="name">
-              </app-select-dropdown>
+              <app-text-input [(ngModel)]="pincode" [label]="'Pincode'" ></app-text-input>
             </div>
 
              <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
-                  <app-category-dropdown [catId]="6" [(ngModel)]="selectedCategoryId"  [addAll]="true"  [label]="'Product Category'">
+                  <app-category-dropdown [catId]="8" [(ngModel)]="selectedType"  [addAll]="true"  [label]="'Product Category'">
                   </app-category-dropdown>
                 </div>
             <div class="col-md-2 d-flex align-items-end mt-3">

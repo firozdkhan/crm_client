@@ -12,12 +12,14 @@ import { BsDatepickerConfig, BsDatepickerModule } from 'ngx-bootstrap/datepicker
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { ClientVisitComponent } from './client-visit/client-visit.component';
 import { VisitReportsComponent } from './visit-reports/visit-reports.component';
+import { DailyWorkComponent } from './daily-work/daily-work.component';
+import { DailyWorkReportComponent } from './daily-work-report/daily-work-report.component';
 
 
 
 @NgModule({
   declarations: [
-    DataDirectoryComponent, PincodeComponent, VisitFormComponent, ClientVisitComponent, VisitReportsComponent
+    DataDirectoryComponent, PincodeComponent, VisitFormComponent, ClientVisitComponent, VisitReportsComponent,DailyWorkComponent,DailyWorkReportComponent
   ],
   imports: [
     CommonModule,

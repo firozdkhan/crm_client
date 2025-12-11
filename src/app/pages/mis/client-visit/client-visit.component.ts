@@ -99,7 +99,7 @@ export class ClientVisitComponent {
       if (result.isConfirmed) {
         let params = new HttpParams().set('id', miscId.toString());
         let res = await this.genericService.ExecuteAPI_Delete(
-          'CustomerApi/DeleteCustomer',
+          'Geo/DeleteClientVisit',
           params
         );
         if (res && res) {
@@ -123,7 +123,7 @@ export class ClientVisitComponent {
     this.action = RowItem.action;
    
     if (this.action === 'delete') {
-      this.deleteMenu(this.clientVisit.id);
+      this.deleteMenu(visit.id);
     } else {
       
       this.clientVisit = visit;
